@@ -16,7 +16,7 @@ install:
   - go get github.com/TIBCOSoftware/mashling-cli/...
   - go get -u github.com/TIBCOSoftware/mashling-cli/...
   - pwd
-  - cd ..
+  - cd ../TIBCOSoftware
   - git clone https://github.com/TIBCOSoftware/mashling-cicd.git
   - cd mashling-cicd/samples-recipes
   - ls
