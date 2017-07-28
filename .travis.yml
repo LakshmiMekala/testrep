@@ -18,14 +18,18 @@ install:
   - pwd
   - cd ..
   - git clone https://github.com/TIBCOSoftware/mashling-cicd.git
-  - cd mashling-cicd/sample-recipes
-script:
-   - chmod ugo+x ./build.sh 
-   - ./build.sh
-
-after_script:
-  - "[ -f \"${HOME}/.netrc\" ] && rm -f ${HOME}/.netrc" 
-
-after_success:
-   - chmod ugo+x ./push.sh
-   - ./push.sh
+  - pwd
+  - ls 
+  - cd mashling-cicd
+  - ls
+#  - cd mashling-cicd/sample-recipes
+#script:
+#   - chmod ugo+x ./build.sh 
+#   - ./build.sh
+#
+#after_script:
+#  - "[ -f \"${HOME}/.netrc\" ] && rm -f ${HOME}/.netrc" 
+#
+#after_success:
+#   - chmod ugo+x ./push.sh
+#   - ./push.sh
