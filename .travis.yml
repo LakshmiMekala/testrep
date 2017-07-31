@@ -16,9 +16,10 @@ install:
   - go get github.com/TIBCOSoftware/mashling-cli/...
   - go get -u github.com/TIBCOSoftware/mashling-cli/...
   - pwd
-  - cd ..
-  - git clone https://github.com/LakshmiMekala/sample-recipes.git
-  - cd sample-recipes
+  - cd ../../TIBCOSoftware
+  - git clone https://github.com/TIBCOSoftware/mashling-cicd.git
+  - cd mashling-cicd/samples-recipes
+  - ls
 script:
    - chmod ugo+x ./build.sh 
    - ./build.sh
@@ -29,3 +30,4 @@ after_script:
 after_success:
    - chmod ugo+x ./push.sh
    - ./push.sh
+
