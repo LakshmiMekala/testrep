@@ -32,7 +32,7 @@ after_success:
    - ./push.sh
    - pwd
    - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" tibdocker.tibco.com
-   - export REPO=tibdocker.tibco.com/mashling/mashling-rest-conditional-gateway
+   - export REPO=tibdocker.tibco.com/mashling/rest-conditional-gateway
    - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
    - docker build -t $REPO:$TAG --build-arg GITHUB_USER_TOKEN="$GITHUB_USER_TOKEN" --build-arg TRAVIS_BUILD_NUMBER=$TRAVIS_BUILD_NUMBER .
    - docker tag $REPO:$COMMIT $REPO:$TAG
