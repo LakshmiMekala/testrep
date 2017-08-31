@@ -5,21 +5,11 @@ before_install:
  
 os: 
   - linux
-  - osx
+#  - osx
 #  - windows
 
   
-install:
-  - go get github.com/constabulary/gb/...
-  - go get -u github.com/constabulary/gb/...
-  - go get -u github.com/TIBCOSoftware/flogo-cli/...
-  - go get github.com/TIBCOSoftware/mashling-cli/...
-  - go get -u github.com/TIBCOSoftware/mashling-cli/...
-  - pwd
-  - cd ../../TIBCOSoftware
-  - git clone https://github.com/TIBCOSoftware/mashling-cicd.git
-  - cd mashling-cicd/samples-recipes
-  - ls
+
 script:
    - chmod ugo+x ./build.sh 
    - ./build.sh
@@ -27,13 +17,4 @@ script:
 after_script:
   - "[ -f \"${HOME}/.netrc\" ] && rm -f ${HOME}/.netrc" 
 
-after_success:
-   - chmod ugo+x ./push.sh
-   - ./push.sh
-   - pwd
-   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" tibdocker.tibco.com
-   - export REPO=tibdocker.tibco.com/mashling/rest-conditional-gateway
-   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-   - docker build -t $REPO:$TAG --build-arg GITHUB_USER_TOKEN="$GITHUB_USER_TOKEN" --build-arg TRAVIS_BUILD_NUMBER=$TRAVIS_BUILD_NUMBER .
-   - docker tag $REPO:$COMMIT $REPO:$TAG
-   - docker push $REPO  
+
