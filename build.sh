@@ -4,10 +4,14 @@ cd ../.. ;
 git clone https://github.com/TIBCOSoftware/mashling-cicd.git ;
 pwd ;
 mkdir -p tmp ;
+ls ;
 echo "alert 1";
-cp -r mashling-cicd/sample-recipes/builds/latest/rest-conditional-gateway/rest-conditional-gateway-osx.zip /tmp
+pwd ;
+cp -r mashling-cicd/sample-recipes/builds/latest/rest-conditional-gateway/rest-conditional-gateway-osx.zip ./tmp
 echo "alert 2" ;
 cd tmp ;
+ls ;
+pwd ;
 echo "alert 3" ;
 chmod 755 rest-conditional-gateway-linux.zip ;
 echo "alert 4" ;
@@ -18,7 +22,7 @@ echo "alert 6" ;
 ./rest-conditional-gateway-linux ;
 
 echo "alert 7" ;
-curl -I -X GET http://localhost:9096/pets/2
+curl -I -X GET http://localhost:9096/pets/2 ;
 
 
 
