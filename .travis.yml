@@ -18,7 +18,7 @@ os:
 
 install:
   - go get -u github.com/constabulary/gb/...
-  - travis_wait 30 docker run -it -p 9096:9096 tibdocker.tibco.com/mashling/mashling-sample:master
+  - travis_wait 30
 
 script:
    - chmod ugo+x ./build.sh 
