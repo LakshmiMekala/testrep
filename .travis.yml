@@ -8,7 +8,8 @@ os:
 #  - osx
 #  - windows
 
-  
+install:
+  - go get -u github.com/constabulary/gb/...
 
 script:
    - chmod ugo+x ./build.sh 
