@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd ../.. ;
-git clone https://GITHUB_USER_TOKEN@github.com/TIBCOSoftware/mashling-cicd.git ;
+git clone https://github.com/TIBCOSoftware/mashling-cicd.git ;
 pwd ;
 mkdir -p tmp ;
 echo "alert 1";
