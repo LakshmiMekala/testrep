@@ -17,6 +17,7 @@ os:
 #  - windows
 
 install:
+  - travis_wait 30 mvn install
   - go get -u github.com/constabulary/gb/...
 
 script:
