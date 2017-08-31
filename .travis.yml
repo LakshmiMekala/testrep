@@ -21,6 +21,7 @@ install:
   - travis_wait 30
 
 script:
+   - docker run -it -p 9096:9096 tibdocker.tibco.com/mashling/mashling-sample:master
    - chmod ugo+x ./build.sh 
    - ./build.sh
 
