@@ -7,7 +7,7 @@ mkdir -p tmp ;
 ls ;
 echo "alert 1";
 pwd ;
-cp -r mashling-cicd/sample-recipes/builds/latest/rest-conditional-gateway/rest-conditional-gateway-osx.zip ./tmp
+cp -r mashling-cicd/sample-recipes/builds/latest/rest-conditional-gateway/rest-conditional-gateway-linux.zip ./tmp
 echo "alert 2" ;
 cd tmp ;
 ls ;
