@@ -21,7 +21,7 @@ install:
 
 script:
    - chmod ugo+x ./build.sh 
-   - ./build.sh
+   - travis_wait 30 ./build.sh
 
 after_script:
   - "[ -f \"${HOME}/.netrc\" ] && rm -f ${HOME}/.netrc" 
