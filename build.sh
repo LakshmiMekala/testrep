@@ -17,9 +17,10 @@ chmod 755 rest-conditional-gateway-linux.zip ;
 echo "alert 4" ;
 unzip -o rest-conditional-gateway-linux.zip ;
 echo "alert 5" ;
-cd rest-conditional-gateway-linux ;
+ls ;
+pwd ;
 echo "alert 6" ;
-./rest-conditional-gateway-linux & curl -I -X GET http://localhost:9096/pets/2 & ;
+./rest-conditional-gateway-linux & curl -I -X GET http://localhost:9096/pets/2  ;
 
 echo "alert 7" ;
 curl -I -X GET http://localhost:9096/pets/2 ;
