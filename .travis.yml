@@ -11,7 +11,7 @@ language :
 before_install:
   - "echo -e \"machine github.com\n  login ${GITHUB_USER_TOKEN}\" >> ~/.netrc"
 #  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then
-  -  docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  -  docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" tibdocker.tibco.com
 #    fi
  
 os: 
