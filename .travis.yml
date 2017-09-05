@@ -13,16 +13,19 @@ before_install:
  
 os: 
   - linux
-#  - osx
-#  - windows
+  - osx
+  - windows
 
 install:
   - go get -u github.com/constabulary/gb/...
 #  - travis_wait 30
 
 script:
-   - chmod ugo+x ./build.sh 
-   - ./build.sh
+   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then
+    docker login -u="${DOCKER_USERNAME}" -p="${DOCKER_PASSWORD}"
+    fi
+   #- chmod ugo+x ./build.sh 
+   #- ./build.sh
 
 after_script:
   - "[ -f \"${HOME}/.netrc\" ] && rm -f ${HOME}/.netrc" 
