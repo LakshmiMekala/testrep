@@ -22,7 +22,7 @@ install:
 
 script:
    - if [ "$TRAVIS_OS_NAME" == "linux" ]; then
-    docker login -u="${DOCKER_USERNAME}" -p="${DOCKER_PASSWORD}"
+    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
     fi
    #- chmod ugo+x ./build.sh 
    #- ./build.sh
