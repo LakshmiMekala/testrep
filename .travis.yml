@@ -10,9 +10,6 @@ language :
   - go  
 before_install:
   - "echo -e \"machine github.com\n  login ${GITHUB_USER_TOKEN}\" >> ~/.netrc"
-#  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then
-  -  docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" tibdocker.tibco.com
-#    fi
  
 os: 
   - linux
@@ -21,14 +18,10 @@ os:
 
 install:
   - go get -u github.com/constabulary/gb/...
-#  - travis_wait 30
 
 script:
-   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then
-    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-    fi
-   #- chmod ugo+x ./build.sh 
-   #- ./build.sh
+   - chmod ugo+x ./build.sh 
+   - ./build.sh
 
 after_script:
   - "[ -f \"${HOME}/.netrc\" ] && rm -f ${HOME}/.netrc" 
