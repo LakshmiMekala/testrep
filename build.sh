@@ -21,16 +21,21 @@ ls ;
 pwd ;
 echo "alert 6" ;
 ./rest-conditional-gateway-linux & curl -I -X GET http://localhost:9096/pets/2  ;
-
+if [ "${HTTP_STATUS}" == 200 ]; then
+    echo "Test case 1 passed" ;
+else
+    echo "Test case 1 failed" ;
+    exit 1;
+fi
 
 
 echo "alert 7" ;
 HTTP_STATUS="$(curl -I -X GET http://localhost:9096/pets/2 | grep HTTP )";
 
 if [ "${HTTP_STATUS}" == 200 ]; then
-    echo "Test case 1 passed" ;
+    echo "Test case 2 passed" ;
 else
-    echo "Test case 1 failed" ;
+    echo "Test case 2 failed" ;
     exit 1;
 fi
 
