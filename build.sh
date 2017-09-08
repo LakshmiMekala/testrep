@@ -20,8 +20,24 @@ echo "alert 5" ;
 ls ;
 pwd ;
 echo "alert 6" ;
-./rest-conditional-gateway-linux & HTTP_STATUS="$(curl -i http://localhost:9096/pets/40 | grep HTTP )"  ;
-if [ "${HTTP_STATUS}" == "HTTP/1.1 200 OK" ]; then
+#./rest-conditional-gateway-linux & HTTP_STATUS="$(curl -i http://localhost:9096/pets/40 | grep HTTP )"  ;
+
+
+function test {
+  ./rest-conditional-gateway-linux & RESPONSE=$(curl -so /dev/null -w "%{http_code}\n" ${1})
+  if [[ $RESPONSE != 200 ]]; then
+    echo "Error ${RESPONSE} on ${1}"
+  fi
+}    
+test http://localhost:9096/pets/40
+#test google.com
+
+
+
+
+
+
+if [ "${HTTP_STATUS}" -eq "HTTP/1.1 200 OK" ]; then
     echo "Test case 1 passed" ;
 else
     echo "Test case 1 failed" ;
