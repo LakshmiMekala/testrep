@@ -20,7 +20,7 @@ echo "alert 5" ;
 ls ;
 pwd ;
 echo "alert 6" ;
-./rest-conditional-gateway-linux & HTTP_STATUS="$(curl -i http://localhost:9096/pets/40 )"  ;
+./rest-conditional-gateway-linux & HTTP_STATUS="$(curl -i http://localhost:9096/pets/40 | grep HTTP )"  ;
 if [ "${HTTP_STATUS}" == 200 ]; then
     echo "Test case 1 passed" ;
 else
