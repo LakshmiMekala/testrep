@@ -30,13 +30,15 @@ fi
 
 
 echo "alert 7" ;
-HTTP_STATUS="$(curl -I -X GET http://localhost:9096/pets/40 | grep HTTP )";
+HTTP_STATUS="$(curl -I -X GET http://localhost:9096/pets/40 | grep -c 'HTTP/1.1 200 OK' )";
 
-if [ "${HTTP_STATUS}" == 200 ]; then
-    echo "Test case 2 passed" ;
+if [ $HTTP_STATUS -eq 1 ]
+then
+MSG = " OKAY"
+EXIT_CODE = 0
 else
-    echo "Test case 2 failed" ;
-    exit 1;
+MSG = " NOT OKAY"
+EXIT_CODE = 2
 fi
 
 
