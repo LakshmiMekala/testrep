@@ -25,8 +25,8 @@ echo "alert 6" ;
 
 function test {
   ./rest-conditional-gateway-linux & RESPONSE=$(curl -so /dev/null -w "%{http_code}\n" ${1})
-  if [[ $RESPONSE != 200 ]]; then
-    echo "Error ${RESPONSE} on ${1}"
+  if [[ $RESPONSE = 200 ]]; then
+    echo "Success with ${RESPONSE} on ${1}"
   fi
 }    
 test http://localhost:9096/pets/40
@@ -37,7 +37,7 @@ test http://localhost:9096/pets/40
 
 
 
-if [ "${HTTP_STATUS}" -eq "HTTP/1.1 200 OK" ]; then
+if [ "${HTTP_STATUS}" -== "HTTP/1.1 200 OK" ]; then
     echo "Test case 1 passed" ;
 else
     echo "Test case 1 failed" ;
