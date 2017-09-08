@@ -22,6 +22,11 @@ pwd ;
 echo "alert 6" ;
 #./rest-conditional-gateway-linux & HTTP_STATUS="$(curl -i http://localhost:9096/pets/40 | grep HTTP )"  ;
 
+./rest-conditional-gateway-linux & HTTP_STATUS=$(curl -i -X PUT -d '{"name":"CAT"}' http://localhost:9096/pets | grep -c 'HTTP/1.1 200 OK' )
+if [ $HTTP_STATUS -eq 1 ]; then
+    echo  success message "$HTTP_STATUS" ;
+    echo "PUT Method passed"
+fi
 
 function URL {
   ./rest-conditional-gateway-linux & RESPONSE=$(curl -so /dev/null -w "%{http_code}\n" ${1})
@@ -34,11 +39,6 @@ function URL {
 URL http://localhost:9096/pets/40
 
 
-HTTP_STATUS=$(curl -i -X PUT -d '{"name":"CAT"}' http://localhost:9096/pets | grep -c 'HTTP/1.1 200 OK' )
-if [ $HTTP_STATUS -eq 1 ]; then
-    echo  success message "$HTTP_STATUS" ;
-    echo "GET Method passed"
-fi
 
 
 
