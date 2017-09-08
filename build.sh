@@ -23,17 +23,22 @@ echo "alert 6" ;
 #./rest-conditional-gateway-linux & HTTP_STATUS="$(curl -i http://localhost:9096/pets/40 | grep HTTP )"  ;
 
 
-function test {
+function URL {
   ./rest-conditional-gateway-linux & RESPONSE=$(curl -so /dev/null -w "%{http_code}\n" ${1})
   if [[ $RESPONSE = 200 ]]; then
     echo "Success with ${RESPONSE} on ${1}" ;
-    exit 0 ;
+    echo "GET Method passed"
+    #exit 0 ;
   fi
 }    
-test http://localhost:9096/pets/40
+URL http://localhost:9096/pets/40
 
 
-
+HTTP_STATUS=$(curl -i -X PUT -d '{"name":"CAT"}' http://localhost:9096/pets | grep -c 'HTTP/1.1 200 OK' )
+if [ $HTTP_STATUS -eq 1 ]; then
+    echo  success message "$HTTP_STATUS" ;
+    echo "GET Method passed"
+fi
 
 
 
