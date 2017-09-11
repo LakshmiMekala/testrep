@@ -28,6 +28,7 @@ script:
   - mkdir TIBCOSoftware
   - cd TIBCOSoftware
   - git clone https://github.com/TIBCOSoftware/mashling.git
+  - ls
   - touch mashling.tgz
   - tar cvfz mashling.tgz --exclude=mashling.tgz .
   - find . -not -name "mashling.tgz" -not  -name "\." -not -name "\.\."  -print0 | xargs -0 rm -rf --
@@ -39,6 +40,7 @@ script:
         echo \"Branch ${TRAVIS_BRANCH} not found on mashling-cicd using master\" ;
         git clone https://github.com/TIBCOSoftware/mashling-cicd.git mashling-cicd ;
     fi"
+  - ls
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then    
     pushd mashling-cicd/docker/mashling-cli;
     chmod ugo+x ./build-mashling-cli.sh ;
@@ -52,6 +54,8 @@ after_script:
 after_success:
   - export TRAVIS_BUILD_DIR=$HOME/gopath/src/github.com/TIBCOSoftware/mashling
   - "docker login -u=\"${DOCKER_USERNAME}\" -p=\"${DOCKER_PASSWORD}\" tibdocker.tibco.com"
+  - pwd
+  - ls
   - "if [ \"${TRAVIS_BRANCH}\" == \"master\" ]; then
     source ${TRAVIS_BUILD_DIR}/mashling-cicd/scripts/init.sh ;
     mashling::module::postbuild mashling-cli mashling-cli ;
