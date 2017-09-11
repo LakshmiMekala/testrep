@@ -28,6 +28,7 @@ script:
   - mkdir TIBCOSoftware
   - cd TIBCOSoftware
   - git clone https://github.com/TIBCOSoftware/mashling.git
+  - cd mashling
   - ls
   - touch mashling.tgz
   - tar cvfz mashling.tgz --exclude=mashling.tgz .
