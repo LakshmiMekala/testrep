@@ -6,8 +6,8 @@ services:
   - docker
 os:
   - linux
-  - osx
-  - windows
+#  - osx
+#  - windows
   
 cache:
   bundler: false
@@ -43,9 +43,9 @@ script:
     fi"
   - ls
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then    
-    pushd mashling-cicd/docker/mashling;
-    chmod ugo+x ./build-mashling.sh ;
-    ./build-mashling.sh ;
+    pushd mashling-cicd/docker/mashling-cli;
+    chmod ugo+x ./build-mashling-cli.sh ;
+    ./build-mashling-cli.sh ;
     popd ;
     fi 
     
@@ -59,7 +59,7 @@ after_success:
   - ls
   - "if [ \"${TRAVIS_BRANCH}\" == \"master\" ]; then
     source ${TRAVIS_BUILD_DIR}/mashling-cicd/scripts/init.sh ;
-    mashling::module::postbuild mashling mashling ;
+    mashling::module::postbuild mashling-cli mashling-cli ;
     fi"
   - cd $GOPATH   
   - rm -rf $GOPATH/src/github.com/TIBCOSoftware/mashling 
