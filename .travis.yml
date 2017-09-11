@@ -24,7 +24,9 @@ install:
   - go get -u github.com/constabulary/gb/...
   
 script:
-  - cd ../../TIBCOSoftware
+  - cd ../../
+  - mkdir TIBCOSoftware
+  - cd TIBCOSoftware
   - git clone https://github.com/TIBCOSoftware/mashling.git
   - touch mashling.tgz
   - tar cvfz mashling.tgz --exclude=mashling.tgz .
