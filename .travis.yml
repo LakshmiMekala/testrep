@@ -50,6 +50,7 @@ after_script:
   - "[ -f \"${HOME}/.netrc\" ] && rm -f ${HOME}/.netrc"
 
 after_success:
+  - export TRAVIS_BUILD_DIR=$HOME/gopath/src/github.com/TIBCOSoftware/mashling
   - "docker login -u=\"${DOCKER_USERNAME}\" -p=\"${DOCKER_PASSWORD}\" tibdocker.tibco.com"
   - "if [ \"${TRAVIS_BRANCH}\" == \"master\" ]; then
     source ${TRAVIS_BUILD_DIR}/mashling-cicd/scripts/init.sh ;
