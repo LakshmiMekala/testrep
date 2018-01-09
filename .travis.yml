@@ -12,7 +12,4 @@ install:
   - sudo apt-get install mosquitto-clients
   
 script:
-  - mosquitto
-  - mosquitto_sub
-  - mosquitto_pub
   - mosquitto_pub -m "123" -t "abc" & mosquitto_sub -t "abc"
