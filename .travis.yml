@@ -15,6 +15,7 @@ script:
   - mkdir -p $GOPATH/kafka && cd $GOPATH
   - tar -xvzf $GOPATH/kafka.tgz --strip 1
   - git clone https://github.com/LakshmiMekala/testrep.git 
+  - cd testrep
   - chmod ugo+x ./build.sh
   - source ./build.sh
   - testcase1
