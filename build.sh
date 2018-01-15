@@ -4,7 +4,7 @@ function get_test_cases {
     local my_list=( testcase1 )
     echo "${my_list[@]}"
 }
-function testcase1 {
+##function testcase1 {
 
     cd kafka
     
@@ -52,4 +52,4 @@ function testcase1 {
             echo "FAIL"
     fi
     cd ..
-}
+#}
