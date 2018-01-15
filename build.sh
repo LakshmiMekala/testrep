@@ -6,7 +6,7 @@ function get_test_cases {
 }
 function testcase1 {
 
-    cd kafka
+    cd ../kafka
     
     bin/zookeeper-server-start.sh config/zookeeper.properties &
     pId=$!
