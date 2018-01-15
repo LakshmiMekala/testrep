@@ -1,59 +1,55 @@
 #!/bin/bash
 
-cd ../.. ;
-git clone https://github.com/TIBCOSoftware/mashling-cicd.git ;
-pwd ;
-mkdir -p tmp ;
-ls ;
-echo "alert 1";
-pwd ;
-cp -r mashling-cicd/sample-recipes/builds/latest/rest-conditional-gateway/rest-conditional-gateway-linux.zip ./tmp
-echo "alert 2" ;
-cd tmp ;
-ls ;
-pwd ;
-echo "alert 3" ;
-chmod 755 rest-conditional-gateway-linux.zip ;
-echo "alert 4" ;
-unzip -o rest-conditional-gateway-linux.zip ;
-echo "alert 5" ;
-ls ;
-pwd ;
-echo "alert 6" ;
-#./rest-conditional-gateway-linux & HTTP_STATUS="$(curl -i http://localhost:9096/pets/40 | grep HTTP )"  ;
+function get_test_cases {
+    local my_list=( testcase1 )
+    echo "${my_list[@]}"
+}
+function testcase1 {
 
-./rest-conditional-gateway-linux & HTTP_STATUS=$(curl -i -X PUT -d '{"name":"CAT"}' http://localhost:9096/pets | grep -c 'HTTP/1.1 200 OK' )
-if [ $HTTP_STATUS -eq 1 ]; then
-    echo  success message "$HTTP_STATUS" ;
-    echo "PUT Method passed"
-fi
+    cd kafka
+    
+    bin/zookeeper-server-start.sh config/zookeeper.properties &
+    pId=$!
+    echo "zookeeper pid : [$pId]"
+    sleep 10
 
-function URL {
-  ./rest-conditional-gateway-linux & RESPONSE=$(curl -so /dev/null -w "%{http_code}\n" ${1})
-  if [[ $RESPONSE = 200 ]]; then
-    echo "Success with ${RESPONSE} on ${1}" ;
-    echo "GET Method passed"
-    #exit 0 ;
-  fi
-}    
-URL http://localhost:9096/pets/40
+    bin/kafka-server-start.sh config/server.properties &
+    pId1=$!
+    echo "kafka pid : [$pId1]"
+    sleep 10
 
+    bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic publishpet13
 
+    sleep 5
 
+    # # cd ../KafkaTrigger-To-KafkaPublisher
 
+    # # ./kafkatrigger-to-kafkapublisher &
+    # # pId4=$!
+    # # echo "kafka gateway pid : [$pId4]"
+    # # sleep 20
 
+    # cd ../kafka
+    current_time=$(date "+%Y.%m.%d-%H.%M.%S")
+    echo "{\"country1\":\"USA\",\"Current Time\" :\"$current_time\"}" | bin/kafka-console-producer.sh --broker-list localhost:9092 --topic publishpet13 & kafkaProducerPID=$!
+    #bin/kafka-console-producer.sh --broker-list localhost:9092 --topic syslog   --property "parse.key=true"  --property "key.separator=:"  key1:USA &
+    sleep 5
+    kill -SIGINT $kafkaProducerPID
+    echo "After killing"
+    # kafkaMessage="$(bin/kafka-console-consumer.sh --topic publishpet1 --bootstrap-server localhost:9092 --timeout-ms 9000 --consumer.config /home/ramesh/Downloads/abc/kafka/config/consumer.properties)"
 
+    kafkaMessage="$(bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic publishpet13 --timeout-ms 10000 --consumer.config $GOPATH/kafka/config/consumer.properties ) "
+    
+	echo "kafka message value : [$kafkaMessage]"
 
-#if [ -n "${TRAVIS_TAG}" ]; then
-#docker pull tibdocker.tibco.com/mashling/mashling-sample:latest
-#docker run -it -p 9096:9096 tibdocker.tibco.com/mashling/mashling-sample:latest
-#fi
+    echo "received message : [$kafkaMessage]" 
+    echo "actual message : [{\"country1\":\"USA\",\"Current Time\" :\"$current_time\"}]"
 
-#if [ -z "${TRAVIS_TAG}" ]; then
-#docker pull tibdocker.tibco.com/mashling/mashling-sample:master
-#docker run -it -p 9096:9096 tibdocker.tibco.com/mashling/mashling-sample:master
-#fi
-
-#curl -I -X GET http://localhost:9096/pets/2
-#curl -I -X PUT -d '{"name":"CAT"}' http://localhost:9096/pets
-#curl -I -X PUT -d '{"name":"CATs"}' http://localhost:9096/pets
+    if [ "$kafkaMessage" == "{\"country1\":\"USA\",\"Current Time\" :\"$current_time\"}" ] 
+        then 
+            echo "PASS"   
+        else
+            echo "FAIL"
+    fi
+    cd ..
+}

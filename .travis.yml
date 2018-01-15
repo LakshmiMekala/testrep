@@ -5,11 +5,16 @@ before_install:
   - "echo -e \"machine github.com\n  login ${GITHUB_USER_TOKEN}\" >> ~/.netrc"
 install:
 #  - go install ./...
-  - sudo apt-add-repository ppa:mosquitto-dev/mosquitto-ppa --yes
+  - sudo apt-get install zookeeperd
   - sudo apt-get update -q
-  - sudo apt-get install mosquitto
-  - sudo apt-get install libmosquitto-dev
-  - sudo apt-get install mosquitto-clients
   
 script:
-  - mosquitto_pub -m "123" -t "abc" & mosquitto_sub -t "abc"
+  - mkdir -p $GOPATH/src/github.com/TIBCOSoftware
+  - cd $GOPATH
+  - wget http://redrockdigimark.com/apachemirror/kafka/1.0.0/kafka_2.11-1.0.0.tgz -O $GOPATH/kafka.tgz
+  - mkdir -p $GOPATH/kafka && cd $GOPATH
+  - tar -xvzf $GOPATH/kafka.tgz --strip 1
+  - git clone https://github.com/LakshmiMekala/testrep.git 
+  - chmod ugo+x ./build.sh
+  - source ./build.sh
+  - testcase1
