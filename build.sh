@@ -42,8 +42,8 @@ function get_test_cases {
     bin/kafka-console-consumer.sh --topic subscribepet --bootstrap-server localhost:9092 --from-beginning & pid5=$!
     sleep 2
     echo "Test 1"
-    kafkaMessage="$(bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic publishpet --timeout-ms 10000 --consumer.config $GOPATH/kafka/config/consumer.properties ) "
-    
+    kafkaMessage="$(bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic publishpet --timeout-ms 300000 --consumer.config $GOPATH/kafka/config/consumer.properties ) "
+     echo "message is $kafkaMessage"
      echo "Test 0"
     samplevalue= $(bin/kafka-console-consumer.sh --topic subscribepet --bootstrap-server localhost:9092 --from-beginning) & pid6=$!
     sleep 2
