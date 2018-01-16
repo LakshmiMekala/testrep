@@ -34,7 +34,7 @@ function get_test_cases {
     current_time=$(date "+%Y.%m.%d-%H.%M.%S")
 
     #passing message from kafka producer
-    echo "{\"country\":\"USA\",\"Current Time\" :\"$current_time\"}" | bin/kafka-console-producer.sh --broker-list localhost:9092 --topic users &  pId3=$!    
+    echo "{\"id\":15,\"country\":\"USA\",\"category\":{\"id\":0,\"name\":\"string\"},\"name\":\"doggie\",\"photoUrls\":[\"string\"],\"tags\":[{\"id\":0,\"name\":\"string\"}],\"status\":\"available\"}" | bin/kafka-console-producer.sh --broker-list localhost:9092 --topic users &  pId3=$!    
     sleep 2
 
     # starting kafka consumer in background and capturing logged messages into tmp/test file
