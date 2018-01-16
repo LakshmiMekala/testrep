@@ -36,10 +36,20 @@ function get_test_cases {
     #passing message from kafka producer
     echo "{\"id\":15,\"country\":\"USA\",\"category\":{\"id\":0,\"name\":\"string\"},\"name\":\"doggie\",\"photoUrls\":[\"string\"],\"tags\":[{\"id\":0,\"name\":\"string\"}],\"status\":\"available\"}" | bin/kafka-console-producer.sh --broker-list localhost:9092 --topic users &  pId3=$!    
     sleep 10
-
+if [ "cat /tmp/test.log | grep $output" == "$output" ] 
+        then 
+            echo "PASS"   
+        else
+            echo "FAIL"
+    fi
     # starting kafka consumer in background and capturing logged messages into tmp/test file
 	output={\"id\":15,\"country\":\"USA\",\"category\":{\"id\":0,\"name\":\"string\"},\"name\":\"doggie\",\"photoUrls\":[\"string\"],\"tags\":[{\"id\":0,\"name\":\"string\"}],\"status\":\"available\"}
-    
+    if [ "cat /tmp/test.log | grep $output" == "$output" ] 
+        then 
+            echo "PASS"   
+        else
+            echo "FAIL"
+    fi
 	echo "kafka message value : [$(cat /tmp/test.log)]"	
     echo logs are : $(cat /tmp/test.log)
 
