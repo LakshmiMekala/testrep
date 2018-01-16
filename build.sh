@@ -56,7 +56,8 @@ function get_test_cases {
 
     bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic subscribepet > /tmp/test.log & pid7=$! 
     sleep 20
-    echo "123"
+    echo "pid7=$pid7";
+    echo "log file content is /tmp/test.log"
     cat /tmp/test.log
     echo "456"   
     kafkaMessage="$(cat /tmp/test.log)"
