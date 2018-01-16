@@ -18,5 +18,6 @@ script:
   - git clone -b kafka-test https://github.com/LakshmiMekala/testrep.git 
   - cd testrep
   - chmod ugo+x ./build.sh
-  - source ./build.sh
-  - testcase1
+  - ./build.sh
+  #- source ./build.sh
+#  - testcase1
