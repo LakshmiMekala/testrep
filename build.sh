@@ -34,7 +34,7 @@ function get_test_cases {
     echo "{\"country1\":\"USA\",\"Current Time\" :\"$current_time\"}" | bin/kafka-console-producer.sh --broker-list localhost:9092 --topic publishpet & kafkaProducerPID=$!
     #bin/kafka-console-producer.sh --broker-list localhost:9092 --topic syslog   --property "parse.key=true"  --property "key.separator=:"  key1:USA &
     sleep 5
-    kill -SIGINT $kafkaProducerPID
+    
     echo "After killing"
     # kafkaMessage="$(bin/kafka-console-consumer.sh --topic publishpet1 --bootstrap-server localhost:9092 --timeout-ms 9000 --consumer.config /home/ramesh/Downloads/abc/kafka/config/consumer.properties)"
     # sleep 2
@@ -62,6 +62,7 @@ function get_test_cases {
     kafkaMessage="$(cat /tmp/test.log)"
     echo $kafkaMessage;
     kill -9 $pid7
+    kill -SIGINT $kafkaProducerPID
     if [ "$kafkaMessage" == "{\"country1\":\"USA\",\"Current Time\" :\"$current_time\"}" ] 
         then 
             echo "PASS"   
