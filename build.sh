@@ -55,10 +55,11 @@ function get_test_cases {
     # echo "actual message : [{\"country1\":\"USA\",\"Current Time\" :\"$current_time\"}]"
 
     bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic subscribepet > /tmp/test.log & pid7=$! 
+    sleep 20
     echo "123"
     cat /tmp/test.log
     echo "456"   
-    kafkaMessage=$(cat /tmp/test.log)
+    kafkaMessage="$(cat /tmp/test.log)"
     echo $kafkaMessage;
     kill -9 $pid7
     if [ "$kafkaMessage" == "{\"country1\":\"USA\",\"Current Time\" :\"$current_time\"}" ] 
