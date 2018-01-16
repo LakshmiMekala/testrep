@@ -54,7 +54,7 @@ function get_test_cases {
     # echo "received message : [$kafkaMessage]" 
     # echo "actual message : [{\"country1\":\"USA\",\"Current Time\" :\"$current_time\"}]"
 
-    bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic subscribepet > /tmp/test.log & pid7=$! 
+    bin/kafka-console-consumer.sh --topic subscribepet --bootstrap-server localhost:9092 --from-beginning > /tmp/test.log & pid7=$! 
     sleep 20
     echo "pid7=$pid7";
     echo "log file content is $(cat /tmp/test.log)"
