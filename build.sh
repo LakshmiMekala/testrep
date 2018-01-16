@@ -22,14 +22,14 @@ function testcase1 {
 
     sleep 5
 
-    cd ..
+    cd ../testrep
     chmod 777 kafkatrigger-to-kafkapublisher
     ./kafkatrigger-to-kafkapublisher &
     pId4=$!
     echo "kafka gateway pid : [$pId4]"
     sleep 20
 
-    cd kafka
+    cd ../kafka
     current_time=$(date "+%Y.%m.%d-%H.%M.%S")
     echo "{\"country1\":\"USA\",\"Current Time\" :\"$current_time\"}" | bin/kafka-console-producer.sh --broker-list localhost:9092 --topic publishpet13 & kafkaProducerPID=$!
     #bin/kafka-console-producer.sh --broker-list localhost:9092 --topic syslog   --property "parse.key=true"  --property "key.separator=:"  key1:USA &
@@ -37,9 +37,18 @@ function testcase1 {
     kill -SIGINT $kafkaProducerPID
     echo "After killing"
     # kafkaMessage="$(bin/kafka-console-consumer.sh --topic publishpet1 --bootstrap-server localhost:9092 --timeout-ms 9000 --consumer.config /home/ramesh/Downloads/abc/kafka/config/consumer.properties)"
-
+    sleep 2
+    echo "Test 0"
+    bin/kafka-console-consumer.sh --topic subscribepet --bootstrap-server localhost:9092 --from-beginning & pid5=$!
+    sleep 2
+    echo "Test 1"
     kafkaMessage="$(bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic publishpet13 --timeout-ms 10000 --consumer.config $GOPATH/kafka/config/consumer.properties ) "
     
+     echo "Test 0"
+    samplevalue=eval $(bin/kafka-console-consumer.sh --topic subscribepet --bootstrap-server localhost:9092 --from-beginning) & pid6=$!
+    sleep 2
+    echo "value is : [$samplevalue]"
+
 	echo "kafka message value : [$kafkaMessage]"
 
     echo "received message : [$kafkaMessage]" 
