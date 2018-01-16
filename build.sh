@@ -35,23 +35,17 @@ function get_test_cases {
 
     #passing message from kafka producer
     echo "{\"id\":15,\"country\":\"USA\",\"category\":{\"id\":0,\"name\":\"string\"},\"name\":\"doggie\",\"photoUrls\":[\"string\"],\"tags\":[{\"id\":0,\"name\":\"string\"}],\"status\":\"available\"}" | bin/kafka-console-producer.sh --broker-list localhost:9092 --topic users &  pId3=$!    
-    sleep 2
+    sleep 20
 
     # starting kafka consumer in background and capturing logged messages into tmp/test file
 	output="{\"id\":15,\"country\":\"USA\",\"category\":{\"id\":0,\"name\":\"string\"},\"name\":\"doggie\",\"photoUrls\":[\"string\"],\"tags\":[{\"id\":0,\"name\":\"string\"}],\"status\":\"available\"}"
     
 	echo "kafka message value : [$(cat /tmp/test.log)]"	
-    kafkaMessage=$(cat /tmp/test.log)
+    echo logs are : $(cat /tmp/test.log)
 
    echo $kafkaMessage;
-    kill -SIGINT $pId1
-    sleep 5
-    kill -SIGINT $pId
-    sleep 5
-    kill -SIGINT $pId4
-    sleep 5
-    kill -SIGINT $pId5
-    echo "{\"country\":\"USA\",\"Current Time\" :\"$current_time\"}"
+    
+    #echo "{\"country\":\"USA\",\"Current Time\" :\"$current_time\"}"
 
     if [ "cat /tmp/test.log | grep $output" == "$output" ] 
         then 
@@ -59,5 +53,12 @@ function get_test_cases {
         else
             echo "FAIL"
     fi
+    kill -SIGINT $pId1
+    sleep 5
+    kill -SIGINT $pId
+    sleep 5
+    kill -SIGINT $pId4
+    sleep 5
+    kill -SIGINT $pId5
     rm -f /tmp/test.log /tmp/kafka.log
 # }
