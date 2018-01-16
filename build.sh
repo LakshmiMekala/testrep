@@ -18,7 +18,7 @@ function testcase1 {
     echo "kafka pid : [$pId1]"
     sleep 10
 
-    bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic publishpet13
+    bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic publishpet
 
     sleep 5
 
@@ -31,7 +31,7 @@ function testcase1 {
 
     cd ../kafka
     current_time=$(date "+%Y.%m.%d-%H.%M.%S")
-    echo "{\"country1\":\"USA\",\"Current Time\" :\"$current_time\"}" | bin/kafka-console-producer.sh --broker-list localhost:9092 --topic publishpet13 & kafkaProducerPID=$!
+    echo "{\"country1\":\"USA\",\"Current Time\" :\"$current_time\"}" | bin/kafka-console-producer.sh --broker-list localhost:9092 --topic publishpet & kafkaProducerPID=$!
     #bin/kafka-console-producer.sh --broker-list localhost:9092 --topic syslog   --property "parse.key=true"  --property "key.separator=:"  key1:USA &
     sleep 5
     kill -SIGINT $kafkaProducerPID
@@ -42,7 +42,7 @@ function testcase1 {
     bin/kafka-console-consumer.sh --topic subscribepet --bootstrap-server localhost:9092 --from-beginning & pid5=$!
     sleep 2
     echo "Test 1"
-    kafkaMessage="$(bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic publishpet13 --timeout-ms 10000 --consumer.config $GOPATH/kafka/config/consumer.properties ) "
+    kafkaMessage="$(bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic publishpet --timeout-ms 10000 --consumer.config $GOPATH/kafka/config/consumer.properties ) "
     
      echo "Test 0"
     samplevalue= $(bin/kafka-console-consumer.sh --topic subscribepet --bootstrap-server localhost:9092 --from-beginning) & pid6=$!
