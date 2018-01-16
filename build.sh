@@ -25,6 +25,7 @@ function get_test_cases {
     popd
 	
     #executing the gateway binary
+    chmod 777 event-dispatcher-router-mashling
     ./event-dispatcher-router-mashling > /tmp/test.log &
     pId4=$!
     sleep 20
