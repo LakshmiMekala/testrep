@@ -6,69 +6,57 @@ function get_test_cases {
 }
 # function testcase1 {
 
-    cd ../kafka
-    
+    pushd $GOPATH/kafka
+    # starting zookeeper in background
     bin/zookeeper-server-start.sh config/zookeeper.properties > /tmp/kafka.log &
     pId=$!
-    echo "zookeeper pid : [$pId]"
     sleep 10
 
+    # starting kafka server in background
     bin/kafka-server-start.sh config/server.properties > /tmp/kafka.log &
     pId1=$!
-    echo "kafka pid : [$pId1]"
     sleep 10
 
-    bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic publishpet
+    # creating kafka topic
+    bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic users &
+    pId2=$!
+    sleep 10
 
-    sleep 5
-
-    cd ../testrep
-    chmod 777 kafkatrigger-to-kafkapublisher
-    ./kafkatrigger-to-kafkapublisher &
+    popd
+	
+    #executing the gateway binary
+    ./event-dispatcher-router-mashling > /tmp/test.log &
     pId4=$!
-    echo "kafka gateway pid : [$pId4]"
     sleep 20
 
-    cd ../kafka
+    cd $GOPATH/kafka
     current_time=$(date "+%Y.%m.%d-%H.%M.%S")
-    echo "{\"country1\":\"USA\",\"Current Time\" :\"$current_time\"}" | bin/kafka-console-producer.sh --broker-list localhost:9092 --topic publishpet & kafkaProducerPID=$!
-    #bin/kafka-console-producer.sh --broker-list localhost:9092 --topic syslog   --property "parse.key=true"  --property "key.separator=:"  key1:USA &
-    sleep 5
+
+    #passing message from kafka producer
+    echo "{\"country\":\"USA\",\"Current Time\" :\"$current_time\"}" | bin/kafka-console-producer.sh --broker-list localhost:9092 --topic users &  pId3=$!    
+    sleep 2
+
+    # starting kafka consumer in background and capturing logged messages into tmp/test file
+	output="{\"id\":15,\"country\":\"USA\",\"category\":{\"id\":0,\"name\":\"string\"},\"name\":\"doggie\",\"photoUrls\":[\"string\"],\"tags\":[{\"id\":0,\"name\":\"string\"}],\"status\":\"available\"}"
     
-    echo "After killing"
-    # kafkaMessage="$(bin/kafka-console-consumer.sh --topic publishpet1 --bootstrap-server localhost:9092 --timeout-ms 9000 --consumer.config /home/ramesh/Downloads/abc/kafka/config/consumer.properties)"
-    # sleep 2
-    # echo "Test 0"
-    # bin/kafka-console-consumer.sh --topic subscribepet --bootstrap-server localhost:9092 --from-beginning & pid5=$!
-    # sleep 2
-    # echo "Test 1"
-    # kafkaMessage="$(bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic publishpet --timeout-ms 300000 --consumer.config $GOPATH/kafka/config/consumer.properties ) "
-    #  echo "message is $kafkaMessage"
-    #  echo "Test 0"
-    # samplevalue= $(bin/kafka-console-consumer.sh --topic subscribepet --bootstrap-server localhost:9092 --from-beginning) & pid6=$!
-    # sleep 2
-    # echo "value is : [$samplevalue]"
+	echo "kafka message value : [$(cat /tmp/test.log)]"	
+    kafkaMessage=$(cat /tmp/test.log)
 
-	# echo "kafka message value : [$kafkaMessage]"
+   echo $kafkaMessage;
+    kill -SIGINT $pId1
+    sleep 5
+    kill -SIGINT $pId
+    sleep 5
+    kill -SIGINT $pId4
+    sleep 5
+    kill -SIGINT $pId5
+    echo "{\"country\":\"USA\",\"Current Time\" :\"$current_time\"}"
 
-    # echo "received message : [$kafkaMessage]" 
-    # echo "actual message : [{\"country1\":\"USA\",\"Current Time\" :\"$current_time\"}]"
-
-    bin/kafka-console-consumer.sh --topic subscribepet --bootstrap-server localhost:9092 --from-beginning > /tmp/test.log & pid7=$! 
-    sleep 20
-    echo "pid7=$pid7";
-    echo "log file content is $(cat /tmp/test.log)"
-    cat /tmp/test.log
-    echo "456"   
-    kafkaMessage="$(cat /tmp/test.log)"
-    echo $kafkaMessage;
-    kill -9 $pid7
-    kill -SIGINT $kafkaProducerPID
-    if [ "$kafkaMessage" == "{\"country1\":\"USA\",\"Current Time\" :\"$current_time\"}" ] 
+    if [ "cat /tmp/test.log | grep $output" == "$output" ] 
         then 
             echo "PASS"   
         else
             echo "FAIL"
     fi
-    cd ..
+    rm -f /tmp/test.log /tmp/kafka.log
 # }
