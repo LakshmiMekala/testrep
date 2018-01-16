@@ -37,23 +37,27 @@ function get_test_cases {
     kill -SIGINT $kafkaProducerPID
     echo "After killing"
     # kafkaMessage="$(bin/kafka-console-consumer.sh --topic publishpet1 --bootstrap-server localhost:9092 --timeout-ms 9000 --consumer.config /home/ramesh/Downloads/abc/kafka/config/consumer.properties)"
-    sleep 2
-    echo "Test 0"
-    bin/kafka-console-consumer.sh --topic subscribepet --bootstrap-server localhost:9092 --from-beginning & pid5=$!
-    sleep 2
-    echo "Test 1"
-    kafkaMessage="$(bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic publishpet --timeout-ms 300000 --consumer.config $GOPATH/kafka/config/consumer.properties ) "
-     echo "message is $kafkaMessage"
-     echo "Test 0"
-    samplevalue= $(bin/kafka-console-consumer.sh --topic subscribepet --bootstrap-server localhost:9092 --from-beginning) & pid6=$!
-    sleep 2
-    echo "value is : [$samplevalue]"
+    # sleep 2
+    # echo "Test 0"
+    # bin/kafka-console-consumer.sh --topic subscribepet --bootstrap-server localhost:9092 --from-beginning & pid5=$!
+    # sleep 2
+    # echo "Test 1"
+    # kafkaMessage="$(bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic publishpet --timeout-ms 300000 --consumer.config $GOPATH/kafka/config/consumer.properties ) "
+    #  echo "message is $kafkaMessage"
+    #  echo "Test 0"
+    # samplevalue= $(bin/kafka-console-consumer.sh --topic subscribepet --bootstrap-server localhost:9092 --from-beginning) & pid6=$!
+    # sleep 2
+    # echo "value is : [$samplevalue]"
 
-	echo "kafka message value : [$kafkaMessage]"
+	# echo "kafka message value : [$kafkaMessage]"
 
-    echo "received message : [$kafkaMessage]" 
-    echo "actual message : [{\"country1\":\"USA\",\"Current Time\" :\"$current_time\"}]"
+    # echo "received message : [$kafkaMessage]" 
+    # echo "actual message : [{\"country1\":\"USA\",\"Current Time\" :\"$current_time\"}]"
 
+    bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic subscribepet > /tmp/test.log & pid7=$!    
+    kafkaMessage=$(cat /tmp/test.log)
+    echo $kafkaMessage;
+    kill -9 $pid7
     if [ "$kafkaMessage" == "{\"country1\":\"USA\",\"Current Time\" :\"$current_time\"}" ] 
         then 
             echo "PASS"   
