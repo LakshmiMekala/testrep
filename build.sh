@@ -38,7 +38,7 @@ function get_test_cases {
     sleep 20
 
     # starting kafka consumer in background and capturing logged messages into tmp/test file
-	output="{\"id\":15,\"country\":\"USA\",\"category\":{\"id\":0,\"name\":\"string\"},\"name\":\"doggie\",\"photoUrls\":[\"string\"],\"tags\":[{\"id\":0,\"name\":\"string\"}],\"status\":\"available\"}"
+	output={\"id\":15,\"country\":\"USA\",\"category\":{\"id\":0,\"name\":\"string\"},\"name\":\"doggie\",\"photoUrls\":[\"string\"],\"tags\":[{\"id\":0,\"name\":\"string\"}],\"status\":\"available\"}
     
 	echo "kafka message value : [$(cat /tmp/test.log)]"	
     echo logs are : $(cat /tmp/test.log)
