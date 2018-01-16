@@ -22,14 +22,14 @@ function testcase1 {
 
     sleep 5
 
-    # # cd ../KafkaTrigger-To-KafkaPublisher
+    cd ..
+    chmod 777 kafkatrigger-to-kafkapublisher
+    ./kafkatrigger-to-kafkapublisher &
+    pId4=$!
+    echo "kafka gateway pid : [$pId4]"
+    sleep 20
 
-    # # ./kafkatrigger-to-kafkapublisher &
-    # # pId4=$!
-    # # echo "kafka gateway pid : [$pId4]"
-    # # sleep 20
-
-    # cd ../kafka
+    cd kafka
     current_time=$(date "+%Y.%m.%d-%H.%M.%S")
     echo "{\"country1\":\"USA\",\"Current Time\" :\"$current_time\"}" | bin/kafka-console-producer.sh --broker-list localhost:9092 --topic publishpet13 & kafkaProducerPID=$!
     #bin/kafka-console-producer.sh --broker-list localhost:9092 --topic syslog   --property "parse.key=true"  --property "key.separator=:"  key1:USA &
