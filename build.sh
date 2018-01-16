@@ -28,14 +28,14 @@ function get_test_cases {
     chmod 777 event-dispatcher-router-mashling
     ./event-dispatcher-router-mashling > /tmp/test.log &
     pId4=$!
-    sleep 20
+    sleep 40
 
     cd $GOPATH/kafka
     current_time=$(date "+%Y.%m.%d-%H.%M.%S")
-
+	echo 123-logs are : $(cat /tmp/test.log)	
     #passing message from kafka producer
     echo "{\"id\":15,\"country\":\"USA\",\"category\":{\"id\":0,\"name\":\"string\"},\"name\":\"doggie\",\"photoUrls\":[\"string\"],\"tags\":[{\"id\":0,\"name\":\"string\"}],\"status\":\"available\"}" | bin/kafka-console-producer.sh --broker-list localhost:9092 --topic users &  pId3=$!    
-    sleep 20
+    sleep 10
 
     # starting kafka consumer in background and capturing logged messages into tmp/test file
 	output={\"id\":15,\"country\":\"USA\",\"category\":{\"id\":0,\"name\":\"string\"},\"name\":\"doggie\",\"photoUrls\":[\"string\"],\"tags\":[{\"id\":0,\"name\":\"string\"}],\"status\":\"available\"}
