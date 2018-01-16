@@ -45,7 +45,7 @@ function testcase1 {
     kafkaMessage="$(bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic publishpet13 --timeout-ms 10000 --consumer.config $GOPATH/kafka/config/consumer.properties ) "
     
      echo "Test 0"
-    samplevalue=eval $(bin/kafka-console-consumer.sh --topic subscribepet --bootstrap-server localhost:9092 --from-beginning) & pid6=$!
+    samplevalue= $(bin/kafka-console-consumer.sh --topic subscribepet --bootstrap-server localhost:9092 --from-beginning) & pid6=$!
     sleep 2
     echo "value is : [$samplevalue]"
 
