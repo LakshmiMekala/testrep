@@ -8,12 +8,12 @@ function get_test_cases {
 
     cd ../kafka
     
-    bin/zookeeper-server-start.sh config/zookeeper.properties &
+    bin/zookeeper-server-start.sh config/zookeeper.properties > /tmp/kafka.log &
     pId=$!
     echo "zookeeper pid : [$pId]"
     sleep 10
 
-    bin/kafka-server-start.sh config/server.properties &
+    bin/kafka-server-start.sh config/server.properties > /tmp/kafka.log &
     pId1=$!
     echo "kafka pid : [$pId1]"
     sleep 10
@@ -54,7 +54,10 @@ function get_test_cases {
     # echo "received message : [$kafkaMessage]" 
     # echo "actual message : [{\"country1\":\"USA\",\"Current Time\" :\"$current_time\"}]"
 
-    bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic subscribepet > /tmp/test.log & pid7=$!    
+    bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic subscribepet > /tmp/test.log & pid7=$! 
+    echo "123"
+    cat /tmp/test.log
+    echo "456"   
     kafkaMessage=$(cat /tmp/test.log)
     echo $kafkaMessage;
     kill -9 $pid7
