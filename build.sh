@@ -31,12 +31,13 @@ function get_test_cases {
     sleep 40
 
     cd $GOPATH/kafka
-    current_time=$(date "+%Y.%m.%d-%H.%M.%S")
-	echo 123-logs are : $(cat /tmp/test.log)	
-	output={\"id\":15,\"country\":\"USA\",\"category\":{\"id\":0,\"name\":\"string\"},\"name\":\"doggie\",\"photoUrls\":[\"string\"],\"tags\":[{\"id\":0,\"name\":\"string\"}],\"status\":\"available\"}
+    #current_time=$(date "+%Y.%m.%d-%H.%M.%S")
+		
+	#output={\"id\":15,\"country\":\"USA\",\"category\":{\"id\":0,\"name\":\"string\"},\"name\":\"doggie\",\"photoUrls\":[\"string\"],\"tags\":[{\"id\":0,\"name\":\"string\"}],\"status\":\"available\"}
     #passing message from kafka producer
     echo "{\"id\":15,\"country\":\"USA\",\"category\":{\"id\":0,\"name\":\"string\"},\"name\":\"doggie\",\"photoUrls\":[\"string\"],\"tags\":[{\"id\":0,\"name\":\"string\"}],\"status\":\"available\"}" | bin/kafka-console-producer.sh --broker-list localhost:9092 --topic users &  pId3=$!    
-    sleep 10
+    sleep 20
+    echo 123-logs are : $(cat /tmp/test.log)
 	if [ "cat /tmp/test.log | grep USA" == *"USA"* ] 
         then 
             echo "PASS"   
@@ -44,7 +45,7 @@ function get_test_cases {
             echo "FAIL"
     fi
     # starting kafka consumer in background and capturing logged messages into tmp/test file
-	output={\"id\":15,\"country\":\"USA\",\"category\":{\"id\":0,\"name\":\"string\"},\"name\":\"doggie\",\"photoUrls\":[\"string\"],\"tags\":[{\"id\":0,\"name\":\"string\"}],\"status\":\"available\"}
+	#output={\"id\":15,\"country\":\"USA\",\"category\":{\"id\":0,\"name\":\"string\"},\"name\":\"doggie\",\"photoUrls\":[\"string\"],\"tags\":[{\"id\":0,\"name\":\"string\"}],\"status\":\"available\"}
     
     kill -SIGINT $pId1
     sleep 5
