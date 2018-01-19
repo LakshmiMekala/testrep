@@ -22,6 +22,9 @@ function get_test_cases {
     pId2=$!
     sleep 10
 
+    echo "{\"id\":15,\"country\":\"USA\",\"category\":{\"id\":0,\"name\":\"string\"},\"name\":\"doggie\",\"photoUrls\":[\"string\"],\"tags\":[{\"id\":0,\"name\":\"string\"}],\"status\":\"available\"}" | bin/kafka-console-producer.sh --broker-list localhost:9092 --topic users &  pId3=$!    
+    sleep 20
+    echo 123-logs are : $(cat /tmp/test.log)
     popd
 	
     #executing the gateway binary
@@ -35,9 +38,9 @@ function get_test_cases {
 		
 	#output={\"id\":15,\"country\":\"USA\",\"category\":{\"id\":0,\"name\":\"string\"},\"name\":\"doggie\",\"photoUrls\":[\"string\"],\"tags\":[{\"id\":0,\"name\":\"string\"}],\"status\":\"available\"}
     #passing message from kafka producer
-    echo "{\"id\":15,\"country\":\"USA\",\"category\":{\"id\":0,\"name\":\"string\"},\"name\":\"doggie\",\"photoUrls\":[\"string\"],\"tags\":[{\"id\":0,\"name\":\"string\"}],\"status\":\"available\"}" | bin/kafka-console-producer.sh --broker-list localhost:9092 --topic users &  pId3=$!    
-    sleep 20
-    echo 123-logs are : $(cat /tmp/test.log)
+    # echo "{\"id\":15,\"country\":\"USA\",\"category\":{\"id\":0,\"name\":\"string\"},\"name\":\"doggie\",\"photoUrls\":[\"string\"],\"tags\":[{\"id\":0,\"name\":\"string\"}],\"status\":\"available\"}" | bin/kafka-console-producer.sh --broker-list localhost:9092 --topic users &  pId3=$!    
+    # sleep 20
+    # echo 123-logs are : $(cat /tmp/test.log)
 	if [ "cat /tmp/test.log | grep USA" == *"USA"* ] 
         then 
             echo "PASS"   
