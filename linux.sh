@@ -33,13 +33,13 @@ function get_test_cases {
    bin/kafka-console-consumer.sh --topic syslog --bootstrap-server localhost:9092 --from-beginning > /tmp/test.log & pId4=$!  
     sleep 2
 	
-	binaryoutput=$(cat /tmp/kafka.log)
-	consumer-output=$(cat /tmp/test.log)
-	echo =====================================================
-	echo binaryoutput
-	echo =====================================================
-	echo consumer-output
-	echo =====================================================
+    output=photoUrls
+	if [[ "cat /tmp/test.log | grep $output" == "$output" ]] 
+        then 
+            echo "PASS"   
+        else
+            echo "FAIL"
+    fi
 	
     
 
