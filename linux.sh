@@ -20,6 +20,7 @@ function get_test_cases {
     popd
 	
     #executing the gateway binary
+    chmod 777 resttrigger-to-kafkapublisher
     ./resttrigger-to-kafkapublisher > /tmp/output.log &
     pId3=$!
     sleep 20
