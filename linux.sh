@@ -4,7 +4,7 @@ function get_test_cases {
     local my_list=( testcase1 )
     echo "${my_list[@]}"
 }
-function testcase1 {
+#function testcase1 {
 
     pushd $GOPATH/kafka
     # starting zookeeper in background
@@ -60,4 +60,4 @@ function testcase1 {
             echo "FAIL"
     fi
     rm -f /tmp/test.log /tmp/kafka.log
-}
+#}
