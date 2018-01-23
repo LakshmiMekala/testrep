@@ -49,6 +49,8 @@ function get_test_cases {
 	echo ================
 	cat /tmp/client.log
 	echo ================
+	cat /tmp/gw.log
+	echo ================
 	#output=$(cat /tmp/client.log)
 	input="{"Hobbies":["snowboarding","programming"],"Name":"Alex"}"
 	#output=Hobbies
