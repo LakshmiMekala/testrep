@@ -53,7 +53,7 @@ function get_test_cases {
 	input="{"Hobbies":["snowboarding","programming"],"Name":"Alex"}"
 	#output=Hobbies
 	
-	if [[ "echo $(cat /tmp/client.log)" =~ "echo $(cat /tmp/gw.log)" ]] 
+	if [[ "echo $(cat /tmp/client.log)" =~ '{"Hobbies":["snowboarding","programming"],"Name":"Alex"}' ]] 
         then 
             echo "PASS"
             
