@@ -19,6 +19,7 @@ function get_test_cases {
 	export ENDPOINT_URL=https://localhost:8080
 	echo $ENDPOINT_URL $SERVER_CERT $SERVER_KEY $TRUST_STORE
 	
+	chmod 777 secure-rest-gateway
 	./secure-rest-gateway > /tmp/gw.log &  pId2=$!
 	echo $pId2
 	
