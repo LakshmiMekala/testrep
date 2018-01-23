@@ -53,7 +53,7 @@ function get_test_cases {
 	input="{"Hobbies":["snowboarding","programming"],"Name":"Alex"}"
 	#output=Hobbies
 	
-	if [[ "echo $(cat /tmp/client.log)" =~ "echo $(/tmp/gw.log)" ]] 
+	if [[ "echo $(cat /tmp/client.log)" =~ "echo $(cat /tmp/gw.log)" ]] 
         then 
             echo "PASS"
             
@@ -64,6 +64,7 @@ function get_test_cases {
 	
 	popd
 	
+	rm -f /tmp/client.log /tmp/gw.log
 	kill -SIGINT $pId
 	kill -SIGINT $pId1
 	kill -SIGINT $pId2
