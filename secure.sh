@@ -39,10 +39,12 @@ function get_test_cases {
 	sed -i s/'log.Println(httpServer.ListenAndServeTLS("..\/cert.pem", "..\/key.pem"))/log.Println(httpServer.ListenAndServeTLS("..\/apiserver.crt", "..\/apiserver.key"))'/g server.go
 	sed -i s/'"fmt"/\/\/"fmt"'/g server.go
 	
-	
+	echo "123"
 	go run server.go > /tmp/server.log & pId=$!
 	cd ../client
-	go run client.go > /tmp/client.log & pId1=$!
+	sleep 20
+	echo "456"
+	go run client.go > /tmp/client.log 'sleep 5' & pId1=$!
 	
 	echo ================
 	cat /tmp/client.log
@@ -59,7 +61,7 @@ function get_test_cases {
             echo "FAIL"
             
     fi
-	sleep 20
+	
 	popd
 	
 	kill -SIGINT $pId
