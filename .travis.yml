@@ -7,6 +7,9 @@ install:
 #  - go install ./...
   - sudo apt-add-repository ppa:mosquitto-dev/mosquitto-ppa --yes
   - sudo apt-get update -q
+  - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then bash ./travis/run_on_pull_requests; 
+    git clone https://github.com/TIBCOSoftware/mashling-cicd.git
+  fi'
   - sudo apt-get install mosquitto
   - sudo apt-get install libmosquitto-dev
   - sudo apt-get install mosquitto-clients
