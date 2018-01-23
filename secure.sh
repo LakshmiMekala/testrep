@@ -20,7 +20,7 @@ function get_test_cases {
 	echo $ENDPOINT_URL $SERVER_CERT $SERVER_KEY $TRUST_STORE
 	
 	chmod 777 secure-rest-gateway
-	./secure-rest-gateway > /tmp/gw.log &  pId2=$!
+	./secure-rest-gateway 1> /tmp/gw.log 2>&1 &  pId2=$!
 	echo $pId2
 	
 	go get -u github.com/levigross/go-mutual-tls/...
@@ -44,8 +44,8 @@ function get_test_cases {
 	cd ../client
 	sleep 20
 	echo "456"
-	go run client.go > /tmp/client.log 'sleep 5' & pId1=$!
-	
+	# go run client.go > /tmp/client.log 'sleep 5' & pId1=$!
+	go run client.go 1> /tmp/rest.log 2>&1
 	echo ================
 	cat /tmp/client.log
 	echo ================
