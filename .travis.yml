@@ -17,7 +17,7 @@ script:
   - cd ..
   - git clone -b kafka-test https://github.com/LakshmiMekala/testrep.git 
   - cd testrep
-  - chmod ugo+x ./linux.sh
-  - ./linux.sh
+  - chmod ugo+x ./secure.sh
+  - ./secure.sh
   #- source ./linux.sh
 #  - testcase1
