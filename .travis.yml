@@ -10,8 +10,9 @@ install:
   
 script:
   - mkdir -p $GOPATH/src/github.com/TIBCOSoftware
-  - git clone https://github.com/TIBCOSoftware/mashling-recipes.git
   - cd $GOPATH
+  - git clone https://github.com/TIBCOSoftware/mashling-recipes.git
+#  - cd $GOPATH
 #  - wget http://www-eu.apache.org/dist/kafka/1.0.0/kafka_2.11-1.0.0.tgz -O $GOPATH/kafka.tgz > /tmp/kafka.log
 #  - mkdir -p $GOPATH/kafka && cd $GOPATH/kafka
 #  - tar -xvzf $GOPATH/kafka.tgz --strip 1 > /tmp/kafka.log
