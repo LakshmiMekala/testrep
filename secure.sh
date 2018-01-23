@@ -8,10 +8,10 @@ function get_test_cases {
 
 	
 	mkdir -p $HOME/gatewaycerts $HOME/truststore
-	cp C:/Users/lmekala/Documents/GoWorkspace/src/github.com/TIBCOSoftware/mashling-recipes/recipes/secure-rest-gateway/utils/gateway.crt $HOME/gatewaycerts
-	cp C:/Users/lmekala/Documents/GoWorkspace/src/github.com/TIBCOSoftware/mashling-recipes/recipes/secure-rest-gateway/utils/gateway.key	 $HOME/gatewaycerts
-	cp C:/Users/lmekala/Documents/GoWorkspace/src/github.com/TIBCOSoftware/mashling-recipes/recipes/secure-rest-gateway/utils/client.crt $HOME/truststore
-	cp C:/Users/lmekala/Documents/GoWorkspace/src/github.com/TIBCOSoftware/mashling-recipes/recipes/secure-rest-gateway/utils/apiserver.crt $HOME/truststore
+	cp $GOPATH/src/github.com/TIBCOSoftware/mashling-recipes/recipes/secure-rest-gateway/utils/gateway.crt $HOME/gatewaycerts
+	cp $GOPATH/src/github.com/TIBCOSoftware/mashling-recipes/recipes/secure-rest-gateway/utils/gateway.key	 $HOME/gatewaycerts
+	cp $GOPATH/src/github.com/TIBCOSoftware/mashling-recipes/recipes/secure-rest-gateway/utils/client.crt $HOME/truststore
+	cp $GOPATH/src/github.com/TIBCOSoftware/mashling-recipes/recipes/secure-rest-gateway/utils/apiserver.crt $HOME/truststore
 	
 	export SERVER_CERT=$HOME/gatewaycerts/gateway.crt
 	export SERVER_KEY=$HOME/gatewaycerts/gateway.key
@@ -24,8 +24,8 @@ function get_test_cases {
 	
 	go get -u github.com/levigross/go-mutual-tls/...
 	
-	pushd C:/Users/lmekala/Documents/GoWorkspace/src/github.com/levigross/go-mutual-tls
-	cp -r C:/Users/lmekala/Documents/GoWorkspace/src/github.com/TIBCOSoftware/mashling-recipes/recipes/secure-rest-gateway/utils/* C:/Users/lmekala/Documents/GoWorkspace/src/github.com/levigross/go-mutual-tls
+	pushd $GOPATH/src/github.com/levigross/go-mutual-tls
+	cp -r $GOPATH/src/github.com/TIBCOSoftware/mashling-recipes/recipes/secure-rest-gateway/utils/* $GOPATH/src/github.com/levigross/go-mutual-tls
 	cd client
 	sed -i s/'cert, err := tls.LoadX509KeyPair("..\/cert.pem", "..\/key.pem")/cert, err := tls.LoadX509KeyPair("..\/client.crt", "..\/client.key")'/g client.go
 	sed -i s/'clientCACert, err := ioutil.ReadFile("..\/cert.pem")/clientCACert, err := ioutil.ReadFile("..\/gateway.crt")'/g client.go
