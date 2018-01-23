@@ -50,10 +50,10 @@ function get_test_cases {
 	cat /tmp/client.log
 	echo ================
 	#output=$(cat /tmp/client.log)
-	input="{"\Hobbies\":["\snowboarding\",\"programming\"],\"Name\":\"Alex\"}"
+	input="{"Hobbies":["snowboarding","programming"],"Name":"Alex"}"
 	#output=Hobbies
 	
-	if [[ "cat /tmp/client.log" == *"$input"* ]] 
+	if [[ "cat /tmp/client.log" =~ '{"Hobbies":["snowboarding","programming"],"Name":"Alex"}' ]] 
         then 
             echo "PASS"
             
