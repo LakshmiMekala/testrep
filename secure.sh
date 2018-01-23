@@ -45,7 +45,7 @@ function get_test_cases {
 	sleep 20
 	echo "456"
 	# go run client.go > /tmp/client.log 'sleep 5' & pId1=$!
-	go run client.go 1> /tmp/rest.log 2>&1
+	go run client.go 1> /tmp/client.log 2>&1
 	echo ================
 	cat /tmp/client.log
 	echo ================
