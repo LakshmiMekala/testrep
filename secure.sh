@@ -61,6 +61,14 @@ function get_test_cases {
             echo "FAIL"
             
     fi
+	if [[ "echo $(cat /tmp/gw.log)" =~ '{"Hobbies":["snowboarding","programming"],"Name":"Alex"}' ]] 
+        then 
+            echo "PASS"
+            
+        else
+            echo "FAIL"
+            
+    fi
 	
 	popd
 	
