@@ -4,7 +4,7 @@
    sudo apt-get install zookeeperd
    sudo apt-get update q
    pushd $GOPATH   
-   wget http://wwweu.apache.org/dist/kafka/1.0.0/kafka_2.111.0.0.tgz -O $GOPATH/kafka.tgz
+   wget http://www-eu.apache.org/dist/kafka/1.0.0/kafka_2.11-1.0.0.tgz -O $GOPATH/kafka.tgz
    mkdir p $GOPATH/kafka && cd $GOPATH/kafka
    tar xvzf $GOPATH/kafka.tgz strip 1 > /tmp/kafka.log
    cd $GOPATH
