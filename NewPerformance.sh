@@ -42,6 +42,9 @@ for ((i=0;i < ${#value[@]};i++))
             sed -i "s/<tr><th>Trigger Type<\/th><th>Transactions\/Sec<\/th><th>No of Tests<\/th><th>Errors<\/th><th>Test Time(Sec)<\/th>/<tr><th>Trigger Type<\/th><th>Transactions\/Sec<\/th><th>No of Tests<\/th><th>Errors<\/th><th>Test Time(Sec)<\/th><\/tr><tr><th>REST<\/th><th>${array[2]}<\/th><th>${array[0]}<\/th><th>${array[1]}<\/th><th>$testTime<\/th><\/tr>/g" $GOPATH/$FILENAME
         done
 
+REPONAME="${TRAVIS_REPO_SLUG}" ;
+REPOFOLDER=${REPONAME:14} ;
+
 mkdir ${HOME}/.aws
 cat > ${HOME}/.aws/credentials <<EOL
 [default]
@@ -66,7 +69,7 @@ function create_dest_directory ()
 }
 
 pushd $GOPATH/src/github.com/TIBCOSoftware/mashling ;
-mkdir -p perf-reports;
+mkdir perf-reports;
 create_dest_directory ;
 cp "$GOPATH/$FILENAME" "$GOPATH/src/github.com/TIBCOSoftware/mashling/perf-reports/$DESTFOLDER"
 cp "$GOPATH/$FILENAME" "$GOPATH/src/github.com/TIBCOSoftware/mashling/perf-reports/latest"

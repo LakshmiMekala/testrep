@@ -17,6 +17,7 @@ function testcase1 {
 	CLASSPATH=$GRINDERPATH/lib/grinder.jar:$CLASSPATH
 	PATH=$JAVA_HOME/bin:$PATH
 	export CLASSPATH PATH GRINDERPROPERTIES
+	echo ++++++++++++++++++++++==$CLASSPATH+++++++++++++++++++++=
 	sleep 5
 	echo CONSOLE
 	#cd bin
