@@ -29,7 +29,7 @@ install:
 
 jobs:
   include:
-    - stage: test
+    - stage: build
       script:
         - mkdir -p $GOPATH/src/github.com/TIBCOSoftware
         - cd $GOPATH/src/github.com/TIBCOSoftware
