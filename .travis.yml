@@ -21,7 +21,7 @@ git:
 # Do a github login using token
 before_install:
   - "echo -e \"machine github.com\n  login ${GITHUB_USER_TOKEN}\" >> ~/.netrc"
-  - pip install --user awscli
+#  - pip install --user awscli
 install:
   - go get -u github.com/constabulary/gb/...
   - go get -u github.com/tools/godep/...
