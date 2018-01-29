@@ -33,7 +33,7 @@ function testcase1 {
 	cd ..
 	multimech-run my_project
 	echo completed
-	s 2>&1leep 30
+	sleep 30
 	#echo var=$var
 	kill -SIGINT $pId
 	sleep 5
@@ -41,15 +41,10 @@ function testcase1 {
 	sleep 5
 	kill -SIGINT $pId2
 
-	cd my_project/results
+	cd results
 	cd */
 
 	echo results
-	#sed -n 's/.*src="\([^"]*\).*/\1/p' results.html
-
-	#cat results.html | grep -Eo "(transactions:|errors:)://[a-zA-Z0-9./?=_-]*" | sort | uniq
-
-	#tidy -q -asxml --numeric-entities yes results.html >results.xml
 	transactions=$(xmllint --html -xpath "string(/html/body/table[1]/tr[2]/td[1])" results.html)
 	text=$(xmllint --html -xpath "string(/html/body/div)" results.html)
 	responseTime=$(xmllint --html -xpath "string(/html/body/table[1]/tr[2]/td[3])" results.html)
@@ -91,7 +86,7 @@ function testcase2 {
 	cd ..
 	multimech-run my_project
 	echo completed
-	s 2>&1leep 30
+	sleep 30
 	#echo var=$var
 	kill -SIGINT $pId
 	sleep 5
@@ -99,7 +94,7 @@ function testcase2 {
 	sleep 5
 	kill -SIGINT $pId2
 
-	cd my_project/results
+	cd results
 	cd */
 
 	echo results
