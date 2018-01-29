@@ -1,25 +1,78 @@
 sudo: required
 language : 
-  - go
+  - go  
+os:
+  - linux
+services:
+  - docker
+
+branches:
+  only:
+    - master
+    - /^v\d+\.\d+\.\d+(\.\d+)?(-\S*)?$/
+    
+cache:
+  bundler: false
+  directories:
+  - .build-cache          # images.txt
+# Handle git submodules yourself
+git:
+    submodules: false
+# Do a github login using token
 before_install:
   - "echo -e \"machine github.com\n  login ${GITHUB_USER_TOKEN}\" >> ~/.netrc"
+  - pip install --user awscli
 install:
- - mkdir -p $GOPATH/src/github.com/TIBCOSoftware
-#  - sudo apt-get install zookeeperd
-#  - sudo apt-get update -q
-  
-script:
-  - mkdir -p $GOPATH/src/github.com/TIBCOSoftware
-  - cd $GOPATH/src/github.com/TIBCOSoftware
-  - git clone https://github.com/TIBCOSoftware/mashling-recipes.git
-#  - cd $GOPATH
-#  - wget http://www-eu.apache.org/dist/kafka/1.0.0/kafka_2.11-1.0.0.tgz -O $GOPATH/kafka.tgz > /tmp/kafka.log
-#  - mkdir -p $GOPATH/kafka && cd $GOPATH/kafka
-#  - tar -xvzf $GOPATH/kafka.tgz --strip 1 > /tmp/kafka.log
-#  - cd ..
-  - git clone -b kafka-test https://github.com/LakshmiMekala/testrep.git 
-  - cd testrep
-  - chmod ugo+x ./secure.sh
-  - ./secure.sh
-  #- source ./linux.sh
-#  - testcase1
+  - go get -u github.com/constabulary/gb/...
+  - go get -u github.com/tools/godep/...
+  - go get -u github.com/ains/go-test-html 
+
+jobs:
+  include:
+    - stage: test
+      script:
+        - mkdir -p $GOPATH/src/github.com/TIBCOSoftware
+        - cd $GOPATH/src/github.com/TIBCOSoftware
+        - git clone https://github.com/TIBCOSoftware/mashling.git
+        - git clone https://github.com/TIBCOSoftware/mashling-cicd.git mashling-cicd
+        - cp -r $GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/dependency-config/* $GOPATH/src/github.com/TIBCOSoftware/mashling
+        - cd mashling
+        - godep restore
+        - go test ./... -v 2> >(tee gotest_stderr_file) | tee gotest_stdout_file
+    - stage: build
+      script:
+        - mkdir -p $GOPATH/src/github.com/TIBCOSoftware
+        - cd $GOPATH/src/github.com/TIBCOSoftware
+        - git clone https://github.com/TIBCOSoftware/mashling.git
+        - git clone https://github.com/TIBCOSoftware/mashling-cicd.git mashling-cicd
+        - cp -r $GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/dependency-config/* $GOPATH/src/github.com/TIBCOSoftware/mashling
+        - cd mashling
+        - godep restore
+      #  - go test ./... -v 2> >(tee gotest_stderr_file) | tee gotest_stdout_file
+      #  - go install ./...
+        - make all
+      #   - mashling help
+      #   - cd $GOPATH/src/github.com/TIBCOSoftware
+      #   - pushd mashling-cicd/sample-recipes
+      #   - rm -rf builds
+      #   - mkdir -p builds/latest
+      #   - chmod ugo+x ./build-recipes.sh ./sanity.sh ./gotestreport.sh
+      #   - ./gotestreport.sh
+      #   - ./build-recipes.sh
+      #   - ./sanity.sh
+      #   - popd
+      #   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then    
+      #     pushd mashling-cicd/docker/mashling;
+      #     chmod ugo+x ./build-mashling.sh ;
+      #     ./build-mashling.sh ;
+      #     popd ;
+      #     fi  
+          
+      # after_script:
+      #   - "[ -f \"${HOME}/.netrc\" ] && rm -f ${HOME}/.netrc"
+      #   - "[ -f \"${HOME}/.aws\" ] && rm -f ${HOME}/.aws"
+
+      # after_success:
+      #   - "docker login -u=\"${DOCKER_USERNAME}\" -p=\"${DOCKER_PASSWORD}\" tibdocker.tibco.com"
+      #   - source $GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/scripts/init.sh
+      #   - mashling::module::postbuild mashling mashling
