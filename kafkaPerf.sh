@@ -28,7 +28,7 @@ function testcase1 {
 	testTime=5
 	#var="$(timeout 70s multimech-run my_project &)"
 	echo started
-	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project
+	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher
 	sed -i "/run_time/c\run_time = $testTime" config.cfg
 	cd ..
 	multimech-run my_project
@@ -41,7 +41,7 @@ function testcase1 {
 	sleep 5
 	kill -SIGINT $pId2
 
-	cd results
+	cd my_project/results
 	cd */
 
 	echo results
@@ -81,7 +81,7 @@ function testcase2 {
 	testTime=10
 	#var="$(timeout 70s multimech-run my_project &)"
 	echo started
-	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project
+	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher
 	sed -i "/run_time/c\run_time = $testTime" config.cfg
 	cd ..
 	multimech-run my_project
@@ -94,7 +94,7 @@ function testcase2 {
 	sleep 5
 	kill -SIGINT $pId2
 
-	cd results
+	cd my_project/results
 	cd */
 
 	echo results
