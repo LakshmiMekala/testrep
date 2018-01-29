@@ -3,7 +3,7 @@
 ##Installing pre requisites to run performance test
    sudo apt-get install zookeeperd
    sudo apt-get update q
-   cd $GOPATH
+   pushd $GOPATH   
    wget http://wwweu.apache.org/dist/kafka/1.0.0/kafka_2.111.0.0.tgz O $GOPATH/kafka.tgz
    mkdir p $GOPATH/kafka && cd $GOPATH/kafka
    tar xvzf $GOPATH/kafka.tgz strip 1 > /tmp/kafka.log
@@ -25,3 +25,4 @@
     # Installing multi mechanize
     sudo apt-get install python-pip python-matplotlib
     sudo pip install -U multi-mechanize
+    popd
