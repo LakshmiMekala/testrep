@@ -38,7 +38,11 @@ jobs:
         - cp -r $GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/dependency-config/* $GOPATH/src/github.com/TIBCOSoftware/mashling
         - cd mashling
         - godep restore
-        - go test ./... -v 2> >(tee gotest_stderr_file) | tee gotest_stdout_file
+        - echo $JAVA_HOME
+        - cd $GOPATH/src/github.com/LakshmiMekala/testrep
+      #  - chmod ugo+x ./build.sh
+      #  - ./build.sh
+      #  - go test ./... -v 2> >(tee gotest_stderr_file) | tee gotest_stdout_file
       # after_script:
       #   - "[ -f \"${HOME}/.netrc\" ] && rm -f ${HOME}/.netrc"  
     - stage: build
