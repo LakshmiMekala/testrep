@@ -8,6 +8,7 @@
    mkdir p $GOPATH/kafka && cd $GOPATH/kafka
    tar xvzf $GOPATH/kafka.tgz strip 1 > /tmp/kafka.log
    cd $GOPATH
+   ls
    wget https://sourceforge.net/projects/grinder/files/latest/download $GOPATH/download.zip
    unzip $GOPATH/download > /tmp/grinder.log
    rm -f download
