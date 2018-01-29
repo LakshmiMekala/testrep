@@ -5,8 +5,8 @@
    sudo apt-get update q
    pushd $GOPATH   
    wget http://www-eu.apache.org/dist/kafka/1.0.0/kafka_2.11-1.0.0.tgz -O $GOPATH/kafka.tgz
-   mkdir p $GOPATH/kafka && cd $GOPATH/kafka
-   tar xvzf $GOPATH/kafka.tgz strip 1 > /tmp/kafka.log
+   mkdir -p $GOPATH/kafka && cd $GOPATH/kafka
+   tar -xvzf $GOPATH/kafka.tgz --strip 1 > /tmp/kafka.log
    cd $GOPATH
    ls
    wget https://sourceforge.net/projects/grinder/files/latest/download $GOPATH/download.zip
