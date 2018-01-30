@@ -21,14 +21,14 @@ function testcase1 {
 	sleep 5
 	echo CONSOLE
 	#cd bin
-	#./startConsole.sh &
-	java -classpath $CLASSPATH net.grinder.Grinder $GRINDERPROPERTIES &
+	#./startConsole.sh &	
+	java -classpath $CLASSPATH net.grinder.Console &
 	pId1=$!
 	sleep 10
 	echo AGENT
 	sleep 20
 	#./startAgent.sh &
-	java -classpath $CLASSPATH net.grinder.Console &
+	java -classpath $CLASSPATH net.grinder.Grinder $GRINDERPROPERTIES &
 	pId2=$!
 
 	curl -X PUT -H "Content-Type: application/json" http://localhost:6373/properties -d '{"propertiesFile" : "grinder.properties"}'

@@ -31,16 +31,16 @@ for ((i=0;i < ${#value[@]};i++))
         done
 
 #Rest Performance
-# cd $GOPATH/src/github.com/LakshmiMekala/testrep/rest-performance-testing
-# source ./Grinder.sh
-# value=($(get_test_cases))
-# for ((i=0;i < ${#value[@]};i++))
-#         do
-#             #source ./Grinder.sh
-#             ${value[i]}
-#             #cd /home/ramesh/Documents/Performance\ Automation/
-#             sed -i "s/<tr><th>Trigger Type<\/th><th>Transactions\/Sec<\/th><th>No of Tests<\/th><th>Errors<\/th><th>Test Time(Sec)<\/th>/<tr><th>Trigger Type<\/th><th>Transactions\/Sec<\/th><th>No of Tests<\/th><th>Errors<\/th><th>Test Time(Sec)<\/th><\/tr><tr><th>REST<\/th><th>${array[2]}<\/th><th>${array[0]}<\/th><th>${array[1]}<\/th><th>$testTime<\/th><\/tr>/g" $GOPATH/$FILENAME
-#         done
+cd $GOPATH/src/github.com/LakshmiMekala/testrep/rest-performance-testing
+source ./Grinder.sh
+value=($(get_test_cases))
+for ((i=0;i < ${#value[@]};i++))
+        do
+            #source ./Grinder.sh
+            ${value[i]}
+            #cd /home/ramesh/Documents/Performance\ Automation/
+            sed -i "s/<tr><th>Trigger Type<\/th><th>Transactions\/Sec<\/th><th>No of Tests<\/th><th>Errors<\/th><th>Test Time(Sec)<\/th>/<tr><th>Trigger Type<\/th><th>Transactions\/Sec<\/th><th>No of Tests<\/th><th>Errors<\/th><th>Test Time(Sec)<\/th><\/tr><tr><th>REST<\/th><th>${array[2]}<\/th><th>${array[0]}<\/th><th>${array[1]}<\/th><th>$testTime<\/th><\/tr>/g" $GOPATH/$FILENAME
+        done
 
 REPONAME="${TRAVIS_REPO_SLUG}" ;
 REPOFOLDER=${REPONAME:14} ;

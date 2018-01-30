@@ -8,7 +8,7 @@ function get_test_cases {
 function testcase1 {
 	cd $GOPATH/kafka
 	echo zookeeper
-	bin/zookeeper-server-start.sh config/zookeeper.properties > /tmp/kafka.log &
+	bin/zookeeper-server-start.sh config/zookeeper.properties > /tmp/zookeeper.log &
 	pId=$!
 	sleep 10
 
@@ -41,8 +41,8 @@ function testcase1 {
 	sleep 5
 	kill -SIGINT $pId2
 
-	cd my_project/results
-	# cd */
+	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project/results
+	cd */
 	# echo results
 	transactions=$(xmllint --html -xpath "string(/html/body/table[1]/tr[2]/td[1])" results.html)
 	text=$(xmllint --html -xpath "string(/html/body/div)" results.html)
@@ -52,8 +52,7 @@ function testcase1 {
 	echo responseTime=$responseTime
 	errors=$(echo $text | awk '{print $4}')
 	echo errors=$errors
-	cd ..
-	# cd ..
+	cd ../..
 	rm -rf results && mkdir results
 }
 
@@ -93,8 +92,8 @@ function testcase2 {
 	sleep 5
 	kill -SIGINT $pId2
 
-	cd my_project/results
-	# cd */
+	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project/results
+	cd */
 	# echo results
 	#sed -n 's/.*src="\([^"]*\).*/\1/p' results.html
 
@@ -109,7 +108,6 @@ function testcase2 {
 	echo responseTime=$responseTime
 	errors=$(echo $text | awk '{print $4}')
 	echo errors=$errors
-	cd ..
-	# cd ..
+	cd ../..
 	rm -rf results && mkdir results
 }
