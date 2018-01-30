@@ -12,7 +12,7 @@ for ((p=0;p < ${#Gateway[@]};p++))
 
 FILENAME="PerformanceReport.html"
 HTML="<!DOCTYPE html>
-<html><head><style>table {font-family: arial, sans-serif;border-collapse: collapse;margin: auto;}td {border: 1px solid #0c0c0c;text-align: center;padding: 8px;}th {border: 1px solid #dddddd;text-align: left;padding: 8px;}th {background: #003399;text-align: center;color: #fff;}body {padding-right: 15px;padding-left: 15px;margin-right: auto;margin-left: auto;}label {font-weight: bold;}.test-report h1 {color: #003399;}.summary,.test-report {text-align: center;}.success {background-color: #79d279;}.error {background-color: #ff3300;}.summary-tbl {font-weight: bold;}.summary-tbl td {border: none;}</style></head><body>    
+<html><head><style>table {font-family: arial, sans-serif;border-collapse: collapse;margin: auto;}td {border: 1px solid #dddddd;text-align: center;padding: 8px;}th {border: 1px solid #dddddd;text-align: left;padding: 8px;}th {background: #003399;text-align: center;color: #fff;}body {padding-right: 15px;padding-left: 15px;margin-right: auto;margin-left: auto;}label {font-weight: bold;}.test-report h1 {color: #003399;}.summary,.test-report {text-align: center;}.success {background-color: #79d279;}.error {background-color: #ff3300;}.summary-tbl {font-weight: bold;}.summary-tbl td {border: none;}</style></head><body>    
 <section class=test-report><h1>Gateway Performance Report</h1></section>
 <section class=test-report><table><tr><th>Trigger Type</th><th>Transactions/Sec</th><th>No of Tests</th><th>Errors</th><th>Test Time(Sec)</th></tr> </table></section><br /><br />
 <section class=test-report><table><tr><th>Trigger Type</th><th>Transaction Response Summary</th><th>No of Tests</th><th>Errors</th><th>Test Time</th></tr></table></section></html>"
