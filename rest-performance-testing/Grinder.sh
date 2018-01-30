@@ -39,7 +39,7 @@ function testcase1 {
 	curl -X POST http://localhost:6373/files/distribute
 	sleep 5
 
-	curl -H "Content-Type: application/json" -X POST http://localhost:6373/agents/start-workers -d '{"grinder.processes" : "2", "grinder.threads" : "1000", "grinder.runs" : "10000",  "grinder.script" : "$GOPATH/grinder/examples/Http-example_WithoutGateway.py" }' &
+	curl -H "Content-Type: application/json" -X POST http://localhost:6373/agents/start-workers -d '{"grinder.processes" : "2", "grinder.threads" : "1000", "grinder.runs" : "10000",  "grinder.script" : "Http-example_WithoutGateway.py" }' &
 	testTime=10
 	sleep $testTime
 	json=$(curl -s http://localhost:6373/recording/data | jq -r '.totals | .[0,1,4]')
@@ -104,7 +104,7 @@ function testcase2 {
 	curl -X POST http://localhost:6373/files/distribute
 	sleep 5
 
-	curl -H "Content-Type: application/json" -X POST http://localhost:6373/agents/start-workers -d '{"grinder.processes" : "2", "grinder.threads" : "1000", "grinder.runs" : "100",  "grinder.script" : "$GOPATH/grinder/examples/Http-example.py" }' &
+	curl -H "Content-Type: application/json" -X POST http://localhost:6373/agents/start-workers -d '{"grinder.processes" : "2", "grinder.threads" : "1000", "grinder.runs" : "100",  "grinder.script" : "Http-example.py" }' &
 
 	testTime=60
 	sleep $testTime
