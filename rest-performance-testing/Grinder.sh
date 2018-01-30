@@ -25,13 +25,13 @@ function testcase1 {
 	export DISPLAY=:0.0
 	#cd bin
 	#./startConsole.sh &	
-	java -classpath $CLASSPATH net.grinder.Console -headless &
+	java -classpath $CLASSPATH net.grinder.Console -headless > /tmp/console1.log 2>&1 &
 	pId1=$!
 	sleep 10
 	echo AGENT
 	sleep 20
 	#./startAgent.sh &
-	java -classpath $CLASSPATH net.grinder.Grinder $GRINDERPROPERTIES &
+	java -classpath $CLASSPATH net.grinder.Grinder $GRINDERPROPERTIES > /tmp/agent1.log 2>&1 &
 	pId2=$!
 
 	curl -X PUT -H "Content-Type: application/json" http://localhost:6373/properties -d '{"propertiesFile" : "grinder.properties"}'
@@ -91,12 +91,12 @@ function testcase2 {
 	export CLASSPATH PATH GRINDERPROPERTIES
 	sleep 5
 	echo CONSOLE
-	java -classpath $CLASSPATH net.grinder.Console -headless &
+	java -classpath $CLASSPATH net.grinder.Console -headless > /tmp/console2.log 2>&1 &
 	pId1=$!
 	sleep 10
 	echo AGENT
 	sleep 20
-	java -classpath $CLASSPATH net.grinder.Grinder $GRINDERPROPERTIES &
+	java -classpath $CLASSPATH net.grinder.Grinder $GRINDERPROPERTIES > /tmp/agent2.log 2>&1 &
 	pId2=$!
 
 	curl -X PUT -H "Content-Type: application/json" http://localhost:6373/properties -d '{"propertiesFile" : "grinder.properties"}'
