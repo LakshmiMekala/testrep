@@ -30,14 +30,10 @@ function testcase1 {
 	sleep 10
 	echo AGENT
 	sleep 20
-	cd bin
-	echo !!!!!!!!!!!!!!!!!!!!!!!!!!
-	cat startAgent.sh
-	./startAgent.sh &
-	#java -classpath $CLASSPATH net.grinder.Grinder $GRINDERPROPERTIES &
+	#./startAgent.sh &
+	java -classpath $CLASSPATH net.grinder.Grinder $GRINDERPROPERTIES &
 	pId2=$!
-	echo !!!!!!!!!!!!!!!!!!!!!!!!!!
-	
+
 	curl -X PUT -H "Content-Type: application/json" http://localhost:6373/properties -d '{"propertiesFile" : "grinder.properties"}'
 	sleep 5
 	curl -X POST http://localhost:6373/files/distribute
