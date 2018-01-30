@@ -19,16 +19,16 @@ HTML="<!DOCTYPE html>
 echo $HTML >> $GOPATH/$FILENAME
 
 #Kafka Performance
-cd $GOPATH/src/github.com/LakshmiMekala/testrep/
-source ./kafkaPerf.sh
-value=($(get_test_cases))
-for ((i=0;i < ${#value[@]};i++))
-        do
-            #source ./kafkaPerf.sh
-            ${value[i]}
-           # cd /home/ramesh/Documents/Performance\ Automation/
-            sed -i "s/<tr><th>Trigger Type<\/th><th>Transaction Response Summary<\/th><th>No of Tests<\/th><th>Errors<\/th><th>Test Time<\/th>/<tr><th>Trigger Type<\/th><th>Transaction Response Summary<\/th><th>No of Tests<\/th><th>Errors<\/th><th>Test Time<\/th><\/tr><tr><th>KAFKA<\/th><th>$responseTime<\/th><th>$transactions<\/th><th>$errors<\/th><th>$testTime<\/th><\/tr>/g" $GOPATH/$FILENAME
-        done
+# cd $GOPATH/src/github.com/LakshmiMekala/testrep/
+# source ./kafkaPerf.sh
+# value=($(get_test_cases))
+# for ((i=0;i < ${#value[@]};i++))
+#         do
+#             #source ./kafkaPerf.sh
+#             ${value[i]}
+#            # cd /home/ramesh/Documents/Performance\ Automation/
+#             sed -i "s/<tr><th>Trigger Type<\/th><th>Transaction Response Summary<\/th><th>No of Tests<\/th><th>Errors<\/th><th>Test Time<\/th>/<tr><th>Trigger Type<\/th><th>Transaction Response Summary<\/th><th>No of Tests<\/th><th>Errors<\/th><th>Test Time<\/th><\/tr><tr><th>KAFKA<\/th><th>$responseTime<\/th><th>$transactions<\/th><th>$errors<\/th><th>$testTime<\/th><\/tr>/g" $GOPATH/$FILENAME
+#         done
 
 #Rest Performance
 cd $GOPATH/src/github.com/LakshmiMekala/testrep/rest-performance-testing
