@@ -21,7 +21,7 @@ function testcase1 {
 	echo gateway
 	cd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
 	env FLOGO_LOG_LEVEL=ERROR
-	./kafkatrigger-to-kafkapublisher > /tmp/gateway.log 2>&1 &
+	./kafkatrigger-to-kafkapublisher > /tmp/testcase1.log 2>&1 &
 	pId2=$!
 	sleep 10
 
@@ -72,7 +72,7 @@ function testcase2 {
 	echo gateway
 	cd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
 	env FLOGO_LOG_LEVEL=ERROR
-	./kafkatrigger-to-kafkapublisher > /tmp/gateway.log 2>&1 &
+	./kafkatrigger-to-kafkapublisher > /tmp/testcase2.log 2>&1 &
 	pId2=$!
 	sleep 10
 
