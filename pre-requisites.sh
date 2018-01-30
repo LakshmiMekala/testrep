@@ -4,7 +4,6 @@
    sudo apt-get install zookeeperd
    sudo apt-get install libxml2-utils
    sudo pip install kafka-python
-   sudo pip install tox-travis
    sudo apt-get update -q
    pushd $GOPATH   
    wget http://www-eu.apache.org/dist/kafka/1.0.0/kafka_2.11-1.0.0.tgz -O $GOPATH/kafka.tgz
