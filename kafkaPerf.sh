@@ -28,7 +28,7 @@ function testcase1 {
 	testTime=5
 	#var="$(timeout 70s multimech-run my_project &)"
 	echo started
-	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher
+	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project
 	sed -i "/run_time/c\run_time = $testTime" config.cfg
 	cd ..
 	multimech-run my_project
@@ -42,9 +42,8 @@ function testcase1 {
 	kill -SIGINT $pId2
 
 	cd my_project/results
-	cd */
-
-	echo results
+	# cd */
+	# echo results
 	transactions=$(xmllint --html -xpath "string(/html/body/table[1]/tr[2]/td[1])" results.html)
 	text=$(xmllint --html -xpath "string(/html/body/div)" results.html)
 	responseTime=$(xmllint --html -xpath "string(/html/body/table[1]/tr[2]/td[3])" results.html)
@@ -54,7 +53,7 @@ function testcase1 {
 	errors=$(echo $text | awk '{print $4}')
 	echo errors=$errors
 	cd ..
-	cd ..
+	# cd ..
 	rm -rf results && mkdir results
 }
 
@@ -81,7 +80,7 @@ function testcase2 {
 	testTime=10
 	#var="$(timeout 70s multimech-run my_project &)"
 	echo started
-	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher
+	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project
 	sed -i "/run_time/c\run_time = $testTime" config.cfg
 	cd ..
 	multimech-run my_project
@@ -95,9 +94,8 @@ function testcase2 {
 	kill -SIGINT $pId2
 
 	cd my_project/results
-	cd */
-
-	echo results
+	# cd */
+	# echo results
 	#sed -n 's/.*src="\([^"]*\).*/\1/p' results.html
 
 	#cat results.html | grep -Eo "(transactions:|errors:)://[a-zA-Z0-9./?=_-]*" | sort | uniq
@@ -112,6 +110,6 @@ function testcase2 {
 	errors=$(echo $text | awk '{print $4}')
 	echo errors=$errors
 	cd ..
-	cd ..
+	# cd ..
 	rm -rf results && mkdir results
 }
