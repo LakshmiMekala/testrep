@@ -6,6 +6,8 @@ function get_test_cases {
 }
 
 function testcase1 {
+	cd $GOPATH/src/github.com/LakshmiMekala/testrep/rest-performance-testing
+	go run server.go &	
 	cd $GOPATH/rest-conditional-gateway/bin
 	./rest-conditional-gateway &
 	pId=$!
@@ -69,10 +71,13 @@ function testcase1 {
 	kill -9 $pId
 	kill -9 $pId1
 	kill -9 $pId2
+	kill $(lsof -t -i:9090)
 	kill $(lsof -t -i:6373)
 }
 
 function testcase2 {
+	cd $GOPATH/src/github.com/LakshmiMekala/testrep/rest-performance-testing
+	go run server.go &
 	cd $GOPATH/rest-conditional-gateway/bin
 	./rest-conditional-gateway &
 	pId=$!
@@ -99,7 +104,7 @@ function testcase2 {
 	curl -X POST http://localhost:6373/files/distribute
 	sleep 5
 
-	curl -H "Content-Type: application/json" -X POST http://localhost:6373/agents/start-workers -d '{"grinder.processes" : "2", "grinder.threads" : "1000", "grinder.runs" : "10000",  "grinder.script" : "Http-example_WithoutGateway.py" }' &
+	curl -H "Content-Type: application/json" -X POST http://localhost:6373/agents/start-workers -d '{"grinder.processes" : "2", "grinder.threads" : "1000", "grinder.runs" : "100",  "grinder.script" : "Http-example.py" }' &
 
 	testTime=60
 	sleep $testTime
@@ -132,5 +137,6 @@ function testcase2 {
 	kill -9 $pId
 	kill -9 $pId1
 	kill -9 $pId2
+	kill $(lsof -t -i:9090)
 	kill $(lsof -t -i:6373)
 }

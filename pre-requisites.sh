@@ -34,6 +34,8 @@
     echo ---------------------------------------
     ls;
     echo ---------------------------------------
-    chmod 777 Http-example_WithoutGateway.py Http-example.py
-    chmod ugo+x Http-example_WithoutGateway.py Http-example.py  
+    # chmod 777 Http-example_WithoutGateway.py Http-example.py
+    # chmod ugo+x Http-example_WithoutGateway.py Http-example.py  
+    os.chmod("Http-example_WithoutGateway.py", 0o777)
+    os.chmod("Http-example.py", 0o777)
     popd
