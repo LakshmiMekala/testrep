@@ -12,7 +12,7 @@ for ((p=0;p < ${#Gateway[@]};p++))
 
 FILENAME="PerformanceReport.html"
 HTML="<!DOCTYPE html>
-<html><head><style>table {font-family: arial, sans-serif;border-collapse: collapse;margin: auto;}td,th {border: 1px solid #dddddd;text-align: left;padding: 8px;}th {background: #003399;text-align: center;color: #fff;}body {padding-right: 15px;padding-left: 15px;margin-right: auto;margin-left: auto;}label {font-weight: bold;}.test-report h1 {color: #003399;}.summary,.test-report {text-align: center;}.success {background-color: #79d279;}.error {background-color: #ff3300;}.summary-tbl {font-weight: bold;}.summary-tbl td {border: none;}</style></head><body>    
+<html><head><style>table {font-family: arial, sans-serif;border-collapse: collapse;margin: auto;}td {border: 1px solid #0c0c0c;text-align: center;padding: 8px;}th {border: 1px solid #dddddd;text-align: left;padding: 8px;}th {background: #003399;text-align: center;color: #fff;}body {padding-right: 15px;padding-left: 15px;margin-right: auto;margin-left: auto;}label {font-weight: bold;}.test-report h1 {color: #003399;}.summary,.test-report {text-align: center;}.success {background-color: #79d279;}.error {background-color: #ff3300;}.summary-tbl {font-weight: bold;}.summary-tbl td {border: none;}</style></head><body>    
 <section class=test-report><h1>Gateway Performance Report</h1></section>
 <section class=test-report><table><tr><th>Trigger Type</th><th>Transactions/Sec</th><th>No of Tests</th><th>Errors</th><th>Test Time(Sec)</th></tr> </table></section><br /><br />
 <section class=test-report><table><tr><th>Trigger Type</th><th>Transaction Response Summary</th><th>No of Tests</th><th>Errors</th><th>Test Time</th></tr></table></section></html>"
@@ -27,7 +27,7 @@ for ((i=0;i < ${#value[@]};i++))
             #source ./kafkaPerf.sh
             ${value[i]}
            # cd /home/ramesh/Documents/Performance\ Automation/
-            sed -i "s/<tr><th>Trigger Type<\/th><th>Transaction Response Summary<\/th><th>No of Tests<\/th><th>Errors<\/th><th>Test Time<\/th>/<tr><th>Trigger Type<\/th><th>Transaction Response Summary<\/th><th>No of Tests<\/th><th>Errors<\/th><th>Test Time<\/th><\/tr><tr><th>KAFKA<\/th><th>$responseTime<\/th><th>$transactions<\/th><th>$errors<\/th><th>$testTime<\/th><\/tr>/g" $GOPATH/$FILENAME
+            sed -i "s/<tr><th>Trigger Type<\/th><th>Transaction Response Summary<\/th><th>No of Tests<\/th><th>Errors<\/th><th>Test Time<\/th>/<tr><th>Trigger Type<\/th><th>Transaction Response Summary<\/th><th>No of Tests<\/th><th>Errors<\/th><th>Test Time<\/th><\/tr><tr><td>KAFKA<\/td><td>$responseTime<\/td><td>$transactions<\/td><td>$errors<\/td><td>$testTime<\/td><\/tr>/g" $GOPATH/$FILENAME
         done
 
 #Rest Performance
@@ -39,7 +39,7 @@ for ((i=0;i < ${#value[@]};i++))
             #source ./Grinder.sh
             ${value[i]}
             #cd /home/ramesh/Documents/Performance\ Automation/
-            sed -i "s/<tr><th>Trigger Type<\/th><th>Transactions\/Sec<\/th><th>No of Tests<\/th><th>Errors<\/th><th>Test Time(Sec)<\/th>/<tr><th>Trigger Type<\/th><th>Transactions\/Sec<\/th><th>No of Tests<\/th><th>Errors<\/th><th>Test Time(Sec)<\/th><\/tr><tr><th>REST<\/th><th>${array[2]}<\/th><th>${array[0]}<\/th><th>${array[1]}<\/th><th>$testTime<\/th><\/tr>/g" $GOPATH/$FILENAME
+            sed -i "s/<tr><th>Trigger Type<\/th><th>Transactions\/Sec<\/th><th>No of Tests<\/th><th>Errors<\/th><th>Test Time(Sec)<\/th>/<tr><th>Trigger Type<\/th><th>Transactions\/Sec<\/th><th>No of Tests<\/th><th>Errors<\/th><th>Test Time(Sec)<\/th><\/tr><tr><td>REST<\/td><td>${array[2]}<\/td><td>${array[0]}<\/td><td>${array[1]}<\/td><td>$testTime<\/td><\/tr>/g" $GOPATH/$FILENAME
         done
 
 REPONAME="${TRAVIS_REPO_SLUG}" ;
