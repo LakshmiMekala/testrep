@@ -20,6 +20,7 @@ function testcase1 {
 	echo ++++++++++++++++++++++==$CLASSPATH+++++++++++++++++++++=
 	sleep 5
 	echo CONSOLE
+	export DISPLAY=:0.0
 	#cd bin
 	#./startConsole.sh &	
 	java -classpath $CLASSPATH net.grinder.Console &
