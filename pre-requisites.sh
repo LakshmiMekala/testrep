@@ -32,7 +32,7 @@
     cp $GOPATH/src/github.com/LakshmiMekala/testrep/rest-performance-testing/Http-example_WithoutGateway.py $GOPATH/grinder/examples
     cd $GOPATH/grinder/examples
     echo ---------------------------------------
-    ls;
+    ls -ll;
     echo ---------------------------------------
     # chmod 777 Http-example_WithoutGateway.py Http-example.py
     # chmod ugo+x Http-example_WithoutGateway.py Http-example.py  
