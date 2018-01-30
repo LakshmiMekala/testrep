@@ -31,6 +31,9 @@
     cp $GOPATH/src/github.com/LakshmiMekala/testrep/rest-performance-testing/Http-example.py $GOPATH/grinder/examples
     cp $GOPATH/src/github.com/LakshmiMekala/testrep/rest-performance-testing/Http-example_WithoutGateway.py $GOPATH/grinder/examples
     cd $GOPATH/grinder/examples
+    echo ---------------------------------------
+    ls;
+    echo ---------------------------------------
     chmod 777 Http-example_WithoutGateway.py Http-example.py
     chmod ugo+x Http-example_WithoutGateway.py Http-example.py  
     popd

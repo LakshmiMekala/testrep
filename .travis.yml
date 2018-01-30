@@ -31,32 +31,32 @@ jobs:
   include:
     - stage: build
       script:
-        # - mkdir -p $GOPATH/src/github.com/TIBCOSoftware
-        # - cd $GOPATH/src/github.com/TIBCOSoftware
-        # - git clone https://github.com/TIBCOSoftware/mashling.git
-        # - git clone https://github.com/TIBCOSoftware/mashling-recipes.git
-        # - git clone https://github.com/TIBCOSoftware/mashling-cicd.git mashling-cicd
-        # - cp -r $GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/dependency-config/* $GOPATH/src/github.com/TIBCOSoftware/mashling
-        # - cd mashling
-        # - godep restore
-        # - make all
-        # - cd $GOPATH/src/github.com/LakshmiMekala/testrep
-        # - chmod ugo+x ./build.sh
-        # - ./build.sh
-        - if [ "$TRAVIS_EVENT_TYPE" == "cron" ]; then
-          mkdir -p $GOPATH/src/github.com/TIBCOSoftware;
-          cd $GOPATH/src/github.com/TIBCOSoftware;
-          git clone https://github.com/TIBCOSoftware/mashling.git;
-          git clone https://github.com/TIBCOSoftware/mashling-recipes.git;
-          git clone https://github.com/TIBCOSoftware/mashling-cicd.git mashling-cicd;
-          cp -r $GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/dependency-config/* $GOPATH/src/github.com/TIBCOSoftware/mashling;
-          cd mashling;
-          godep restore;
-          make all;
-          cd $GOPATH/src/github.com/LakshmiMekala/testrep;
-          chmod ugo+x ./build.sh;
-          ./build.sh;
-          fi
+        - mkdir -p $GOPATH/src/github.com/TIBCOSoftware
+        - cd $GOPATH/src/github.com/TIBCOSoftware
+        - git clone https://github.com/TIBCOSoftware/mashling.git
+        - git clone https://github.com/TIBCOSoftware/mashling-recipes.git
+        - git clone https://github.com/TIBCOSoftware/mashling-cicd.git mashling-cicd
+        - cp -r $GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/dependency-config/* $GOPATH/src/github.com/TIBCOSoftware/mashling
+        - cd mashling
+        - godep restore
+        - make all
+        - cd $GOPATH/src/github.com/LakshmiMekala/testrep
+        - chmod ugo+x ./build.sh
+        - ./build.sh
+        # - if [ "$TRAVIS_EVENT_TYPE" == "cron" ]; then
+        #   mkdir -p $GOPATH/src/github.com/TIBCOSoftware;
+        #   cd $GOPATH/src/github.com/TIBCOSoftware;
+        #   git clone https://github.com/TIBCOSoftware/mashling.git;
+        #   git clone https://github.com/TIBCOSoftware/mashling-recipes.git;
+        #   git clone https://github.com/TIBCOSoftware/mashling-cicd.git mashling-cicd;
+        #   cp -r $GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/dependency-config/* $GOPATH/src/github.com/TIBCOSoftware/mashling;
+        #   cd mashling;
+        #   godep restore;
+        #   make all;
+        #   cd $GOPATH/src/github.com/LakshmiMekala/testrep;
+        #   chmod ugo+x ./build.sh;
+        #   ./build.sh;
+        #   fi
     - stage: build
       script:
         - mkdir -p $GOPATH/src/github.com/TIBCOSoftware
