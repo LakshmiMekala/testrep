@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function get_test_cases {
-    local my_list=( testcase1 )
+    local my_list=( testcase1 testcase2 )
     echo "${my_list[@]}"
 }
 
@@ -59,7 +59,7 @@ function testcase1 {
 function testcase2 {
 	cd $GOPATH/kafka
 	echo zookeeper
-	bin/zookeeper-server-start.sh config/zookeeper.properties > /tmp/kafka.log &
+	bin/zookeeper-server-start.sh config/zookeeper.properties > /tmp/zookeeper.log &
 	pId=$!
 	sleep 10
 
