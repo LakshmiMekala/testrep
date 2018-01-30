@@ -23,6 +23,7 @@
     JAVA_HOME=$JAVA_HOME
     PATH=$JAVA_HOME/bin:$PATH
     export CLASSPATH PATH GRINDERPROPERTIES
+    echo "========java -classpath $CLASSPATH net.grinder.Grinder $GRINDERPROPERTIES=========="
     #    java -classpath $CLASSPATH net.grinder.Grinder $GRINDERPROPERTIES
     #    java -classpath $CLASSPATH net.grinder.Console
     
@@ -34,14 +35,6 @@
     sudo pip install -U multi-mechanize
     cp $GOPATH/src/github.com/LakshmiMekala/testrep/rest-performance-testing/Http-example.py $GOPATH/grinder
     cp $GOPATH/src/github.com/LakshmiMekala/testrep/rest-performance-testing/Http-example_WithoutGateway.py $GOPATH/grinder
-    cp $GOPATH/src/github.com/LakshmiMekala/testrep/rest-performance-testing/Http-example.py $GOPATH/grinder/examples
-    cp $GOPATH/src/github.com/LakshmiMekala/testrep/rest-performance-testing/Http-example_WithoutGateway.py $GOPATH/grinder/examples
-    cp $GOPATH/src/github.com/LakshmiMekala/testrep/rest-performance-testing/Http-example.py $GOPATH/grinder/lib
-    cp $GOPATH/src/github.com/LakshmiMekala/testrep/rest-performance-testing/Http-example_WithoutGateway.py $GOPATH/grinder/lib
-    cp $GOPATH/src/github.com/LakshmiMekala/testrep/rest-performance-testing/Http-example.py $GOPATH/grinder/contrib
-    cp $GOPATH/src/github.com/LakshmiMekala/testrep/rest-performance-testing/Http-example_WithoutGateway.py $GOPATH/grinder/contrib
-    cp $GOPATH/src/github.com/LakshmiMekala/testrep/rest-performance-testing/Http-example.py $GOPATH/grinder/etc
-    cp $GOPATH/src/github.com/LakshmiMekala/testrep/rest-performance-testing/Http-example_WithoutGateway.py $GOPATH/grinder/etc
     cd $GOPATH/grinder/examples
     echo ---------------------------------------
     ls -ll;
