@@ -53,6 +53,7 @@ function testcase1 {
 	echo ELE="${array[0]}"
 	echo ELE1="${array[1]}"
 	ELE2=${array[2]}
+	ELE2=$(echo $ELE2 | awk '{printf "%.0f\n", $1}')
 	echo ELE2="$ELE2"
 
 	sleep 20 
@@ -119,6 +120,7 @@ function testcase2 {
 	echo ELE="${array[0]}"
 	echo ELE1="${array[1]}"
 	ELE2=${array[2]}
+	ELE2=$(echo $ELE2 | awk '{printf "%.0f\n", $1}')
 	echo ELE2="$ELE2"
 
 	sleep 20 
