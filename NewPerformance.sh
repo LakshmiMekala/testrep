@@ -39,7 +39,7 @@ for ((i=0;i < ${#value[@]};i++))
             #source ./Grinder.sh
             ${value[i]}
             #cd /home/ramesh/Documents/Performance\ Automation/
-            sed -i "s/<tr><th>Trigger Type<\/th><th>Transactions\/Sec<\/th><th>No of Tests<\/th><th>Errors<\/th><th>Test Time(Sec)<\/th>/<tr><th>Trigger Type<\/th><th>Transactions\/Sec<\/th><th>No of Tests<\/th><th>Errors<\/th><th>Test Time(Sec)<\/th><\/tr><tr><td>REST<\/td><td>${array[2]}<\/td><td>${array[0]}<\/td><td>${array[1]}<\/td><td>$testTime<\/td><\/tr>/g" $GOPATH/$FILENAME
+            sed -i "s/<tr><th>Trigger Type<\/th><th>Transactions\/Sec<\/th><th>No of Tests<\/th><th>Errors<\/th><th>Test Time(Sec)<\/th>/<tr><th>Trigger Type<\/th><th>Transactions\/Sec<\/th><th>No of Tests<\/th><th>Errors<\/th><th>Test Time(Sec)<\/th><\/tr><tr><td>REST<\/td><td>$ELE2<\/td><td>${array[0]}<\/td><td>${array[1]}<\/td><td>$testTime<\/td><\/tr>/g" $GOPATH/$FILENAME
         done
 
 REPONAME="${TRAVIS_REPO_SLUG}" ;
