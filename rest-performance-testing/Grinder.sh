@@ -9,7 +9,7 @@ function testcase1 {
 	cd $GOPATH/src/github.com/LakshmiMekala/testrep/rest-performance-testing
 	go run server.go &	
 	cd $GOPATH/rest-conditional-gateway/bin
-	./rest-conditional-gateway > /tmp/testcase1.log 2>&1 &
+	./rest-conditional-gateway > /tmp/rest-testcase1.log 2>&1 &
 	pId=$!
 	sleep 10
 	echo GATEWAY
@@ -80,7 +80,7 @@ function testcase2 {
 	cd $GOPATH/src/github.com/LakshmiMekala/testrep/rest-performance-testing
 	go run server.go &
 	cd $GOPATH/rest-conditional-gateway/bin
-	./rest-conditional-gateway > /tmp/testcase2.log 2>&1 &
+	./rest-conditional-gateway > /tmp/rest-testcase2.log 2>&1 &
 	pId=$!
 	sleep 10
 	echo GATEWAY
