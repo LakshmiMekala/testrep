@@ -1,0 +1,280 @@
+{
+    "mashling_schema": "0.2",
+    "gateway": {
+        "name": "sampleRest3",
+        "version": "1.0.0",
+        "display_name": "Content-based HTTP Router",
+        "display_image": "displayImage.svg",
+        "description": "A conditional HTTP router that routes requests based on content",
+        "configurations": [
+            {
+                "name": "restConfig",
+                "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
+                "description": "Configuration for rest trigger",
+                "settings": {
+                    "port": "9096"
+                }
+            }
+        ],
+        "triggers": [
+            {
+                "name": "animals_rest_trigger",
+                "description": "Animals rest trigger - PUT animal details",
+                "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
+                "settings": {
+                    "config": "${configurations.restConfig}",
+                    "method": "PUT",
+                    "path": "/pets",
+                    "optimize": "true"
+                }
+            },
+            {
+                "name": "get_animals_rest_trigger",
+                "description": "Animals rest trigger - get animal details",
+                "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
+                "settings": {
+                    "config": "${configurations.restConfig}",
+                    "method": "GET",
+                    "path": "/pets/{id}",
+                    "optimize": "true"
+                }
+            }
+        ],
+        "event_handlers": [
+            {
+                "name": "animals_handler",
+                "description": "Handle other animals",
+                "definition": {
+                    "data": {
+                        "flow": {
+                            "explicitReply": true,
+                            "type": 1,
+                            "attributes": [],
+                            "rootTask": {
+                                "id": 1,
+                                "type": 1,
+                                "tasks": [
+                                    {
+                                        "id": 2,
+                                        "name": "Invoke REST Service",
+                                        "description": "Simple REST Activity",
+                                        "type": 1,
+                                        "activityType": "github-com-tibco-software-flogo-contrib-activity-rest",
+                                        "activityRef": "github.com/TIBCOSoftware/flogo-contrib/activity/rest",
+                                        "attributes": [
+                                            {
+                                                "name": "method",
+                                                "value": "PUT",
+                                                "required": true,
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "uri",
+                                                "value": "http://petstore.swagger.io/v2/pet",
+                                                "required": true,
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "pathParams",
+                                                "value": null,
+                                                "required": false,
+                                                "type": "params"
+                                            },
+                                            {
+                                                "name": "queryParams",
+                                                "value": null,
+                                                "required": false,
+                                                "type": "params"
+                                            },
+                                            {
+                                                "name": "content",
+                                                "value": null,
+                                                "required": false,
+                                                "type": "any"
+                                            }
+                                        ],
+                                        "inputMappings": [
+                                            {
+                                                "type": 1,
+                                                "value": "{T.content}",
+                                                "mapTo": "content"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": 13,
+                                        "name": "Reply To Trigger (3)",
+                                        "description": "Simple Reply Activity",
+                                        "type": 1,
+                                        "activityType": "tibco-reply",
+                                        "activityRef": "github.com/TIBCOSoftware/flogo-contrib/activity/reply",
+                                        "attributes": [
+                                            {
+                                                "name": "code",
+                                                "value": 200,
+                                                "required": true,
+                                                "type": "integer"
+                                            },
+                                            {
+                                                "name": "data",
+                                                "value": null,
+                                                "required": true,
+                                                "type": "any"
+                                            }
+                                        ],
+                                        "inputMappings": [
+                                            {
+                                                "type": 1,
+                                                "value": "{A2.result}",
+                                                "mapTo": "data"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "links": [
+                                    {
+                                        "id": 1,
+                                        "from": 2,
+                                        "to": 13,
+                                        "type": 0
+                                    }
+                                ],
+                                "attributes": []
+                            }
+                        }
+                    },
+                    "id": "animals_handler",
+                    "ref": "github.com/TIBCOSoftware/flogo-contrib/action/flow"
+                }
+            },
+            {
+                "name": "animals_get_handler",
+                "description": "Handle other animals",
+                "definition": {
+                    "data": {
+                        "flow": {
+                            "explicitReply": true,
+                            "type": 1,
+                            "attributes": [],
+                            "rootTask": {
+                                "id": 1,
+                                "type": 1,
+                                "tasks": [
+                                    {
+                                        "id": 2,
+                                        "name": "Invoke REST Service",
+                                        "description": "Simple REST Activity",
+                                        "type": 1,
+                                        "activityType": "github-com-tibco-software-flogo-contrib-activity-rest",
+                                        "activityRef": "github.com/TIBCOSoftware/flogo-contrib/activity/rest",
+                                        "attributes": [
+                                            {
+                                                "name": "method",
+                                                "value": "GET",
+                                                "required": true,
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "uri",
+                                                "value": "http://petstore.swagger.io/v2/pet/:id",
+                                                "required": true,
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "pathParams",
+                                                "value": null,
+                                                "required": false,
+                                                "type": "params"
+                                            },
+                                            {
+                                                "name": "queryParams",
+                                                "value": null,
+                                                "required": false,
+                                                "type": "params"
+                                            },
+                                            {
+                                                "name": "content",
+                                                "value": null,
+                                                "required": false,
+                                                "type": "any"
+                                            }
+                                        ],
+                                        "inputMappings": [
+                                            {
+                                                "type": 1,
+                                                "value": "{T.pathParams}",
+                                                "mapTo": "pathParams"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "id": 13,
+                                        "name": "Reply To Trigger (3)",
+                                        "description": "Simple Reply Activity",
+                                        "type": 1,
+                                        "activityType": "tibco-reply",
+                                        "activityRef": "github.com/TIBCOSoftware/flogo-contrib/activity/reply",
+                                        "attributes": [
+                                            {
+                                                "name": "code",
+                                                "value": 200,
+                                                "required": true,
+                                                "type": "integer"
+                                            },
+                                            {
+                                                "name": "data",
+                                                "value": null,
+                                                "required": true,
+                                                "type": "any"
+                                            }
+                                        ],
+                                        "inputMappings": [
+                                            {
+                                                "type": 1,
+                                                "value": "{A2.result}",
+                                                "mapTo": "data"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "links": [
+                                    {
+                                        "id": 1,
+                                        "from": 2,
+                                        "to": 13,
+                                        "type": 0
+                                    }
+                                ],
+                                "attributes": []
+                            }
+                        }
+                    },
+                    "id": "animals_get_handler",
+                    "ref": "github.com/TIBCOSoftware/flogo-contrib/action/flow"
+                }
+            }
+        ],
+        "event_links": [
+            {
+                "triggers": [
+                    "animals_rest_trigger"
+                ],
+                "dispatches": [
+                    {
+                        "handler": "animals_handler"
+                    }
+                ]
+            },
+            {
+                "triggers": [
+                    "get_animals_rest_trigger"
+                ],
+                "dispatches": [
+                    {
+                        "handler": "animals_get_handler"
+                    }
+                ]
+            }
+        ]
+    }
+}

@@ -1,0 +1,102 @@
+{
+    "mashling_schema": "0.2",
+    "gateway": {
+        "name": "kafka",
+        "version": "1.0.0",
+        "display_name": "KafkaTrigger to KafkaPublisher",
+        "display_image": "displayImage.svg",
+        "description": "This is the first microgateway app",
+        "configurations": [
+            {
+                "name": "kafkaConfig",
+                "type": "github.com/TIBCOSoftware/flogo-contrib/trigger/kafkasub",
+                "description": "Configuration for kafka cluster",
+                "settings": {
+                    "BrokerUrl": "localhost:9092"
+                }
+            }
+        ],
+        "triggers": [
+            {
+                "name": "kafka_trigger1",
+                "description": "The trigger on kafka 'users' topic",
+                "type": "github.com/TIBCOSoftware/flogo-contrib/trigger/kafkasub",
+                "settings": {
+                    "Topic": "publishpet",
+                    "config": "${configurations.kafkaConfig}"
+                }
+            }
+        ],
+        "event_handlers": [
+            {
+                "name": "kafka_handler1",
+                "description": "Handle the user access",
+                "definition": {
+                    "data": {
+                        "flow": {
+                            "type": 1,
+                            "attributes": [],
+                            "rootTask": {
+                                "id": 1,
+                                "type": 1,
+                                "tasks": [
+                                    {
+                                        "id": 2,
+                                        "name": "tibco-kafkapub",
+                                        "description": "Publish a message to a kafka topic",
+                                        "type": 1,
+                                        "activityType": "tibco-kafkapub",
+                                        "activityRef": "github.com/TIBCOSoftware/flogo-contrib/activity/kafkapub",
+                                        "attributes": [
+                                            {
+                                                "name": "BrokerUrls",
+                                                "value": "localhost:9092",
+                                                "required": false,
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "Topic",
+                                                "value": "subscribepet",
+                                                "required": false,
+                                                "type": "string"
+                                            },
+                                            {
+                                                "name": "Message",
+                                                "value": "",
+                                                "required": false,
+                                                "type": "string"
+                                            }
+                                        ],
+                                        "inputMappings": [
+                                            {
+                                                "type": 1,
+                                                "value": "{T.message}",
+                                                "mapTo": "Message"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "links": [],
+                                "attributes": []
+                            }
+                        }
+                    },
+                    "id": "kafka_handler1",
+                    "ref": "github.com/TIBCOSoftware/flogo-contrib/action/flow"
+                }
+            }
+        ],
+        "event_links": [
+            {
+                "triggers": [
+                    "kafka_trigger1"
+                ],
+                "dispatches": [
+                    {
+                        "handler": "kafka_handler1"
+                    }
+                ]
+            }
+        ]
+    }
+}
