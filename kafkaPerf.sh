@@ -80,7 +80,7 @@ function testcase2 {
 	sleep 10
 
 	testTime=600
-    Threads=50
+    Threads=100
 	#var="$(timeout 70s multimech-run my_project &)"
 	echo started
 	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project
@@ -90,7 +90,7 @@ function testcase2 {
 	multimech-run my_project &
 	pId3=$!
 	echo %%%%%%%%%%%%%%%%%%%%%    
-    sleep 100
+    sleep 700
     echo pid3=$pId3
 	echo %%%%%%%%%%%%%%%%%%%%%
     var=$(ps --ppid $pId3)
