@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function get_test_cases {
-    local my_list=(  testcase1 )
+    local my_list=(  testcase1 testcase2 )
     echo "${my_list[@]}"
 }
 
@@ -20,7 +20,7 @@ function testcase1 {
 
 	echo gateway
 	cd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
-	env FLOGO_LOG_LEVEL=ERROR
+	export FLOGO_LOG_LEVEL=ERROR
 	./kafkatrigger-to-kafkapublisher > /tmp/kafka-testcase1.log 2>&1 &
 	pId2=$!
 	sleep 10
@@ -74,12 +74,12 @@ function testcase2 {
 
 	echo gateway
 	cd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
-	env FLOGO_LOG_LEVEL=ERROR
+	export FLOGO_LOG_LEVEL=ERROR
 	./kafkatrigger-to-kafkapublisher > /tmp/kafka-testcase2.log 2>&1 &
 	pId2=$!
 	sleep 10
 
-	testTime=900
+	testTime=90
     Threads=50
 	#var="$(timeout 70s multimech-run my_project &)"
 	echo started
@@ -88,9 +88,11 @@ function testcase2 {
     sed -i "/threads/c\threads = $Threads" config.cfg
 	cd ..
 	multimech-run my_project &
-	pId3=$!    
-    sleep 1000
+	pId3=$!
+	echo %%%%%%%%%%%%%%%%%%%%%    
+    sleep 100
     echo pid3=$pId3
+	echo %%%%%%%%%%%%%%%%%%%%%
     var=$(ps --ppid $pId3)
     echo var=$var
     pId4=$(echo $var | awk '{print $5}')
@@ -98,6 +100,7 @@ function testcase2 {
     echo completed
     sleep 10
     kill -9 $pId4
+	kill -SIGINT $pId4
 	#echo var=$var
 	kill -SIGINT $pId
 	sleep 5
