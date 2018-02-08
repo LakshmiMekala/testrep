@@ -84,7 +84,7 @@ function testcase2 {
 	sed -i "/run_time/c\run_time = $testTime" config.cfg
     sed -i "/threads/c\threads = $Threads" config.cfg
 	cd ..
-	multimech-run my_project
+	multimech-run my_project &
 	pId3=$!    
     sleep 1000
     echo pid3=$pId3
