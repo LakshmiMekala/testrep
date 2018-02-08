@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function get_test_cases {
-    local my_list=( testcase1 testcase2 )
+    local my_list=(  testcase2 )
     echo "${my_list[@]}"
 }
 
@@ -76,8 +76,8 @@ function testcase2 {
 	pId2=$!
 	sleep 10
 
-	testTime=100
-    Threads=100
+	testTime=1800
+    Threads=50
 	#var="$(timeout 70s multimech-run my_project &)"
 	echo started
 	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project
@@ -86,7 +86,7 @@ function testcase2 {
 	cd ..
 	multimech-run my_project
 	pId3=$!    
-    sleep 20
+    sleep 2000
     echo pid3=$pId3
     var=$(ps --ppid $pId3)
     echo var=$var
