@@ -71,9 +71,9 @@ function create_dest_directory ()
 pushd $GOPATH/src/github.com/TIBCOSoftware/mashling ;
 mkdir perf-reports;
 create_dest_directory ;
-cp $GOPATH/KafkaTrigger-To-KafkaPublisher/bin/tmp/kafka-*.log "$GOPATH/src/github.com/TIBCOSoftware/mashling/perf-reports/$DESTFOLDER"
+cp $GOPATH/rest-testcase*.log "$GOPATH/src/github.com/TIBCOSoftware/mashling/perf-reports/$DESTFOLDER"
 #cp $GOPATH/KafkaTrigger-To-KafkaPublisher/bin/tmp/kafka-testcase2.log "$GOPATH/src/github.com/TIBCOSoftware/mashling/perf-reports/$DESTFOLDER"
-cp $GOPATH/rest-conditional-gateway/bin/tmp/rest-*.log "$GOPATH/src/github.com/TIBCOSoftware/mashling/perf-reports/$DESTFOLDER"
+cp $GOPATH/kafka-testcase*.log "$GOPATH/src/github.com/TIBCOSoftware/mashling/perf-reports/$DESTFOLDER"
 #cp $GOPATH/rest-conditional-gateway/bin/tmp/rest-testcase2.log
 cp "$GOPATH/$FILENAME" "$GOPATH/src/github.com/TIBCOSoftware/mashling/perf-reports/$DESTFOLDER"
 cp "$GOPATH/$FILENAME" "$GOPATH/src/github.com/TIBCOSoftware/mashling/perf-reports/latest"

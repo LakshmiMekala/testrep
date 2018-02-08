@@ -74,6 +74,9 @@ function testcase1 {
 	kill -9 $pId2
 	kill $(lsof -t -i:9090)
 	kill $(lsof -t -i:6373)
+	pushd $GOPATH/rest-conditional-gateway/bin
+	cp /tmp/rest-testcase1.log $GOPATH
+	popd 
 }
 
 function testcase2 {
@@ -141,4 +144,7 @@ function testcase2 {
 	kill -9 $pId2
 	kill $(lsof -t -i:9090)
 	kill $(lsof -t -i:6373)
+	pushd $GOPATH/rest-conditional-gateway/bin
+	cp /tmp/rest-testcase1.log $GOPATH
+	popd
 }

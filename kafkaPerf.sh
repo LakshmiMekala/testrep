@@ -53,6 +53,9 @@ function testcase1 {
 	errors=$(echo $text | awk '{print $4}')
 	echo errors=$errors
 	cd ../..
+	pushd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
+	cp /tmp/kafka-testcase1.log $GOPATH
+	popd
 	rm -rf results && mkdir results
 }
 
@@ -119,5 +122,8 @@ function testcase2 {
 	errors=$(echo $text | awk '{print $4}')
 	echo errors=$errors
 	cd ../..
+	pushd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
+	cp /tmp/kafka-testcase2.log $GOPATH
+	popd
 	rm -rf results && mkdir results
 }
