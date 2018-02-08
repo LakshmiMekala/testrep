@@ -79,7 +79,7 @@ function testcase2 {
 	pId2=$!
 	sleep 10
 
-	testTime=90
+	testTime=600
     Threads=50
 	#var="$(timeout 70s multimech-run my_project &)"
 	echo started

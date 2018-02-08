@@ -145,6 +145,6 @@ function testcase2 {
 	kill $(lsof -t -i:9090)
 	kill $(lsof -t -i:6373)
 	pushd $GOPATH/rest-conditional-gateway/bin
-	cp /tmp/rest-testcase1.log $GOPATH
+	cp /tmp/rest-testcase2.log $GOPATH
 	popd
 }
