@@ -6,7 +6,7 @@ Gateway=( rest-conditional-gateway KafkaTrigger-To-KafkaPublisher )
 
 for ((p=0;p < ${#Gateway[@]};p++))
         do
-            mashling create -f $GOPATH/src/github.com/LakshmiMekala/testrep/${Gateway[$p]}/${Gateway[$p]}.json ${Gateway[$p]} 
+            mashling create -f $GOPATH/src/github.com/LakshmiMekala/testrep/${Gateway[$p]}.json ${Gateway[$p]} 
         done
 
 
