@@ -59,7 +59,7 @@ jobs:
     #       fi
     - stage: build
       script:
-        - if [[] "$TRAVIS_EVENT_TYPE" != "cron" ]; then
+        - if [[ "$TRAVIS_EVENT_TYPE" != "cron" ]]; then
           mkdir -p $GOPATH/src/github.com/TIBCOSoftware
           cd $GOPATH/src/github.com/TIBCOSoftware
           git clone https://github.com/TIBCOSoftware/mashling.git
