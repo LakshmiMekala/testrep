@@ -8,7 +8,7 @@ for ((p=0;p < ${#Gateway[@]};p++))
         do
             mashling create -f $GOPATH/src/github.com/LakshmiMekala/testrep/${Gateway[$p]}.json ${Gateway[$p]} 
         done
-
+ mashling create -f $GOPATH/src/github.com/TIBCOSoftware/mashling-recipes/KafkaTrigger-To-KafkaPublisher.json KafkaTrigger-To-KafkaPublisher
 
 FILENAME="PerformanceReport.html"
 HTML="<!DOCTYPE html><html><head><style>table{font-family: arial, sans-serif;border-collapse: collapse;margin: auto;}td{border: 1px solid #dddddd;text-align: center;padding: 8px;}th {border: 1px solid #dddddd;text-align: left;padding: 8px;}th{background: #003399;text-align: center;color: #fff;}body{padding-right: 15px;padding-left: 15px;margin-right: auto;margin-left: auto;}label {font-weight: bold;}.test-report h1{color: #003399;font-size: 30px}.summary,.test-report{text-align: center;}.note{font-style: italic;
