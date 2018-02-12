@@ -20,8 +20,8 @@ function testcase1 {
 
 	echo gateway
 	cd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
-	env FLOGO_LOG_LEVEL=ERROR
-	./kafkatrigger-to-kafkapublisher > /tmp/testcase1.log 2>&1 &
+	export FLOGO_LOG_LEVEL=ERROR
+	./kafkatrigger-to-kafkapublisher > /tmp/kafka-testcase1.log 2>&1 &
 	pId2=$!
 	sleep 10
 
@@ -71,22 +71,25 @@ function testcase2 {
 
 	echo gateway
 	cd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
-	env FLOGO_LOG_LEVEL=ERROR
-	./kafkatrigger-to-kafkapublisher > /tmp/testcase2.log 2>&1 &
+	export FLOGO_LOG_LEVEL=ERROR
+	./kafkatrigger-to-kafkapublisher > /tmp/kafka-testcase2.log 2>&1 &
 	pId2=$!
 	sleep 10
 
-	testTime=1000
-	#var="$(timeout 70s multimech-run my_project &)"
+	testTime=1800
+    Threads=100
 	echo started
 	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project
 	sed -i "/run_time/c\run_time = $testTime" config.cfg
+	sed -i "/threads/c\threads = $Threads" config.cfg
 	cd ..
-	multimech-run my_project
+	multimech-run my_project & pid9=$!
 	echo completed
-	sleep 1020
+	sleep 2000
 	#echo var=$var
 	kill -SIGINT $pId
+    sleep 5
+    kill -SIGINT $pId9
 	sleep 5
 	kill -SIGINT $pId1
 	sleep 5
@@ -110,4 +113,7 @@ function testcase2 {
 	echo errors=$errors
 	cd ../..
 	rm -rf results && mkdir results
+    pushd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
+	cp /tmp/kafka-testcase2.log $GOPATH
+	popd
 }
