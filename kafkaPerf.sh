@@ -79,7 +79,7 @@ function testcase2 {
 	pId2=$!
 	sleep 10
 
-	testTime=100
+	testTime=1000
     Threads=100
 	#var="$(timeout 70s multimech-run my_project &)"
 	echo started
@@ -90,7 +90,7 @@ function testcase2 {
 	multimech-run my_project &
 	pId3=$!
 	echo %%%%%%%%%%%%%%%%%%%%%    
-    sleep 110
+    sleep 1100
     echo pid3=$pId3
 	echo %%%%%%%%%%%%%%%%%%%%%
     var=$(ps --ppid $pId3)
