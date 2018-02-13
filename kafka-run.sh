@@ -29,7 +29,7 @@ function testcase1 {
 	Threads=100
 	#var="$(timeout 70s multimech-run my_project &)"
 	echo started
-	cd /home/ramesh/Documents/Performance\ Automation/Kafka\ Performance\ Testing/KafkaTrigger-To-KafkaPublisher-linux/my_project
+	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project
 	sed -i "/run_time/c\run_time = $testTime" config.cfg
 	sed -i "/threads/c\threads = $Threads" config.cfg
 	
