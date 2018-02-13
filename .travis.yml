@@ -33,15 +33,14 @@ jobs:
       script:
         - mkdir -p $GOPATH/src/github.com/TIBCOSoftware
         - cd $GOPATH/src/github.com/TIBCOSoftware
-        # - git clone https://github.com/TIBCOSoftware/mashling.git
+        - git clone https://github.com/TIBCOSoftware/mashling.git
         - git clone https://github.com/TIBCOSoftware/mashling-recipes.git
-        # - git clone https://github.com/TIBCOSoftware/mashling-cicd.git mashling-cicd
-        # - cp -r $GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/dependency-config/* $GOPATH/src/github.com/TIBCOSoftware/mashling
-        # - cd mashling
-        # - godep restore
-        # - make all
-        # - go install ./...
-        - go get -u github.com/TIBCOSoftware/mashling/...
+        - git clone https://github.com/TIBCOSoftware/mashling-cicd.git mashling-cicd
+        - cp -r $GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/dependency-config/* $GOPATH/src/github.com/TIBCOSoftware/mashling
+        - cd mashling
+        - ls
+        - godep restore
+        - make
         - cd $GOPATH/src/github.com/LakshmiMekala/testrep
         - chmod ugo+x ./build.sh
         - ./build.sh
