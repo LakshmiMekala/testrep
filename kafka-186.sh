@@ -77,7 +77,7 @@ function testcase2 {
 	sleep 10
 
 	testTime=1800
-    Threads=1
+    Threads=100
 	echo started
 	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project
 	sed -i "/run_time/c\run_time = $testTime" config.cfg
