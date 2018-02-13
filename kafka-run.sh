@@ -21,11 +21,11 @@ function testcase1 {
 	echo gateway
 	cd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
 	export FLOGO_LOG_LEVEL=ERROR
-	./kafkatrigger-to-kafkapublisher > /tmp/gateway.log &
+	./kafkatrigger-to-kafkapublisher > /tmp/kafka-testcase1.log 2>&1 &
 	pId2=$!
 	sleep 10
 
-	testTime=100
+	testTime=1800
 	Threads=100
 	#var="$(timeout 70s multimech-run my_project &)"
 	echo started
@@ -36,7 +36,7 @@ function testcase1 {
 	cd ..
 	multimech-run my_project &
 	pId3=$!	
-	sleep 200
+	sleep 2000
 	echo pid3=$pId3
 	var=$(ps --ppid $pId3)
 	echo var=$var
@@ -72,6 +72,9 @@ function testcase1 {
 	cd ..
 	cd ..
 	rm -rf results && mkdir results
+    pushd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
+    cp /tmp/kafka-testcase1.log $GOPATH
+    popd
 }
 
 function testcase2 {
