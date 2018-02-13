@@ -62,7 +62,7 @@ function testcase1 {
 function testcase2 {
 	cd $GOPATH/kafka
 	echo zookeeper
-	bin/zookeeper-server-start.sh config/zookeeper.properties > /tmp/zookeeper.log &
+	bin/zookeeper-server-start.sh config/zookeeper.properties > /tmp/kafka.log &
 	pId=$!
 	sleep 10
 
@@ -79,28 +79,26 @@ function testcase2 {
 	pId2=$!
 	sleep 10
 
-	testTime=1000
-    Threads=100
+	testTime=1800
+	Threads=100
 	#var="$(timeout 70s multimech-run my_project &)"
 	echo started
 	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project
 	sed -i "/run_time/c\run_time = $testTime" config.cfg
-    sed -i "/threads/c\threads = $Threads" config.cfg
+	sed -i "/threads/c\threads = $Threads" config.cfg
+	
 	cd ..
 	multimech-run my_project &
-	pId3=$!
-	echo %%%%%%%%%%%%%%%%%%%%%    
-    sleep 1100
-    echo pid3=$pId3
-	echo %%%%%%%%%%%%%%%%%%%%%
-    var=$(ps --ppid $pId3)
-    echo var=$var
-    pId4=$(echo $var | awk '{print $5}')
-    echo 4=$pId4
-    echo completed
-    sleep 10
-    kill -9 $pId4
-	kill -SIGINT $pId4
+	pId3=$!	
+	sleep 2000
+	echo pid3=$pId3
+	var=$(ps --ppid $pId3)
+	echo var=$var
+	pId4=$(echo $var | awk '{print $5}')
+	echo 4=$pId4
+	echo completed
+	sleep 10
+	kill -9 $pId4
 	#echo var=$var
 	kill -SIGINT $pId
 	sleep 5
@@ -108,9 +106,10 @@ function testcase2 {
 	sleep 5
 	kill -SIGINT $pId2
 
-	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project/results
+	cd my_project/results
 	cd */
-	# echo results
+
+	echo results
 	#sed -n 's/.*src="\([^"]*\).*/\1/p' results.html
 
 	#cat results.html | grep -Eo "(transactions:|errors:)://[a-zA-Z0-9./?=_-]*" | sort | uniq
@@ -124,9 +123,10 @@ function testcase2 {
 	echo responseTime=$responseTime
 	errors=$(echo $text | awk '{print $4}')
 	echo errors=$errors
-	cd ../..
-	pushd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
-	cp /tmp/kafka-testcase2.log $GOPATH
-	popd
+	cd ..
+	cd ..
 	rm -rf results && mkdir results
+    pushd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
+    cp /tmp/kafka-testcase2.log $GOPATH
+    popd
 }
