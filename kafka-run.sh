@@ -77,6 +77,7 @@ function testcase2 {
 	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher
 	export FLOGO_LOG_LEVEL=ERROR
 	./kafkatrigger-to-kafkapublisher > /tmp/kafka-testcase2.log 2>&1 &
+	ps -a
 	pId2=$!
 	sleep 10
 
