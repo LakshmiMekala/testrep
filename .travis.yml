@@ -7,6 +7,7 @@ install:
  - mkdir -p $GOPATH/src/github.com/TIBCOSoftware
  - sudo apt-get install zookeeperd
  - sudo pip install kafka-python
+ - sudo apt-get install libxml2-utils
  - sudo apt-get update -q
  - sudo apt-get install python-pip python-matplotlib
  - sudo pip install -U multi-mechanize
