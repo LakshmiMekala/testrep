@@ -31,13 +31,14 @@ function testcase1 {
 	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project
 	sed -i "/run_time/c\run_time = $testTime" config.cfg
 	cd ..
-	multimech-run my_project
+	multimech-run my_project & pid9=$!
 	echo completed
 	sleep 30
 	#echo var=$var
 	kill -SIGINT $pId
 	sleep 5
-	kill -SIGINT $pId1
+	kill -9 $pId1
+	kill -9 $pid9
 	sleep 5
 	kill -SIGINT $pId2
 
@@ -53,7 +54,7 @@ function testcase1 {
 	errors=$(echo $text | awk '{print $4}')
 	echo errors=$errors
 	cd ../..
-	pushd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
+	pushd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher
 	cp /tmp/kafka-testcase1.log $GOPATH
 	popd
 	rm -rf results && mkdir results
@@ -126,7 +127,7 @@ function testcase2 {
 	cd ..
 	cd ..
 	rm -rf results && mkdir results
-    pushd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
+    pushd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher
     cp /tmp/kafka-testcase2.log $GOPATH
     popd
 }
