@@ -14,11 +14,11 @@ script:
   - mkdir -p $GOPATH/src/github.com/TIBCOSoftware
   - cd $GOPATH/src/github.com/TIBCOSoftware
   - git clone https://github.com/TIBCOSoftware/mashling-recipes.git
- - cd $GOPATH
- - wget http://www-eu.apache.org/dist/kafka/1.0.0/kafka_2.11-1.0.0.tgz -O $GOPATH/kafka.tgz > /tmp/kafka.log
- - mkdir -p $GOPATH/kafka && cd $GOPATH/kafka
- - tar -xvzf $GOPATH/kafka.tgz --strip 1 > /tmp/kafka.log
- - cd ..
+  - cd $GOPATH
+  - wget http://www-eu.apache.org/dist/kafka/1.0.0/kafka_2.11-1.0.0.tgz -O $GOPATH/kafka.tgz > /tmp/kafka.log
+  - mkdir -p $GOPATH/kafka && cd $GOPATH/kafka
+  - tar -xvzf $GOPATH/kafka.tgz --strip 1 > /tmp/kafka.log
+  - cd ..
   - git clone -b kafka-test https://github.com/LakshmiMekala/testrep.git 
   - cd testrep
   - chmod ugo+x ./kafka-run.sh
