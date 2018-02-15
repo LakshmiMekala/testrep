@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function get_test_cases {
-    local my_list=( testcase1 testcase2 )
+    local my_list=( testcase2 )
     echo "${my_list[@]}"
 }
 
@@ -76,6 +76,7 @@ function testcase2 {
 	export FLOGO_LOG_LEVEL=ERROR
 	./kafkatrigger-to-kafkapublisher > /tmp/testcase2.log 2>&1 &
 	pId2=$!
+    ps -a &
 	sleep 10
 
 	testTime=180
