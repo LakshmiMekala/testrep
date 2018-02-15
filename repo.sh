@@ -74,7 +74,7 @@ function testcase2 {
 	echo gateway
 	cd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
 	export FLOGO_LOG_LEVEL=ERROR
-	./kafkatrigger-to-kafkapublisher > /tmp/testcase2.log 2>&1 &
+	./kafkatrigger-to-kafkapublisher > /tmp/kafka-testcase2.log 2>&1 &
 	pId2=$!
     ps -a &
 	sleep 10
@@ -89,7 +89,7 @@ function testcase2 {
 	multimech-run my_project &
     pId9=$!
 	echo completed
-	sleep 210
+	sleep 190
 	#echo var=$var
 	kill -SIGINT $pId
 	sleep 5
