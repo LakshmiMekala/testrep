@@ -78,7 +78,7 @@ function testcase2 {
 	pId2=$!
 	sleep 10
 
-	testTime=1800
+	testTime=180
     Threads=100
 	echo started
 	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project
@@ -88,7 +88,7 @@ function testcase2 {
 	multimech-run my_project &
     pId9=$!
 	echo completed
-	sleep 2100
+	sleep 210
 	#echo var=$var
 	kill -SIGINT $pId
 	sleep 5
