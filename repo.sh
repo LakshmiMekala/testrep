@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function get_test_cases {
-    local my_list=( testcase1 )
+    local my_list=( testcase2 )
     echo "${my_list[@]}"
 }
 
@@ -79,8 +79,8 @@ function testcase2 {
     ps -a &
 	sleep 10
 
-	testTime=180
-    Threads=100
+	testTime=60
+    Threads=10
 	echo started
 	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project
 	sed -i "/run_time/c\run_time = $testTime" config.cfg
@@ -88,12 +88,13 @@ function testcase2 {
 	cd ..
 	multimech-run my_project &
     pId9=$!
-	echo completed
-	sleep 190
+    sleep 70
+	echo completed	
 	#echo var=$var
 	kill -SIGINT $pId
 	sleep 5
     kill -9 $pId9
+    sleep 5
 	kill -SIGINT $pId1
 	sleep 5
 	kill -SIGINT $pId2
