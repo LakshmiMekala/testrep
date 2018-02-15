@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function get_test_cases {
-    local my_list=( testcase1 testcase2 )
+    local my_list=( testcase2 )
     echo "${my_list[@]}"
 }
 
@@ -47,7 +47,7 @@ function testcase1 {
 	sleep 5
 	kill -SIGINT $pId2
 
-	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project/results
+	cd my_project/results
 	cd */
 	# echo results
 	transactions=$(xmllint --html -xpath "string(/html/body/table[1]/tr[2]/td[1])" results.html)
