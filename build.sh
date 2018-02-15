@@ -3,7 +3,7 @@
 # install pre-requisites
 
 #if [[ -n $PERFORMANCETESTRUN ]] ; then
-    chmod ugo+x ./pre-requisites.sh ./NewPerformance.sh
+    chmod ugo+x ./pre-requisites.sh ./NewPerformance.sh ./kafkaPerformance.sh ./repo.sh ./kafkaperf.sh
     ./pre-requisites.sh
     ./NewPerformance.sh
 #fi
