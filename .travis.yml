@@ -33,9 +33,6 @@ jobs:
       script:
         - go get github.com/spf13/hugo
         - cd docs && hugo
-        - cd ../showcases && hugo
-        - mv public ../docs/public/showcases
-        - cd ../docs
         - cd public && ls -alh
       deploy:
         provider: pages
