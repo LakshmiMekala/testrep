@@ -52,6 +52,7 @@ function testcase1 {
 	kill -SIGINT $pId
 	sleep 5
 	kill -9 $pId1
+	kill -9 $pId3
 	sleep 5
 	kill -SIGINT $pId2
 
@@ -106,11 +107,12 @@ function testcase2 {
 	cd /home/ramesh/Documents/Performance\ Automation/Kafka\ Performance\ Testing/KafkaTrigger-To-KafkaPublisher-linux/my_project
 	sed -i "/run_time/c\run_time = $testTime" config.cfg
 	cd ..
-	multimech-run my_project
+	multimech-run my_project &pid9=$!
 	echo completed
 	sleep 30
 	#echo var=$var
 	kill -SIGINT $pId
+	kill -9 $pid9
 	sleep 5
 	kill -9 $pId1
 	sleep 5
