@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function get_test_cases {
-    local my_list=( testcase2 )
+    local my_list=( testcase1 testcase2 )
     echo "${my_list[@]}"
 }
 
@@ -21,23 +21,28 @@ function testcase1 {
 	echo gateway
 	cd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
 	export FLOGO_LOG_LEVEL=ERROR
+	export FLOGO_RUNNER_TYPE=POOLED
+	export FLOGO_RUNNER_WORKERS=5
+	export FLOGO_RUNNER_QUEUE=50
 	./kafkatrigger-to-kafkapublisher > /tmp/kafka-testcase1.log 2>&1 &
 	pId2=$!
 	sleep 10
 
-	testTime=5
+	testTime=300
+	Threads=100
 	#var="$(timeout 70s multimech-run my_project &)"
 	echo started
 	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project
 	sed -i "/run_time/c\run_time = $testTime" config.cfg
+	sed -i "/threads/c\threads = $Threads" config.cfg
 	cd ..
-	multimech-run my_project
+	multimech-run my_project & pid6=$!
 	echo completed
-	sleep 30
+	sleep 400
 	#echo var=$var
 	kill -SIGINT $pId
 	sleep 5
-	kill -SIGINT $pId1
+	kill -9 $pId1 $pid6
 	sleep 5
 	kill -SIGINT $pId2
 
@@ -75,11 +80,14 @@ function testcase2 {
 	echo gateway
 	cd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
 	export FLOGO_LOG_LEVEL=ERROR
+	export FLOGO_RUNNER_TYPE=POOLED
+	export FLOGO_RUNNER_WORKERS=5
+	export FLOGO_RUNNER_QUEUE=50
 	./kafkatrigger-to-kafkapublisher > /tmp/kafka-testcase2.log 2>&1 &
 	pId2=$!
 	sleep 10
 
-	testTime=1800
+	testTime=180
 	Threads=100
 	#var="$(timeout 70s multimech-run my_project &)"
 	echo started
@@ -90,7 +98,7 @@ function testcase2 {
 	cd ..
 	multimech-run my_project &
 	pId3=$!	
-	sleep 2000
+	sleep 200
 	echo pid3=$pId3
 	var=$(ps --ppid $pId3)
 	echo var=$var
@@ -102,7 +110,7 @@ function testcase2 {
 	#echo var=$var
 	kill -SIGINT $pId
 	sleep 5
-	kill -SIGINT $pId1
+	kill -9 $pId1 $pId3
 	sleep 5
 	kill -SIGINT $pId2
 
