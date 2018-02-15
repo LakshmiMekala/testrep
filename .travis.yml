@@ -26,4 +26,4 @@ deploy:
   github_token: $GITHUB_TOKEN
   email: $EMAIL
   on:
-branch: master
+    branch: master
