@@ -95,8 +95,7 @@ function testcase2 {
 	echo started
 	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project
 	sed -i "/run_time/c\run_time = $testTime" config.cfg
-	sed -i "/threads/c\threads = $Threads" config.cfg
-	
+	sed -i "/threads/c\threads = $Threads" config.cfg	
 	cd ..
 	multimech-run my_project &
 	pId3=$!	
@@ -112,7 +111,8 @@ function testcase2 {
 	#echo var=$var
 	kill -SIGINT $pId
 	sleep 5
-	kill -9 $pId1 $pId3
+	kill -9 $pId1 
+	kill -9 $pId3
 	sleep 5
 	kill -SIGINT $pId2
 
