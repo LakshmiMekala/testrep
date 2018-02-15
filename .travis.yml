@@ -39,7 +39,7 @@ jobs:
         skip_cleanup: true
         local-dir: docs/public
         github_token: $GITHUB_TOKEN
-    - stage: deploy
+    - stage: perf-test
       script:
         - mkdir -p $GOPATH/src/github.com/TIBCOSoftware
         - cd $GOPATH/src/github.com/TIBCOSoftware
