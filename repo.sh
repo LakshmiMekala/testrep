@@ -26,9 +26,11 @@ function testcase1 {
 	sleep 10
 
 	testTime=5
+    Threads=1
 	echo started
 	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project
 	sed -i "/run_time/c\run_time = $testTime" config.cfg
+    sed -i "/threads/c\threads = $Threads" config.cfg
 	cd ..
 	multimech-run my_project &
     pId9=$!
