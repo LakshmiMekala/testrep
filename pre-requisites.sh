@@ -32,7 +32,7 @@
     cd bin
     echo "java -classpath $CLASSPATH net.grinder.Grinder $GRINDERPROPERTIES" > startAgent.sh
     # Installing multi mechanize
-    sudo apt-get install python-pip python-matplotlib > /tmp/install.log 2>&1
+    # sudo apt-get install python-pip python-matplotlib > /tmp/install.log 2>&1
     sudo pip install -U multi-mechanize
     cp $GOPATH/src/github.com/LakshmiMekala/testrep/rest-performance-testing/Http-example.py $GOPATH/grinder
     cp $GOPATH/src/github.com/LakshmiMekala/testrep/rest-performance-testing/Http-example_WithoutGateway.py $GOPATH/grinder
