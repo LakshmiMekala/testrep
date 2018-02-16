@@ -44,7 +44,7 @@ jobs:
         - sudo apt-get update -q
         - sudo pip install kafka-python
         - sudo apt-get install python-pip python-matplotlib > /tmp/install.log 2>&1
-        - sudo pip install -U multi-mechanize 
+        - sudo pip install multi-mechanize 
         - cd $GOPATH/src/github.com/LakshmiMekala/testrep
         - chmod ugo+x ./build.sh
         - ./build.sh
