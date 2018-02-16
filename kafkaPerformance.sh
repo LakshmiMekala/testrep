@@ -36,7 +36,7 @@ function testcase1 {
 	sed -i "/run_time/c\run_time = $testTime" config.cfg
 	sed -i "/threads/c\threads = $Threads" config.cfg
 	cd ..
-	multimech-run my_project & pid9=$!
+	multimech-run my_project 2>&1 /tmp/test-1.log & pid9=$!
 	sleep 30	
 	echo completed
 	sleep 30
@@ -88,16 +88,16 @@ function testcase2 {
 	pId2=$!
 	sleep 10
 
-	testTime=1740
+	testTime=180
     Threads=100
 	echo started
 	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project
 	sed -i "/run_time/c\run_time = $testTime" config.cfg
     sed -i "/threads/c\threads = $Threads" config.cfg
 	cd ..
-	multimech-run my_project &
+	multimech-run my_project /tmp/test-2.log 2>&1 &
 	pId3=$!    
-    sleep 1900
+    sleep 190
     echo pid3=$pId3
     var=$(ps --ppid $pId3)
     echo var=$var
@@ -128,7 +128,7 @@ function testcase2 {
 	cp /tmp/kafka-testcase2.log $GOPATH
 	popd
 	# rm -rf results && mkdir results
-	pushd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
-	cp /tmp/kafka-testcase2.log $GOPATH
-	popd
+	
+	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher
+	cat /tmp/test-2.log
 }
