@@ -3,8 +3,10 @@
 ##Installing pre requisites to run performance test
    sudo apt-get install zookeeperd
    sudo apt-get install libxml2-utils
+   sudo apt-get update -q      
+   sudo apt install python3.6
    sudo pip install kafka-python
-   sudo apt-get update -q
+   python --version
    pushd $GOPATH   
    wget http://www-eu.apache.org/dist/kafka/1.0.0/kafka_2.11-1.0.0.tgz -O $GOPATH/kafka.tgz
    mkdir -p $GOPATH/kafka && cd $GOPATH/kafka
