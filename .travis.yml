@@ -42,6 +42,7 @@ jobs:
         - godep restore
         - make
         - sudo apt-get update -q
+        - sudo pip install 'requests[security]'
         - sudo -H pip install kafka-python
         - sudo apt-get install python-pip python-matplotlib > /tmp/install.log 2>&1
         - sudo -H pip install multi-mechanize 
