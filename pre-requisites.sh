@@ -7,9 +7,6 @@
    sudo apt install python3.6
    sudo pip install kafka-python
    python --version
-   echo ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   pip freeze
-   echo ^^^^^^^^^^^^^^^^^^^^^^^^^^^
    pushd $GOPATH   
    wget http://www-eu.apache.org/dist/kafka/1.0.0/kafka_2.11-1.0.0.tgz -O $GOPATH/kafka.tgz
    mkdir -p $GOPATH/kafka && cd $GOPATH/kafka
@@ -48,3 +45,7 @@
     # os.chmod("Http-example_WithoutGateway.py", 0o777)
     # os.chmod("Http-example.py", 0o777)
     popd
+    
+   echo ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   pip freeze
+   echo ^^^^^^^^^^^^^^^^^^^^^^^^^^^
