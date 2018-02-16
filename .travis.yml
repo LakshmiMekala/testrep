@@ -18,6 +18,7 @@ install:
 script:
   - cd docs && hugo
   - cd public && ls -alh
+  - python --version
 
 deploy:
   provider: pages
