@@ -51,7 +51,14 @@ function testcase1 {
 	sleep 5
 	kill -9 $pId2
 	sleep 5
-
+	kill -KILL $pid9 $pId $pid1 $pid2	
+	echo +++++++++++++++++++
+	ps -a
+	echo +++++++++++++++++++
+	pkill -9 $pid9 $pId $pid1 $pid2	
+	echo +++++++++++++++++++
+	ps -a
+	echo +++++++++++++++++++
 	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project/results
 	cd */
 	transactions=$(xmllint --html -xpath "string(/html/body/table[1]/tr[2]/td[1])" results.html)
@@ -66,7 +73,7 @@ function testcase1 {
 	pushd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
 	cp /tmp/kafka-testcase1.log $GOPATH
 	popd
-	#rm -rf results && mkdir results
+	rm -rf results && mkdir results
 	echo ===========================
 	ps -a
 	echo ===========================
@@ -136,7 +143,7 @@ function testcase2 {
 	pushd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
 	cp /tmp/kafka-testcase2.log $GOPATH
 	popd
-	# rm -rf results && mkdir results
+	rm -rf results && mkdir results
 	
 	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher
 	cat /tmp/test-2.log
