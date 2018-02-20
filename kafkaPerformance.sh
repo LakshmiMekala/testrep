@@ -51,13 +51,6 @@ function testcase1 {
 	sleep 5
 	kill -SIGINT $pId2
 	sleep 5
-	kill -INT $pid9 $pId $pId1 $pId2
-	sudo kill -15 $pid9 $pId $pId1 $pId2
-	echo $$$$ 
-	ps -a
-	sudo kill -SIGTERM $pid9 $pId $pId1 $pId2
-	echo @@@@
-	ps -a
 	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project/results
 	cd */
 	transactions=$(xmllint --html -xpath "string(/html/body/table[1]/tr[2]/td[1])" results.html)
