@@ -26,7 +26,7 @@ function testcase1 {
 	export FLOGO_RUNNER_WORKERS=5
 	export FLOGO_RUNNER_QUEUE=50
 	./kafkatrigger-to-kafkapublisher > /tmp/kafka-testcase1.log 2>&1 &
-	pId2=$! & ps -a &
+	pId2=$! &
 	sleep 10
 
 	testTime=5
@@ -37,7 +37,7 @@ function testcase1 {
 	sed -i "/threads/c\threads = $Threads" config.cfg
 	cd ..
 	ps -a
-	multimech-run my_project > /tmp/test-1.log 2> & pid9=$!
+	multimech-run my_project > /tmp/test-1.log 2>&1 & pid9=$!
 	echo +++++++++++++++++++
 	ps -a
 	echo +++++++++++++++++++
