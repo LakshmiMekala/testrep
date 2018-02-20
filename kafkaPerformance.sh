@@ -44,12 +44,12 @@ function testcase1 {
 	sleep 30	
 	echo completed
 	sleep 10
-	kill -9 $pid9
-	kill -9 $pId
+	kill -SIGINT $pid9
+	kill -SIGINT $pId
 	sleep 5
-	kill -9 $pId1
+	kill -SIGINT $pId1
 	sleep 5
-	kill -9 $pId2
+	kill -SIGINT $pId2
 	sleep 5
 	kill -INT $pid9 $pId $pId1 $pId2
 	sudo kill -15 $pid9 $pId $pId1 $pId2
