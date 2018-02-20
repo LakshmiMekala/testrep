@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function get_test_cases {
-    local my_list=( testcase2 )
+    local my_list=( testcase1 )
     echo "${my_list[@]}"
 }
 
@@ -36,7 +36,11 @@ function testcase1 {
 	sed -i "/run_time/c\run_time = $testTime" config.cfg
 	sed -i "/threads/c\threads = $Threads" config.cfg
 	cd ..
+	ps -a
 	multimech-run my_project > /tmp/test-1.log 2>&1 & pid9=$!
+	echo +++++++++++++++++++
+	ps -a
+	echo +++++++++++++++++++
 	sleep 30	
 	echo completed
 	sleep 30

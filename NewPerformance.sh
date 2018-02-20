@@ -2,7 +2,8 @@
 
 cd $GOPATH
 
-Gateway=( rest-conditional-gateway KafkaTrigger-To-KafkaPublisher )   
+Gateway=( KafkaTrigger-To-KafkaPublisher )   
+# Gateway=( rest-conditional-gateway KafkaTrigger-To-KafkaPublisher )   
 
 for ((p=0;p < ${#Gateway[@]};p++))
         do
