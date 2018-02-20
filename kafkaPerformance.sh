@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function get_test_cases {
-    local my_list=( testcase1 )
+    local my_list=( testcase2 )
     echo "${my_list[@]}"
 }
 
