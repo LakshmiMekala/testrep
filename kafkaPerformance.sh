@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function get_test_cases {
-    local my_list=( testcase1 testcase2 )
+    local my_list=( testcase1 )
     echo "${my_list[@]}"
 }
 
@@ -62,7 +62,9 @@ function testcase1 {
 	cp /tmp/kafka-testcase1.log $GOPATH
 	popd
 	#rm -rf results && mkdir results
-popd
+	echo ===========================
+	ps -a
+	echo ===========================
 }
 
 function testcase2 {
