@@ -37,19 +37,19 @@ function testcase1 {
 	sed -i "/threads/c\threads = $Threads" config.cfg
 	cd ..
 	ps -a
-	multimech-run my_project > /tmp/test-1.log 2>&1 & pid9=$!
+	multimech-run my_project > /tmp/test-1.log 2> & pid9=$!
 	echo +++++++++++++++++++
 	ps -a
 	echo +++++++++++++++++++
 	sleep 30	
 	echo completed
-	sleep 30
-	kill -SIGINT $pid9
-	kill -SIGINT $pId
+	sleep 10
+	kill -9 $pid9
+	kill -9 $pId
 	sleep 5
 	kill -9 $pId1
 	sleep 5
-	kill -SIGINT $pId2
+	kill -9 $pId2
 
 	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project/results
 	cd */
