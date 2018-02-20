@@ -26,7 +26,7 @@ function testcase1 {
 	export FLOGO_RUNNER_WORKERS=5
 	export FLOGO_RUNNER_QUEUE=50
 	./kafkatrigger-to-kafkapublisher > /tmp/kafka-testcase1.log 2>&1 &
-	pId2=$!
+	pId2=$! & ps -a &
 	sleep 10
 
 	testTime=5
