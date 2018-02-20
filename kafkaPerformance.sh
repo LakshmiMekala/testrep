@@ -55,7 +55,11 @@ function testcase1 {
 	echo +++++++++++++++++++
 	ps -a
 	echo +++++++++++++++++++
-	pkill -9 $pid9 $pId $pid1 $pid2	
+	pkill $pid9 $pId $pid1 $pid2	
+	echo +++++++++++++++++++
+	ps -a
+	echo +++++++++++++++++++
+	killall $pid9 $pId $pid1 $pid2	
 	echo +++++++++++++++++++
 	ps -a
 	echo +++++++++++++++++++
@@ -111,8 +115,11 @@ function testcase2 {
 	sed -i "/run_time/c\run_time = $testTime" config.cfg
     sed -i "/threads/c\threads = $Threads" config.cfg
 	cd ..
+	ps -a
 	multimech-run my_project  & 
-	pId3=$!  
+	pId3=$!
+	echo !!!!!!!!!!!!!!!!!
+	ps -a
     sleep 190
     echo pid3=$pId3
     var=$(ps --ppid $pId3)
