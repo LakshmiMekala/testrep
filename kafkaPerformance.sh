@@ -87,7 +87,7 @@ function testcase2 {
 	./kafkatrigger-to-kafkapublisher > /tmp/kafka-testcase2.log 2>&1 &	pId2=$!
 	sleep 10
 
-	testTime=1800
+	testTime=180
     Threads=100
 	echo started
 	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project
@@ -96,7 +96,7 @@ function testcase2 {
 	cd ..
 	multimech-run my_project  & 
 	pId3=$!  
-    sleep 1900
+    sleep 190
     echo pid3=$pId3
     var=$(ps --ppid $pId3)
     echo var=$var
