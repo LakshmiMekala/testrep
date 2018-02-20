@@ -66,9 +66,9 @@ function create_dest_directory ()
     cd "$DESTFOLDER";
 }
 pushd $GOPATH
-echo %%%%%%%%%%%
-ls
-echo %%%%%%%%%%%
+# echo %%%%%%%%%%%
+# ls
+# echo %%%%%%%%%%%
 pushd $GOPATH/src/github.com/TIBCOSoftware/mashling ;
 mkdir perf-reports;
 create_dest_directory ;

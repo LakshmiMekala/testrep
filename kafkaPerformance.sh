@@ -50,6 +50,7 @@ function testcase1 {
 	kill -9 $pId1
 	sleep 5
 	kill -9 $pId2
+	sleep 5
 
 	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project/results
 	cd */
@@ -73,6 +74,9 @@ function testcase1 {
 
 function testcase2 {
 	cd $GOPATH/kafka
+	echo ===========================-----------------
+	ps -a
+	echo ===========================-----------------------
 	echo zookeeper
 	bin/zookeeper-server-start.sh config/zookeeper.properties > /tmp/zookeeper.log &
 	pId=$!
@@ -93,7 +97,7 @@ function testcase2 {
 	./kafkatrigger-to-kafkapublisher > /tmp/kafka-testcase2.log 2>&1 &	pId2=$!
 	sleep 10
 
-	testTime=1800
+	testTime=180
     Threads=100
 	echo started
 	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project
@@ -102,7 +106,7 @@ function testcase2 {
 	cd ..
 	multimech-run my_project  & 
 	pId3=$!  
-    sleep 1900
+    sleep 190
     echo pid3=$pId3
     var=$(ps --ppid $pId3)
     echo var=$var
@@ -112,11 +116,11 @@ function testcase2 {
     sleep 10
     kill -9 $pId4
 	#echo var=$var
-	kill -SIGINT $pId
+	kill -9 $pId
 	sleep 5
 	kill -9 $pId1
 	sleep 5
-	kill -SIGINT $pId2
+	kill -9 $pId2
 
 	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project/results
 	cd */
@@ -136,4 +140,8 @@ function testcase2 {
 	
 	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher
 	cat /tmp/test-2.log
+
+	echo ===========================-----------------
+	ps -a
+	echo ===========================-----------------------
 }
