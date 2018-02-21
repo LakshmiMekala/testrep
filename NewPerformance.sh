@@ -18,7 +18,7 @@ echo $HTML >> $GOPATH/$FILENAME
 
 #Kafka Performance
 cd $GOPATH/src/github.com/LakshmiMekala/testrep/
-source ./kafkaPerformance.sh
+source ./kafkaPerf.sh
 value=($(get_test_cases))
 for ((i=0;i < ${#value[@]};i++))
         do
