@@ -44,12 +44,12 @@ function testcase1 {
 	sleep 30	
 	echo completed
 	sleep 10
-	kill -SIGINT $pid9
+	kill -s TERM $pid9
 	kill -s TERM $pId
 	sleep 5
 	kill -s TERM $pId1
 	sleep 5
-	kill -SIGINT $pId2
+	kill -s TERM $pId2
 	sleep 5
 	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project/results
 	cd */
@@ -70,6 +70,7 @@ function testcase1 {
 	echo ===========================
 	ps -a
 	echo ===========================
+	sleep 20	
 }
 
 function testcase2 {
