@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function get_test_cases {
-    local my_list=(  testcase2 )
+    local my_list=( testcase1 testcase2 )
     echo "${my_list[@]}"
 }
 
@@ -127,7 +127,7 @@ function testcase2 {
 	cd ..
 	multimech-run my_project &
 	pId3=$! 	
-	sleep 200
+	sleep 220
 	echo pid3=$pId3
 	var=$(ps --ppid $pId3)
 	echo var=$var
