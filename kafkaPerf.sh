@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function get_test_cases {
-    local my_list=( testcase1 testcase2 )
+    local my_list=( testcase1 )
     echo "${my_list[@]}"
 }
 
@@ -10,6 +10,7 @@ function testcase1 {
 	echo zookeeper
 	bin/zookeeper-server-start.sh config/zookeeper.properties > /tmp/kafka.log &
 	pId=$!
+	echo pId
 	sleep 10
 
 	# starting kafka server in background
@@ -17,7 +18,7 @@ function testcase1 {
 	bin/kafka-server-start.sh config/server.properties > /tmp/kafka.log &
 	pId1=$!
 	sleep 10
-
+	echo pId1
 	echo gateway
 	cd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
 	export FLOGO_LOG_LEVEL=ERROR
@@ -27,6 +28,7 @@ function testcase1 {
 	./kafkatrigger-to-kafkapublisher > /tmp/kafka-testcase1.log 2>&1 &
 	ps -a &
 	pId2=$!
+	echo pId2
 	sleep 10
 
 	testTime=300
@@ -50,11 +52,12 @@ function testcase1 {
 	kill -9 $pId4
 	#echo var=$var
 	kill -SIGINT $pId
+	kill -9 pId
 	sleep 5
 	kill -SIGINT $pId1
 	sleep 5
 	kill -SIGINT $pId2
-
+	ps -a
 	cd my_project/results
 	cd */
 
