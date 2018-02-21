@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function get_test_cases {
-    local my_list=( testcase1 testcase2 )
+    local my_list=( testcase2 )
     echo "${my_list[@]}"
 }
 
@@ -49,18 +49,18 @@ function testcase1 {
 	echo 4=$pId4
 	echo completed
 	sleep 10
-	kill -9 $pId4
+	# kill -9 $pId4
 	kill -s TERM $pId4
 	#echo var=$var
-	kill -SIGINT $pId
+	# kill -SIGINT $pId
 	kill -s TERM $pId
-	kill -9 pId
+	# kill -9 $pId
 	sleep 5
-	kill -SIGINT $pId1
+	# kill -SIGINT $pId1
 	kill -s TERM $pId1
 	sleep 5
-	kill -SIGINT $pId2
-	kill -s TERM $pId2
+	# kill -SIGINT $pId2
+	kill -9 $pId2
 	ps -a
 	cd my_project/results
 	cd */
@@ -85,9 +85,16 @@ function testcase1 {
     pushd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
     cp /tmp/kafka-testcase1.log $GOPATH
     popd
+	echo ----------------------
+	ps -a
+	echo ----------------------	
+	sleep 20
 }
 
 function testcase2 {
+	echo ******************************
+	ps -a
+	echo ******************************
 	cd $GOPATH/kafka
 	echo zookeeper
 	bin/zookeeper-server-start.sh config/zookeeper.properties > /tmp/kafka.log &
@@ -129,17 +136,17 @@ function testcase2 {
 	echo 4=$pId4
 	echo completed
 	sleep 10
-	kill -9 $pId4
+	# kill -9 $pId4
 	kill -s TERM $pI4
 	#echo var=$var
-	kill -SIGINT $pId
+	# kill -SIGINT $pId
 	kill -s TERM $pId
 	sleep 5
-	kill -9 $pId1
+	# kill -9 $pId1
 	kill -s TERM $pId1
 	sleep 5
-	kill -SIGINT $pId2
-	kill -s TERM $pId2
+	# kill -SIGINT $pId2
+	kill -9 $pId2
 
 	cd my_project/results
 	cd */
@@ -164,4 +171,5 @@ function testcase2 {
     pushd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
     cp /tmp/kafka-testcase2.log $GOPATH
     popd
+	ps -a
 }
