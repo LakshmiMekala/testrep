@@ -8,7 +8,7 @@ function get_test_cases {
 function testcase1 {
 	cd $GOPATH/kafka
 	echo zookeeper
-	bin/zookeeper-server-start.sh config/zookeeper.properties  &
+	bin/zookeeper-server-start.sh config/zookeeper.properties > /tmp/zookeeper.log  &
 	pId=$!
 	echo $pId
 	sleep 30
