@@ -26,7 +26,6 @@ function testcase1 {
 	export FLOGO_RUNNER_WORKERS=5
 	export FLOGO_RUNNER_QUEUE=50
 	./kafkatrigger-to-kafkapublisher > /tmp/kafka-testcase1.log 2>&1 &
-	ps -a &
 	pId2=$!
 	echo $pId2
 	sleep 10
@@ -56,7 +55,7 @@ function testcase1 {
 	kill -s TERM $pId
 	# kill -9 $pId
 	sleep 5
-	# kill -SIGINT $pId1
+	kill -SIGINT $pId1
 	kill -s TERM $pId1
 	sleep 5
 	# kill -SIGINT $pId2
