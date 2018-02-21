@@ -20,10 +20,10 @@ function testcase1 {
 
 	echo gateway
 	cd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
-	# export FLOGO_LOG_LEVEL=ERROR
-	# export FLOGO_RUNNER_TYPE=POOLED
-	# export FLOGO_RUNNER_WORKERS=5
-	# export FLOGO_RUNNER_QUEUE=50
+	export FLOGO_LOG_LEVEL=ERROR
+	export FLOGO_RUNNER_TYPE=POOLED
+	export FLOGO_RUNNER_WORKERS=5
+	export FLOGO_RUNNER_QUEUE=50
 	./kafkatrigger-to-kafkapublisher > /tmp/kafka-testcase1.log 2>&1 &
 	ps -a &
 	pId2=$!
@@ -51,8 +51,7 @@ function testcase1 {
 	#echo var=$var
 	kill -SIGINT $pId
 	sleep 5
-	kill -SIGINT $pId1 
-	kill -SIGINT $pId3
+	kill -SIGINT $pId1
 	sleep 5
 	kill -SIGINT $pId2
 
@@ -96,10 +95,10 @@ function testcase2 {
 
 	echo gateway
 	cd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
-	# export FLOGO_LOG_LEVEL=ERROR
-	# export FLOGO_RUNNER_TYPE=POOLED
-	# export FLOGO_RUNNER_WORKERS=5
-	# export FLOGO_RUNNER_QUEUE=50
+	export FLOGO_LOG_LEVEL=ERROR
+	export FLOGO_RUNNER_TYPE=POOLED
+	export FLOGO_RUNNER_WORKERS=5
+	export FLOGO_RUNNER_QUEUE=50
 	./kafkatrigger-to-kafkapublisher > /tmp/kafka-testcase2.log 2>&1 &
 	ps -a &
 	pId2=$!
@@ -127,8 +126,7 @@ function testcase2 {
 	#echo var=$var
 	kill -SIGINT $pId
 	sleep 5
-	kill -SIGINT $pId1 
-	kill -SIGINT $pId3
+	kill -9 $pId1
 	sleep 5
 	kill -SIGINT $pId2
 
