@@ -45,9 +45,9 @@ function testcase1 {
 	echo completed
 	sleep 10
 	kill -SIGINT $pid9
-	kill -SIGINT $pId
+	kill -s TERM $pId
 	sleep 5
-	kill -SIGINT $pId1
+	kill -s TERM $pId1
 	sleep 5
 	kill -SIGINT $pId2
 	sleep 5
@@ -119,9 +119,9 @@ function testcase2 {
     sleep 10
     kill -9 $pId4
 	#echo var=$var
-	kill -9 $pId
+	kill -s TERM $pId
 	sleep 5
-	kill -9 $pId1
+	kill -s TERM $pId1
 	sleep 5
 	kill -9 $pId2
 
