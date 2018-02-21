@@ -20,7 +20,7 @@ echo $HTML >> $GOPATH/$FILENAME
 cd $GOPATH/src/github.com/LakshmiMekala/testrep/
 source ./kafkaPerf.sh
 # testcase1
-testcase2
+# testcase2
 value=($(get_test_cases))
 for ((i=0;i < ${#value[@]};i++))
         do

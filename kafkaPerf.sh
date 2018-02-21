@@ -52,6 +52,7 @@ function testcase1 {
 	kill -9 $pId4
 	#echo var=$var
 	kill -SIGINT $pId
+	kill -s TERM $pId
 	kill -9 pId
 	sleep 5
 	kill -SIGINT $pId1
@@ -128,6 +129,7 @@ function testcase2 {
 	kill -9 $pId4
 	#echo var=$var
 	kill -SIGINT $pId
+	kill -s TERM $pId
 	sleep 5
 	kill -9 $pId1
 	sleep 5

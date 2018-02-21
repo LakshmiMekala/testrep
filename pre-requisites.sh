@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##Installing pre requisites to run performance test
-   sudo apt-get install zookeeperd
+   #sudo apt-get install zookeeperd
    sudo apt-get install libxml2-utils
    sudo apt-get update -q
    sudo pip install kafka-python
