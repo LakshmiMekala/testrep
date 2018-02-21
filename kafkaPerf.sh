@@ -50,14 +50,17 @@ function testcase1 {
 	echo completed
 	sleep 10
 	kill -9 $pId4
+	kill -s TERM $pId4
 	#echo var=$var
 	kill -SIGINT $pId
 	kill -s TERM $pId
 	kill -9 pId
 	sleep 5
 	kill -SIGINT $pId1
+	kill -s TERM $pId1
 	sleep 5
 	kill -SIGINT $pId2
+	kill -s TERM $pId2
 	ps -a
 	cd my_project/results
 	cd */
@@ -127,13 +130,16 @@ function testcase2 {
 	echo completed
 	sleep 10
 	kill -9 $pId4
+	kill -s TERM $pI4
 	#echo var=$var
 	kill -SIGINT $pId
 	kill -s TERM $pId
 	sleep 5
 	kill -9 $pId1
+	kill -s TERM $pId1
 	sleep 5
 	kill -SIGINT $pId2
+	kill -s TERM $pId2
 
 	cd my_project/results
 	cd */
