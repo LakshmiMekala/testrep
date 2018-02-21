@@ -8,10 +8,10 @@ function get_test_cases {
 function testcase1 {
 	cd $GOPATH/kafka
 	echo zookeeper
-	bin/zookeeper-server-start.sh config/zookeeper.properties > /tmp/kafka.log &
+	bin/zookeeper-server-start.sh config/zookeeper.properties  &
 	pId=$!
 	echo $pId
-	sleep 10
+	sleep 30
 
 	# starting kafka server in background
 	echo server
