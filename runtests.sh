@@ -26,7 +26,7 @@ function testcase1 {
 	sleep 10
 
 	testTime=1800
-	Threads=10
+	Threads=100
 	#var="$(timeout 70s multimech-run my_project &)"
 	echo started
 	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project
@@ -34,9 +34,10 @@ function testcase1 {
 	sed -i "/threads/c\threads = $Threads" config.cfg
 	
 	cd ..
-	multimech-run my_project &
-	pId3=$!	
-	sleep 2000
+	multimech-run my_project > /tmp/run1.log 2>&1
+	# &
+	# pId3=$!	
+	# sleep 2000
 	echo pid3=$pId3
 	var=$(ps --ppid $pId3)
 	echo var=$var
@@ -75,6 +76,9 @@ function testcase1 {
 	rm -rf results && mkdir results
 	pushd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
 	cp /tmp/kafka-testcase1.log $GOPATH
+	popd
+	pushd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher
+	cp /tmp/run1.log $GOPATH
 	popd
 	sleep 20
 }

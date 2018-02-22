@@ -78,6 +78,7 @@ cp $GOPATH/rest-testcase1.log "$GOPATH/src/github.com/TIBCOSoftware/mashling/per
 cp $GOPATH/rest-testcase2.log "$GOPATH/src/github.com/TIBCOSoftware/mashling/perf-reports/$DESTFOLDER"
 cp $GOPATH/kafka-testcase1.log "$GOPATH/src/github.com/TIBCOSoftware/mashling/perf-reports/$DESTFOLDER"
 cp $GOPATH/kafka-testcase2.log "$GOPATH/src/github.com/TIBCOSoftware/mashling/perf-reports/$DESTFOLDER"
+cp $GOPATH/run1.log "$GOPATH/src/github.com/TIBCOSoftware/mashling/perf-reports/$DESTFOLDER"
 cp "$GOPATH/$FILENAME" "$GOPATH/src/github.com/TIBCOSoftware/mashling/perf-reports/$DESTFOLDER"
 cp "$GOPATH/$FILENAME" "$GOPATH/src/github.com/TIBCOSoftware/mashling/perf-reports/latest"
 aws s3 cp "$GOPATH/src/github.com/TIBCOSoftware/mashling/perf-reports" "s3://$AWS_BUCKET/LakshmiMekala/remoterecipes" --recursive
