@@ -21,7 +21,7 @@ function testcase1 {
 	echo gateway
 	cd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
 	export FLOGO_LOG_LEVEL=ERROR
-	./kafkatrigger-to-kafkapublisher /tmp/kafka-testcase1.log 2>&1 &
+	./kafkatrigger-to-kafkapublisher > /tmp/kafka-testcase1.log 2>&1 &
 	pId2=$!
 	sleep 10
 
