@@ -34,10 +34,9 @@ function testcase1 {
 	sed -i "/threads/c\threads = $Threads" config.cfg
 	
 	cd ..
-	multimech-run my_project > /tmp/run1.log 2>&1
-	# &
+	multimech-run my_project > /tmp/run1.log 2>&1 &
 	# pId3=$!	
-	# sleep 2000
+	 sleep 2000
 	echo pid3=$pId3
 	var=$(ps --ppid $pId3)
 	echo var=$var
