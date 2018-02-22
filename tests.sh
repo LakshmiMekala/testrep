@@ -26,7 +26,7 @@ function testcase1 {
 	sleep 10
 
 	testTime=1800
-	Threads=10
+	Threads=100
 	#var="$(timeout 70s multimech-run my_project &)"
 	echo started
 	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project
@@ -103,7 +103,7 @@ function testcase2 {
 	export FLOGO_LOG_LEVEL=ERROR
 	./kafkatrigger-to-kafkapublisher > /tmp/kafka-testcase2.log &
 	pId2=$!
-	sleep 10
+	sleep 30
 
 	testTime=10
 	#var="$(timeout 70s multimech-run my_project &)"
