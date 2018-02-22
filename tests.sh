@@ -36,17 +36,18 @@ function testcase1 {
 	cd ..
 	multimech-run my_project &
 	pId3=$!	
-	 sleep 200
+	sleep 200
 	echo pid3=$pId3
-	# var=$(ps --ppid $pId3)
-	# echo var=$var
-	# pId4=$(echo $var | awk '{print $5}')
-	# echo 4=$pId4
-	# echo completed
-	# sleep 10
-	# kill -9 $pId4
+	var=$(ps --ppid $pId3)
+	echo var=$var
+	pId4=$(echo $var | awk '{print $5}')
+	echo 4=$pId4
+	echo completed
+	sleep 10
+	kill -9 $pId4
 	#echo var=$var
-	kill -s TERM $pId3
+	sleep 40
+	# kill -s TERM $pId3
 	kill -SIGINT $pId
 	kill -s TERM $pId
 	sleep 5
@@ -112,7 +113,7 @@ function testcase2 {
 	cd ..
 	multimech-run my_project & pId3=$!
 	echo completed
-	sleep 30
+	sleep 60
 	#echo var=$var
 	kill -s TERM $pId3
 	kill -SIGINT $pId
