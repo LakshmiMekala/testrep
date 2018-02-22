@@ -25,8 +25,7 @@ function testcase1 {
 	# export FLOGO_RUNNER_TYPE=POOLED
 	# export FLOGO_RUNNER_WORKERS=5
 	# export FLOGO_RUNNER_QUEUE=50
-	./kafkatrigger-to-kafkapublisher &
-	# > /tmp/kafka-testcase1.log 2>&1 &
+	./kafkatrigger-to-kafkapublisher > /tmp/kafka-testcase1.log 2>&1 &
 	pId2=$!
 	echo $pId2
 	sleep 10
@@ -109,17 +108,17 @@ function testcase2 {
 
 	echo gateway
 	cd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
-	export FLOGO_LOG_LEVEL=ERROR
-	export FLOGO_RUNNER_TYPE=POOLED
-	export FLOGO_RUNNER_WORKERS=5
-	export FLOGO_RUNNER_QUEUE=50
+	# export FLOGO_LOG_LEVEL=ERROR
+	# export FLOGO_RUNNER_TYPE=POOLED
+	# export FLOGO_RUNNER_WORKERS=5
+	# export FLOGO_RUNNER_QUEUE=50
 	./kafkatrigger-to-kafkapublisher > /tmp/kafka-testcase2.log 2>&1 &
 	ps -a &
 	pId2=$!
 	sleep 10
 
-	testTime=180
-	Threads=100
+	testTime=5
+	Threads=1
 	#var="$(timeout 70s multimech-run my_project &)"
 	echo started
 	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project
@@ -128,7 +127,7 @@ function testcase2 {
 	cd ..
 	multimech-run my_project &
 	pId3=$! 	
-	sleep 220
+	sleep 20
 	echo pid3=$pId3
 	var=$(ps --ppid $pId3)
 	echo var=$var
