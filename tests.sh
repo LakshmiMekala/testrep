@@ -36,7 +36,7 @@ function testcase1 {
 	cd ..
 	multimech-run my_project &
 	pId3=$!	
-	 sleep 2200
+	sleep 2500
 	echo pid3=$pId3
 	var=$(ps --ppid $pId3)
 	echo var=$var
@@ -46,8 +46,8 @@ function testcase1 {
 	sleep 10
 	kill -9 $pId4
 	echo var=$var
-	# sleep 40
-	# kill -s TERM $pId3
+	sleep 40
+	kill -s TERM $pId3
 	kill -SIGINT $pId
 	kill -s TERM $pId
 	sleep 5
@@ -124,7 +124,7 @@ function testcase2 {
 	kill -9 $pId4
 	echo var=$var
 	#echo var=$var
-	# kill -s TERM $pId3
+	kill -s TERM $pId3
 	kill -SIGINT $pId
 	kill -s TERM $pId
 	sleep 5
