@@ -38,15 +38,15 @@ function testcase1 {
 	pId3=$!	
 	sleep 2500
 	echo pid3=$pId3
-	var=$(ps --ppid $pId3)
-	echo var=$var
-	pId4=$(echo $var | awk '{print $5}')
-	echo 4=$pId4
-	echo completed
-	sleep 10
-	kill -9 $pId4
-	echo var=$var
-	sleep 40
+	# var=$(ps --ppid $pId3)
+	# echo var=$var
+	# pId4=$(echo $var | awk '{print $5}')
+	# echo 4=$pId4
+	# echo completed
+	# sleep 10
+	# kill -9 $pId4
+	# echo var=$var
+	# sleep 40
 	kill -s TERM $pId3
 	kill -SIGINT $pId
 	kill -s TERM $pId
