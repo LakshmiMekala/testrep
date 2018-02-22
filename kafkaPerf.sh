@@ -65,6 +65,7 @@ function testcase1 {
 	cd */
 
 	echo results
+	
 	#sed -n 's/.*src="\([^"]*\).*/\1/p' results.html
 
 	#cat results.html | grep -Eo "(transactions:|errors:)://[a-zA-Z0-9./?=_-]*" | sort | uniq
@@ -80,6 +81,7 @@ function testcase1 {
 	echo errors=$errors
 	cd ..
 	cd ..
+	cp -r results $GOPATH
 	rm -rf results && mkdir results
     pushd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
     cp /tmp/kafka-testcase1.log $GOPATH
@@ -166,6 +168,7 @@ function testcase2 {
 	echo errors=$errors
 	cd ..
 	cd ..
+	cp -r results $GOPATH
 	rm -rf results && mkdir results
     pushd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
     cp /tmp/kafka-testcase2.log $GOPATH

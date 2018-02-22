@@ -35,7 +35,7 @@ function testcase1 {
 	
 	cd ..
 	multimech-run my_project &
-	# pId3=$!	
+	 pId3=$!	
 	 sleep 200
 	echo pid3=$pId3
 	var=$(ps --ppid $pId3)
@@ -123,6 +123,7 @@ function testcase2 {
 
 	cd my_project/results
 	cd */
+	ls;
 
 	echo results
 	#sed -n 's/.*src="\([^"]*\).*/\1/p' results.html
@@ -140,7 +141,7 @@ function testcase2 {
 	echo errors=$errors
 	cd ..
 	cd ..
-	cp results $GOPATH/results2
+	cp -r results $GOPATH/results2
 	rm -rf results && mkdir results
 	pushd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
 	cp /tmp/kafka-testcase2.log $GOPATH
