@@ -109,8 +109,7 @@ function testcase2 {
 	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project
 	sed -i "/run_time/c\run_time = $testTime" config.cfg
 	cd ..
-	multimech-run my_project 
-	#& pId3=$!
+	multimech-run my_project & pId3=$!
 	echo completed
 	sleep 30
 	#echo var=$var
@@ -124,7 +123,6 @@ function testcase2 {
 
 	cd my_project/results
 	cd */
-	ls;
 
 	echo results
 	#sed -n 's/.*src="\([^"]*\).*/\1/p' results.html
@@ -142,7 +140,7 @@ function testcase2 {
 	echo errors=$errors
 	cd ..
 	cd ..
-	cp -r results $GOPATH/results2
+	cp results $GOPATH/results2
 	rm -rf results && mkdir results
 	pushd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
 	cp /tmp/kafka-testcase2.log $GOPATH
