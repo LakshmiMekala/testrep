@@ -21,11 +21,12 @@ function testcase1 {
 	echo $pId1
 	echo gateway
 	cd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
-	export FLOGO_LOG_LEVEL=ERROR
-	export FLOGO_RUNNER_TYPE=POOLED
-	export FLOGO_RUNNER_WORKERS=5
-	export FLOGO_RUNNER_QUEUE=50
-	./kafkatrigger-to-kafkapublisher > /tmp/kafka-testcase1.log 2>&1 &
+	# export FLOGO_LOG_LEVEL=ERROR
+	# export FLOGO_RUNNER_TYPE=POOLED
+	# export FLOGO_RUNNER_WORKERS=5
+	# export FLOGO_RUNNER_QUEUE=50
+	./kafkatrigger-to-kafkapublisher &
+	# > /tmp/kafka-testcase1.log 2>&1 &
 	pId2=$!
 	echo $pId2
 	sleep 10
