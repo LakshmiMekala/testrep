@@ -18,7 +18,7 @@ echo $HTML >> $GOPATH/$FILENAME
 
 #Kafka Performance
 cd $GOPATH/src/github.com/LakshmiMekala/testrep/
-source ./kafkaPerf.sh
+source ./runtests.sh
 # testcase1
 # testcase2
 value=($(get_test_cases))
