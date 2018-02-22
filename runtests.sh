@@ -72,7 +72,7 @@ function testcase1 {
 	echo errors=$errors
 	cd ..
 	cd ..
-	cp -r results $GOPATH
+	cp -r results $GOPATH/results
 	rm -rf results && mkdir results
 	pushd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
 	cp /tmp/kafka-testcase1.log $GOPATH
@@ -140,7 +140,7 @@ function testcase2 {
 	echo errors=$errors
 	cd ..
 	cd ..
-	cp results $GOPATH
+	cp results $GOPATH/results2
 	rm -rf results && mkdir results
 	pushd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
 	cp /tmp/kafka-testcase2.log $GOPATH
