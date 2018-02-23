@@ -47,7 +47,7 @@ function testcase1 {
 	# kill -9 $pId4
 	#echo var=$var
 	sleep 40
-	kill -s TERM $pId3
+	pkill -9 -g $pId3
 	kill -SIGINT $pId
 	kill -s TERM $pId
 	sleep 5
