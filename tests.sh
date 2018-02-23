@@ -123,7 +123,7 @@ function testcase2 {
 	cd ..
 	multimech-run my_project & pId3=$!
 	echo completed
-	sleep 60
+	sleep 150
 	#echo var=$var
 	echo pid3=$pId3
 	var=$(ps --ppid $pId3)
