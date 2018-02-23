@@ -50,10 +50,10 @@ function testcase1 {
 	echo -----------
 	ps -a
 	echo -----------
-	pkill -9 -g $pId3
+	sudo pkill -9 -g $pId3
 	ps -a
 	echo -----------
-	kill -- -$(ps -o pgid= $pId3 | grep -o [0-9]*)
+	sudo kill -- -$(ps -o pgid= $pId3 | grep -o [0-9]*)
 	ps -a
 	echo -----------
 	kill -SIGINT $pId
