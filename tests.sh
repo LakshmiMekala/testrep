@@ -105,17 +105,19 @@ function testcase2 {
 	pId2=$!
 	sleep 10
 
-	testTime=10
+	testTime=100
+	Threads=1
 	#var="$(timeout 70s multimech-run my_project &)"
 	echo started
 	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project
 	sed -i "/run_time/c\run_time = $testTime" config.cfg
+	sed -i "/threads/c\threads = $Threads" config.cfg
 	cd ..
 	multimech-run my_project & pId3=$!
 	echo completed
 	sleep 60
 	#echo var=$var
-	kill -s TERM $pId3
+	pkill -9 -g $pId3
 	kill -SIGINT $pId
 	kill -s TERM $pId
 	sleep 5
