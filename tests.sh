@@ -25,8 +25,8 @@ function testcase1 {
 	pId2=$!
 	sleep 10
 
-	testTime=180
-	Threads=10
+	testTime=1800
+	Threads=100
 	#var="$(timeout 70s multimech-run my_project &)"
 	echo started
 	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project
@@ -36,7 +36,7 @@ function testcase1 {
 	cd ..
 	multimech-run my_project &
 	pId3=$!	
-	 sleep 200
+	 sleep 2600
 	echo pid3=$pId3
 	var=$(ps --ppid $pId3)
 	echo var=$var
