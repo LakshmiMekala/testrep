@@ -1,11 +1,11 @@
 #!/bin/bash
 
 function get_test_cases {
-    local my_list=( testcase2 testcase1 )
+    local my_list=( testcase1 testcase2 )
     echo "${my_list[@]}"
 }
 
-function testcase2 {
+function testcase1 {
 	cd $GOPATH/kafka
 	echo zookeeper
 	bin/zookeeper-server-start.sh config/zookeeper.properties > /tmp/kafka.log &
@@ -38,16 +38,16 @@ function testcase2 {
 	pId3=$!	
 	 sleep 200
 	echo pid3=$pId3
-	var=$(ps --ppid $pId3)
-	echo var=$var
-	pId4=$(echo $var | awk '{print $5}')
-	echo 4=$pId4
-	echo completed
-	sleep 10
-	kill -9 $pId4
-	echo var=$var
+	# var=$(ps --ppid $pId3)
+	# echo var=$var
+	# pId4=$(echo $var | awk '{print $5}')
+	# echo 4=$pId4
+	# echo completed
+	# sleep 10
+	# kill -9 $pId4
+	#echo var=$var
 	sleep 40
-	# kill -s TERM $pId3
+	kill -s TERM $pId3
 	kill -SIGINT $pId
 	kill -s TERM $pId
 	sleep 5
@@ -85,7 +85,7 @@ function testcase2 {
 	sleep 20
 }
 
-function testcase1 {
+function testcase2 {
 	cd $GOPATH/kafka
 	echo zookeeper
 	bin/zookeeper-server-start.sh config/zookeeper.properties > /tmp/kafka.log &
@@ -114,16 +114,8 @@ function testcase1 {
 	multimech-run my_project & pId3=$!
 	echo completed
 	sleep 60
-	echo pid3=$pId3
-	var=$(ps --ppid $pId3)
-	echo var=$var
-	pId4=$(echo $var | awk '{print $5}')
-	echo 4=$pId4
-	echo completed
-	sleep 10
-	kill -9 $pId4
 	#echo var=$var
-	# kill -s TERM $pId3
+	kill -s TERM $pId3
 	kill -SIGINT $pId
 	kill -s TERM $pId
 	sleep 5
