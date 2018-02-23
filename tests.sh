@@ -125,6 +125,7 @@ function testcase2 {
 	echo completed
 	sleep 60
 	#echo var=$var
+	echo pid3=$pId3
 	var=$(ps --ppid $pId3)
 	echo var=$var
 	pId4=$(echo $var | awk '{print $5}')
@@ -133,7 +134,6 @@ function testcase2 {
 	sleep 10
 	kill -9 $pId4
 	echo var=$var
-	pkill -9 -g $pId3
 	kill -SIGINT $pId
 	kill -s TERM $pId
 	sleep 5
