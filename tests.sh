@@ -38,24 +38,24 @@ function testcase1 {
 	pId3=$!	
 	 sleep 200
 	echo pid3=$pId3
-	# var=$(ps --ppid $pId3)
-	# echo var=$var
-	# pId4=$(echo $var | awk '{print $5}')
-	# echo 4=$pId4
-	# echo completed
-	# sleep 10
-	# kill -9 $pId4
-	#echo var=$var
-	sleep 40
-	echo -----------
-	ps -a
-	echo -----------
-	sudo pkill -9 -g $pId3
-	ps -a
-	echo -----------
-	sudo pkill -9 -x multimech-run
-	ps -a
-	echo -----------
+	var=$(ps --ppid $pId3)
+	echo var=$var
+	pId4=$(echo $var | awk '{print $5}')
+	echo 4=$pId4
+	echo completed
+	sleep 10
+	kill -9 $pId4
+	echo var=$var
+	# sleep 40
+	# echo -----------
+	# ps -a
+	# echo -----------
+	# sudo pkill -9 -g $pId3
+	# ps -a
+	# echo -----------
+	# sudo pkill -9 -x multimech-run
+	# ps -a
+	# echo -----------
 	kill -SIGINT $pId
 	kill -s TERM $pId
 	sleep 5
@@ -125,6 +125,14 @@ function testcase2 {
 	echo completed
 	sleep 60
 	#echo var=$var
+	var=$(ps --ppid $pId3)
+	echo var=$var
+	pId4=$(echo $var | awk '{print $5}')
+	echo 4=$pId4
+	echo completed
+	sleep 10
+	kill -9 $pId4
+	echo var=$var
 	pkill -9 -g $pId3
 	kill -SIGINT $pId
 	kill -s TERM $pId
