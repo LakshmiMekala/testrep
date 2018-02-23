@@ -47,7 +47,15 @@ function testcase1 {
 	# kill -9 $pId4
 	#echo var=$var
 	sleep 40
+	echo -----------
+	ps -a
+	echo -----------
 	pkill -9 -g $pId3
+	ps -a
+	echo -----------
+	kill -- -$(ps -o pgid= $pId3 | grep -o [0-9]*)
+	ps -a
+	echo -----------
 	kill -SIGINT $pId
 	kill -s TERM $pId
 	sleep 5
