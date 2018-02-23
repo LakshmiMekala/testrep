@@ -53,7 +53,7 @@ function testcase1 {
 	sudo pkill -9 -g $pId3
 	ps -a
 	echo -----------
-	sudo kill -- -$(ps -o pgid= $pId3 | grep -o [0-9]*)
+	sudo pkill -9 -x multimech-run
 	ps -a
 	echo -----------
 	kill -SIGINT $pId
