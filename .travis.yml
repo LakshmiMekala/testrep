@@ -41,13 +41,9 @@ script:
   # - go test ./... -v 2> >(tee gotest_stderr_file) | tee gotest_stdout_file
   # - make all
   - mashling help
-  - cd $GOPATH/src/github.com/TIBCOSoftware
-  - pushd mashling-cicd/sample-recipes
-  - rm -rf builds
+  - cd $GOPATH/src/github.com/LakshmiMekala/testrep
   - lscpu
   - mkdir -p $HOME/builds/latest
-  - chmod ugo+x ./build-recipes.sh ./sanity.sh ./gotestreport.sh
+  - chmod ugo+x ./build-recipes.sh
   # - ./gotestreport.sh
   - ./build-recipes.sh
-  - ./sanity.sh
-  - popd
