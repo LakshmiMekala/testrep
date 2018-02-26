@@ -161,7 +161,7 @@ function testcase2 {
 	echo errors=$errors
 	cd ..
 	cd ..
-	cp results $GOPATH/results2
+	cp -r results $GOPATH/results2
 	rm -rf results && mkdir results
 	pushd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
 	cp /tmp/kafka-testcase2.log $GOPATH
