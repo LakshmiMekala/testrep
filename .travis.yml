@@ -34,12 +34,12 @@ jobs:
       script:
         - mkdir -p $GOPATH/src/github.com/TIBCOSoftware
         - cd $GOPATH/src/github.com/TIBCOSoftware
-        - git clone https://github.com/TIBCOSoftware/mashling.git
+        - git clone -b feature-dep https://github.com/TIBCOSoftware/mashling.git
         - git clone https://github.com/TIBCOSoftware/mashling-recipes.git
         - git clone https://github.com/TIBCOSoftware/mashling-cicd.git mashling-cicd
         - cp -r $GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/dependency-config/* $GOPATH/src/github.com/TIBCOSoftware/mashling
         - cd mashling
-        - git checkout df2745f87f5c717531954c098ce2f94018d815b0
+        # - git checkout df2745f87f5c717531954c098ce2f94018d815b0
         - ls
         - godep restore
         - make
