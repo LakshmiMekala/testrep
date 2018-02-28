@@ -39,6 +39,7 @@ jobs:
         - git clone https://github.com/TIBCOSoftware/mashling-cicd.git mashling-cicd
         - cp -r $GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/dependency-config/* $GOPATH/src/github.com/TIBCOSoftware/mashling
         - cd mashling
+        - git checkout df2745f87f5c717531954c098ce2f94018d815b0
         - ls
         - godep restore
         - make
