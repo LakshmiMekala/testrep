@@ -26,7 +26,8 @@ before_install:
 install:
   - go get -u github.com/constabulary/gb/...
   - go get -u github.com/tools/godep/...
-  - go get -u github.com/ains/go-test-html 
+  - go get -u github.com/ains/go-test-html
+  - go get -u github.com/golang/dep/cmd/dep 
 
 jobs:
   include:
@@ -34,18 +35,14 @@ jobs:
       script:
         - mkdir -p $GOPATH/src/github.com/TIBCOSoftware
         - cd $GOPATH/src/github.com/TIBCOSoftware
-        - git clone -b feature-enable-perf-tests https://github.com/TIBCOSoftware/mashling.git
-        - git clone https://github.com/TIBCOSoftware/mashling-recipes.git
-        - git clone https://github.com/TIBCOSoftware/mashling-cicd.git mashling-cicd
-        - cp -r $GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/dependency-config/* $GOPATH/src/github.com/TIBCOSoftware/mashling
+        - git clone https://github.com/TIBCOSoftware/mashling.git
+        - git clone -b feature-enable-perf-tests https://github.com/TIBCOSoftware/mashling-cicd.git mashling-cicd
         - cd mashling
-        # - git checkout df2745f87f5c717531954c098ce2f94018d815b0
-        - ls
-        - godep restore
-        - make
-        - cd $GOPATH/src/github.com/LakshmiMekala/testrep
-        - chmod ugo+x ./build.sh
-        - ./build.sh
+        - dep ensure
+        - make all
+        - cd $GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/performance-scripts
+        - chmod ugo+x ./run-performance-test.sh
+        - ./run-performance-test.sh
     #     - if [ "$TRAVIS_EVENT_TYPE" == "cron" ]; then
     #       mkdir -p $GOPATH/src/github.com/TIBCOSoftware;
     #       cd $GOPATH/src/github.com/TIBCOSoftware;
