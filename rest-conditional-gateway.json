@@ -176,7 +176,7 @@
                                             },
                                             {
                                                 "name": "uri",
-                                                "value": "http://petstore.swagger.io/v2/pet/:id",
+                                                "value": "http://localhost:9090/test",
                                                 "required": true,
                                                 "type": "string"
                                             },
@@ -197,13 +197,6 @@
                                                 "value": null,
                                                 "required": false,
                                                 "type": "any"
-                                            }
-                                        ],
-                                        "inputMappings": [
-                                            {
-                                                "type": 1,
-                                                "value": "{T.pathParams}",
-                                                "mapTo": "pathParams"
                                             }
                                         ]
                                     },
