@@ -31,8 +31,8 @@ echo $HTML >> $GOPATH/$FILENAME
 #         done
 
 #Rest Performance
-cd $GOPATH/src/github.com/LakshmiMekala/testrep/rest-performance-testing
-# cd $GOPATH/src/github.com/TIBCOSoftware/recipes/rest-performance-testing
+# cd $GOPATH/src/github.com/LakshmiMekala/testrep/rest-performance-testing
+cd $GOPATH/src/github.com/TIBCOSoftware/recipes/rest-performance-testing
 source ./Grinder.sh
 value=($(get_test_cases))
 for ((i=0;i < ${#value[@]};i++))
