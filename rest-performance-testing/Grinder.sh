@@ -1,14 +1,18 @@
 #!/bin/bash
 
 function get_test_cases {
-    local my_list=( )
+    local my_list=( testcase1 testcase2 )
     echo "${my_list[@]}"
 }
 
 function testcase1 {
-	cd $GOPATH/src/github.com/LakshmiMekala/testrep/rest-performance-testing
+	cd $GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/performance-scripts/rest-performance-testing
 	go run server.go &	
 	cd $GOPATH/rest-conditional-gateway/bin
+	export FLOGO_LOG_LEVEL=ERROR
+	export FLOGO_RUNNER_TYPE=POOLED
+	export FLOGO_RUNNER_WORKERS=5
+	export FLOGO_RUNNER_QUEUE=60
 	./rest-conditional-gateway > /tmp/rest-testcase1.log 2>&1 &
 	pId=$!
 	sleep 10
@@ -19,18 +23,13 @@ function testcase1 {
 	CLASSPATH=$GRINDERPATH/lib/grinder.jar:$CLASSPATH
 	PATH=$JAVA_HOME/bin:$PATH
 	export CLASSPATH PATH GRINDERPROPERTIES
-	echo ++++++++++++++++++++++==$CLASSPATH+++++++++++++++++++++=
 	sleep 5
 	echo CONSOLE
-	export DISPLAY=:0.0
-	#cd bin
-	#./startConsole.sh &	
 	java -classpath $CLASSPATH net.grinder.Console -headless > /tmp/console1.log 2>&1 &
 	pId1=$!
 	sleep 10
 	echo AGENT
 	sleep 20
-	#./startAgent.sh &
 	java -classpath $CLASSPATH net.grinder.Grinder $GRINDERPROPERTIES > /tmp/agent1.log 2>&1 &
 	pId2=$!
 
@@ -39,8 +38,8 @@ function testcase1 {
 	curl -X POST http://localhost:6373/files/distribute
 	sleep 5
 
-	curl -H "Content-Type: application/json" -X POST http://localhost:6373/agents/start-workers -d '{"grinder.processes" : "2", "grinder.threads" : "1000", "grinder.runs" : "10000",  "grinder.script" : "Http-example_WithoutGateway.py" }' &
-	testTime=10
+	curl -H "Content-Type: application/json" -X POST http://localhost:6373/agents/start-workers -d '{"grinder.processes" : "2", "grinder.threads" : "1000", "grinder.runs" : "10000",  "grinder.script" : "Http-example.py" }' &
+	testTime=120
 	sleep $testTime
 	json=$(curl -s http://localhost:6373/recording/data | jq -r '.totals | .[0,1,4]')
 	set -f
@@ -76,13 +75,17 @@ function testcase1 {
 	kill $(lsof -t -i:6373)
 	pushd $GOPATH/rest-conditional-gateway/bin
 	cp /tmp/rest-testcase1.log $GOPATH
-	popd 
+	popd
 }
 
 function testcase2 {
-	cd $GOPATH/src/github.com/LakshmiMekala/testrep/rest-performance-testing
+	cd $GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/performance-scripts/rest-performance-testing
 	go run server.go &
 	cd $GOPATH/rest-conditional-gateway/bin
+	export FLOGO_LOG_LEVEL=ERROR
+	export FLOGO_RUNNER_TYPE=POOLED
+	export FLOGO_RUNNER_WORKERS=5
+	export FLOGO_RUNNER_QUEUE=60
 	./rest-conditional-gateway > /tmp/rest-testcase2.log 2>&1 &
 	pId=$!
 	sleep 10
@@ -110,7 +113,7 @@ function testcase2 {
 
 	curl -H "Content-Type: application/json" -X POST http://localhost:6373/agents/start-workers -d '{"grinder.processes" : "2", "grinder.threads" : "1000", "grinder.runs" : "100",  "grinder.script" : "Http-example.py" }' &
 
-	testTime=60
+	testTime=300
 	sleep $testTime
 	json=$(curl -s http://localhost:6373/recording/data | jq -r '.totals | .[0,1,4]')
 	set -f

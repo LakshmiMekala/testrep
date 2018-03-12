@@ -5,10 +5,10 @@ cd $GOPATH
 Gateway=( KafkaTrigger-To-KafkaPublisher )   
 # Gateway=( rest-conditional-gateway KafkaTrigger-To-KafkaPublisher )   
 
-for ((p=0;p < ${#Gateway[@]};p++))
-        do
-            mashling create -f $GOPATH/src/github.com/LakshmiMekala/testrep/${Gateway[$p]}.json ${Gateway[$p]} 
-        done
+# for ((p=0;p < ${#Gateway[@]};p++))
+#         do
+#             mashling create -f $GOPATH/src/github.com/LakshmiMekala/testrep/${Gateway[$p]}.json ${Gateway[$p]} 
+#         done
 # mashling create -f $GOPATH/src/github.com/TIBCOSoftware/mashling-recipes/recipes/KafkaTrigger-To-KafkaPublisher/KafkaTrigger-To-KafkaPublisher.json KafkaTrigger-To-KafkaPublisher
 
 FILENAME="PerformanceReport.html"
@@ -17,18 +17,18 @@ HTML="<!DOCTYPE html><html><head><style>table{font-family: arial, sans-serif;bor
 echo $HTML >> $GOPATH/$FILENAME
 
 #Kafka Performance
-cd $GOPATH/src/github.com/LakshmiMekala/testrep/
-source ./tests.sh
-# testcase1
-# testcase2
-value=($(get_test_cases))
-for ((i=0;i < ${#value[@]};i++))
-        do
-            #source ./kafkaPerf.sh
-            ${value[i]}
-           # cd /home/ramesh/Documents/Performance\ Automation/
-            sed -i "s/<tr><th>Trigger Type<\/th><th>Transaction Response Summary<\/th><th>No of Tests<\/th><th>Errors<\/th><th>Test Time(Sec)<\/th>/<tr><th>Trigger Type<\/th><th>Transaction Response Summary<\/th><th>No of Tests<\/th><th>Errors<\/th><th>Test Time(Sec)<\/th><\/tr><tr><td>KAFKA<\/td><td>$responseTime<\/td><td>$transactions<\/td><td>$errors<\/td><td>$testTime<\/td><\/tr>/g" $GOPATH/$FILENAME
-        done
+# cd $GOPATH/src/github.com/LakshmiMekala/testrep/
+# source ./tests.sh
+# # testcase1
+# # testcase2
+# value=($(get_test_cases))
+# for ((i=0;i < ${#value[@]};i++))
+#         do
+#             #source ./kafkaPerf.sh
+#             ${value[i]}
+#            # cd /home/ramesh/Documents/Performance\ Automation/
+#             sed -i "s/<tr><th>Trigger Type<\/th><th>Transaction Response Summary<\/th><th>No of Tests<\/th><th>Errors<\/th><th>Test Time(Sec)<\/th>/<tr><th>Trigger Type<\/th><th>Transaction Response Summary<\/th><th>No of Tests<\/th><th>Errors<\/th><th>Test Time(Sec)<\/th><\/tr><tr><td>KAFKA<\/td><td>$responseTime<\/td><td>$transactions<\/td><td>$errors<\/td><td>$testTime<\/td><\/tr>/g" $GOPATH/$FILENAME
+#         done
 
 #Rest Performance
 cd $GOPATH/src/github.com/LakshmiMekala/testrep/rest-performance-testing
