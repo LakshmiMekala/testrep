@@ -57,12 +57,8 @@ EOL
 function create_dest_directory ()
 {
     cd perf-reports ;
-    if [ -n "${TRAVIS_TAG}" ]; then
-        DESTFOLDER="mashling-${TRAVIS_TAG}"
-    elif [ -z "${TRAVIS_TAG}" ]; then
-        DESTFOLDER="mashling-$BUILD_NUMBER"
-    fi
-
+    DESTFOLDER="$REPOFOLDER-$BUILD_NUMBER"
+    
     if [ ! -d "$DESTFOLDER" ]; then
         mkdir "$DESTFOLDER" "latest";
     fi
@@ -88,3 +84,5 @@ cp "$GOPATH/$FILENAME" "$GOPATH/src/github.com/TIBCOSoftware/mashling/perf-repor
 cp "$GOPATH/$FILENAME" "$GOPATH/src/github.com/TIBCOSoftware/mashling/perf-reports/latest"
 aws s3 cp "$GOPATH/src/github.com/TIBCOSoftware/mashling/perf-reports" "s3://$AWS_BUCKET/LakshmiMekala/remoterecipes" --recursive
 popd ;
+
+rm -rf ${HOME}/.aws
