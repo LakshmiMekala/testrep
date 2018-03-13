@@ -59,7 +59,7 @@ function create_dest_directory ()
     if [ -n "${TRAVIS_TAG}" ]; then
         DESTFOLDER="$REPOFOLDER-${TRAVIS_TAG}"
     elif [ -z "${TRAVIS_TAG}" ]; then
-        DESTFOLDER="$REPOFOLDER-${TRAVIS_BUILD_NUMBER}"
+        DESTFOLDER="$REPOFOLDER-$BUILD_NUMBER"
     fi
 
     if [ ! -d "$DESTFOLDER" ]; then
