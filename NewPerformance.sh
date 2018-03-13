@@ -43,8 +43,9 @@ for ((i=0;i < ${#value[@]};i++))
             sed -i "s/<tr><th>Trigger Type<\/th><th>Transactions\/Sec<\/th><th>No of Tests<\/th><th>Errors<\/th><th>Test Time(Sec)<\/th>/<tr><th>Trigger Type<\/th><th>Transactions\/Sec<\/th><th>No of Tests<\/th><th>Errors<\/th><th>Test Time(Sec)<\/th><\/tr><tr><td>REST<\/td><td>$ELE2<\/td><td>${array[0]}<\/td><td>${array[1]}<\/td><td>$testTime<\/td><\/tr>/g" $GOPATH/$FILENAME
         done
 
-REPONAME="${TRAVIS_REPO_SLUG}" ;
-REPOFOLDER=${REPONAME:14} ;
+# REPONAME="${TRAVIS_REPO_SLUG}" ;
+# REPOFOLDER=${REPONAME:14} ;
+REPOFOLDER=mashling ;
 
 mkdir ${HOME}/.aws
 cat > ${HOME}/.aws/credentials <<EOL
@@ -57,9 +58,9 @@ function create_dest_directory ()
 {
     cd perf-reports ;
     if [ -n "${TRAVIS_TAG}" ]; then
-        DESTFOLDER="$REPOFOLDER-${TRAVIS_TAG}"
+        DESTFOLDER="mashling-${TRAVIS_TAG}"
     elif [ -z "${TRAVIS_TAG}" ]; then
-        DESTFOLDER="$REPOFOLDER-$BUILD_NUMBER"
+        DESTFOLDER="mashling-$BUILD_NUMBER"
     fi
 
     if [ ! -d "$DESTFOLDER" ]; then
