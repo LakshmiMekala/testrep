@@ -116,7 +116,7 @@ function testcase2 {
 	kill -SIGINT $pId1
 	sleep 5
 	kill -SIGINT $pId2
-
+	sleep 60
 	cd $GOPATH/src/github.com/TIBCOSoftware/recipes/KafkaTrigger-To-KafkaPublisher/my_project/results
 	cd */
 	transactions=$(xmllint --html -xpath "string(/html/body/table[1]/tr[2]/td[1])" results.html)
