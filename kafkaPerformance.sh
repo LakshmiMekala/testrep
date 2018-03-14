@@ -6,7 +6,6 @@ function get_test_cases {
 }
 
 function testcase1 {
-	
 	cd $GOPATH/kafka
 	echo zookeeper
 	bin/zookeeper-server-start.sh config/zookeeper.properties > /tmp/zookeeper.log &
@@ -25,33 +24,35 @@ function testcase1 {
 	export FLOGO_RUNNER_TYPE=POOLED
 	export FLOGO_RUNNER_WORKERS=5
 	export FLOGO_RUNNER_QUEUE=50
-	./kafkatrigger-to-kafkapublisher > /tmp/kafka-testcase1.log 2>&1 &
-	pId2=$! &
+	./KafkaTrigger-To-KafkaPublisher > /tmp/kafka-testcase1.log 2>&1 &
+	pId2=$!
 	sleep 10
 
 	testTime=5
 	Threads=1
 	echo started
-	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project
+	cd $GOPATH/src/github.com/TIBCOSoftware/recipes/KafkaTrigger-To-KafkaPublisher/my_project
 	sed -i "/run_time/c\run_time = $testTime" config.cfg
 	sed -i "/threads/c\threads = $Threads" config.cfg
 	cd ..
-	ps -a
-	multimech-run my_project > /tmp/test-1.log 2>&1 & pid9=$!
-	echo +++++++++++++++++++
-	ps -a
-	echo +++++++++++++++++++
-	sleep 30	
-	echo completed
-	sleep 10
-	kill -s TERM $pid9
-	kill -s TERM $pId
+	multimech-run my_project &
+	pId3=$!    
+    sleep 30
+    echo pid3=$pId3
+    var=$(ps --ppid $pId3)
+    echo var=$var
+    pId4=$(echo $var | awk '{print $5}')
+    echo 4=$pId4
+    echo completed
+    sleep 10
+    kill -9 $pId4
+	kill -SIGINT $pId
 	sleep 5
-	kill -s TERM $pId1
+	kill -SIGINT $pId1
 	sleep 5
-	kill -s TERM $pId2
-	sleep 5
-	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project/results
+	kill -SIGINT $pId2
+
+	cd $GOPATH/src/github.com/TIBCOSoftware/recipes/KafkaTrigger-To-KafkaPublisher/my_project/results
 	cd */
 	transactions=$(xmllint --html -xpath "string(/html/body/table[1]/tr[2]/td[1])" results.html)
 	text=$(xmllint --html -xpath "string(/html/body/div)" results.html)
@@ -66,18 +67,10 @@ function testcase1 {
 	cp /tmp/kafka-testcase1.log $GOPATH
 	popd
 	rm -rf results && mkdir results
-	sleep 20
-	echo ===========================
-	ps -a
-	echo ===========================
-	sleep 20	
 }
 
 function testcase2 {
 	cd $GOPATH/kafka
-	echo ===========================-----------------
-	ps -a
-	echo ===========================-----------------------
 	echo zookeeper
 	bin/zookeeper-server-start.sh config/zookeeper.properties > /tmp/zookeeper.log &
 	pId=$!
@@ -95,22 +88,20 @@ function testcase2 {
 	export FLOGO_RUNNER_TYPE=POOLED
 	export FLOGO_RUNNER_WORKERS=5
 	export FLOGO_RUNNER_QUEUE=50
-	./kafkatrigger-to-kafkapublisher > /tmp/kafka-testcase2.log 2>&1 &	pId2=$!
+	./KafkaTrigger-To-KafkaPublisher > /tmp/kafka-testcase2.log 2>&1 &
+	pId2=$!
 	sleep 10
 
-	testTime=180
+	testTime=1800
     Threads=100
 	echo started
-	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project
+	cd $GOPATH/src/github.com/TIBCOSoftware/recipes/KafkaTrigger-To-KafkaPublisher/my_project
 	sed -i "/run_time/c\run_time = $testTime" config.cfg
     sed -i "/threads/c\threads = $Threads" config.cfg
 	cd ..
-	ps -a
-	multimech-run my_project  & 
-	pId3=$!
-	echo !!!!!!!!!!!!!!!!!
-	ps -a
-    sleep 190
+	multimech-run my_project &
+	pId3=$!    
+    sleep 3600
     echo pid3=$pId3
     var=$(ps --ppid $pId3)
     echo var=$var
@@ -120,13 +111,13 @@ function testcase2 {
     sleep 10
     kill -9 $pId4
 	#echo var=$var
-	kill -s TERM $pId
+	kill -SIGINT $pId
 	sleep 5
-	kill -s TERM $pId1
+	kill -SIGINT $pId1
 	sleep 5
-	kill -9 $pId2
+	kill -SIGINT $pId2
 
-	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project/results
+	cd $GOPATH/src/github.com/TIBCOSoftware/recipes/KafkaTrigger-To-KafkaPublisher/my_project/results
 	cd */
 	transactions=$(xmllint --html -xpath "string(/html/body/table[1]/tr[2]/td[1])" results.html)
 	text=$(xmllint --html -xpath "string(/html/body/div)" results.html)
@@ -141,11 +132,4 @@ function testcase2 {
 	cp /tmp/kafka-testcase2.log $GOPATH
 	popd
 	rm -rf results && mkdir results
-	
-	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher
-	cat /tmp/test-2.log
-
-	echo ===========================-----------------
-	ps -a
-	echo ===========================-----------------------
 }
