@@ -11,12 +11,7 @@ services:
 #   only:
 #     - master
 #     - /^v\d+\.\d+\.\d+(\.\d+)?(-\S*)?$/
-    
-cache:
-  bundler: false
-  directories:
-  - .build-cache          # images.txt
-# Handle git submodules yourself
+ 
 git:
     submodules: false
 # Do a github login using token
