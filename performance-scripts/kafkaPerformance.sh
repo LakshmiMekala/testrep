@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function get_test_cases {
-    local my_list=( testcase2 )
+    local my_list=( testcase1 testcase2 )
     echo "${my_list[@]}"
 }
 
@@ -19,31 +19,40 @@ function testcase1 {
 	sleep 10
 
 	echo gateway
-	cd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
 	export FLOGO_LOG_LEVEL=ERROR
-	./kafkatrigger-to-kafkapublisher > /tmp/kafka-testcase1.log 2>&1 &
+	export FLOGO_RUNNER_TYPE=POOLED
+	export FLOGO_RUNNER_WORKERS=5
+	export FLOGO_RUNNER_QUEUE=50
+	cd $GOPATH/src/github.com/TIBCOSoftware/mashling
+	./bin/mashling-gateway -c $PERFPATH/KafkaTrigger-To-KafkaPublisher.json > /tmp/kafka-testcase1.log 2>&1 &
 	pId2=$!
 	sleep 10
 
 	testTime=5
-    Threads=1
+	Threads=1
 	echo started
-	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project
+	cd $PERFPATH/KafkaTrigger-To-KafkaPublisher/my_project
 	sed -i "/run_time/c\run_time = $testTime" config.cfg
-    sed -i "/threads/c\threads = $Threads" config.cfg
+	sed -i "/threads/c\threads = $Threads" config.cfg
 	cd ..
 	multimech-run my_project &
-    pId9=$!
-	echo completed
-	sleep 30
-	kill -SIGINT $pId
-    kill -9 $pId9
+	pId3=$!    
+    sleep 30
+    echo pid3=$pId3
+    var=$(ps --ppid $pId3)
+    echo var=$var
+    pId4=$(echo $var | awk '{print $5}')
+    echo 4=$pId4
+    echo completed
+    sleep 10
+    kill -9 $pId4
+	kill -9 $pId
 	sleep 5
-	kill -SIGINT $pId1
+	kill -9 $pId1
 	sleep 5
 	kill -SIGINT $pId2
 
-	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project/results
+	cd $PERFPATH/KafkaTrigger-To-KafkaPublisher/my_project/results
 	cd */
 	transactions=$(xmllint --html -xpath "string(/html/body/table[1]/tr[2]/td[1])" results.html)
 	text=$(xmllint --html -xpath "string(/html/body/div)" results.html)
@@ -54,10 +63,10 @@ function testcase1 {
 	errors=$(echo $text | awk '{print $4}')
 	echo errors=$errors
 	cd ../..
+	pushd $GOPATH/src/github.com/TIBCOSoftware/mashling
+	cp /tmp/kafka-testcase1.log $GOPATH
+	popd
 	rm -rf results && mkdir results
-    pushd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
-    cp /tmp/kafka-testcase1.log $GOPATH
-    popd
 }
 
 function testcase2 {
@@ -74,34 +83,42 @@ function testcase2 {
 	sleep 10
 
 	echo gateway
-	cd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
 	export FLOGO_LOG_LEVEL=ERROR
-	./kafkatrigger-to-kafkapublisher > /tmp/kafka-testcase2.log 2>&1 &
+	export FLOGO_RUNNER_TYPE=POOLED
+	export FLOGO_RUNNER_WORKERS=5
+	export FLOGO_RUNNER_QUEUE=50	
+	cd $GOPATH/src/github.com/TIBCOSoftware/mashling
+	./bin/mashling-gateway -c $PERFPATH/KafkaTrigger-To-KafkaPublisher.json > /tmp/kafka-testcase2.log 2>&1 &
 	pId2=$!
-    ps -a &
 	sleep 10
 
-	testTime=60
-    Threads=10
+	testTime=1800
+    Threads=100
 	echo started
-	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project
+	cd $PERFPATH/KafkaTrigger-To-KafkaPublisher/my_project
 	sed -i "/run_time/c\run_time = $testTime" config.cfg
     sed -i "/threads/c\threads = $Threads" config.cfg
 	cd ..
 	multimech-run my_project &
-    pId9=$!
-    sleep 70
-	echo completed	
+	pId3=$!    
+    sleep 2200
+    echo pid3=$pId3
+    var=$(ps --ppid $pId3)
+    echo var=$var
+    pId4=$(echo $var | awk '{print $5}')
+    echo 4=$pId4
+    echo completed
+    sleep 10
+    kill -9 $pId4
+	kill -9 $pId4
 	#echo var=$var
-	kill -SIGINT $pId
+	kill -9 $pId
 	sleep 5
-    kill -9 $pId9
-    sleep 5
-	kill -SIGINT $pId1
+	kill -9 $pId1
 	sleep 5
 	kill -SIGINT $pId2
 
-	cd $GOPATH/src/github.com/LakshmiMekala/testrep/KafkaTrigger-To-KafkaPublisher/my_project/results
+	cd $PERFPATH/KafkaTrigger-To-KafkaPublisher/my_project/results
 	cd */
 	transactions=$(xmllint --html -xpath "string(/html/body/table[1]/tr[2]/td[1])" results.html)
 	text=$(xmllint --html -xpath "string(/html/body/div)" results.html)
@@ -112,8 +129,8 @@ function testcase2 {
 	errors=$(echo $text | awk '{print $4}')
 	echo errors=$errors
 	cd ../..
+	pushd $GOPATH/src/github.com/TIBCOSoftware/mashling
+	cp /tmp/kafka-testcase2.log $GOPATH
+	popd
 	rm -rf results && mkdir results
-    pushd $GOPATH/KafkaTrigger-To-KafkaPublisher/bin
-    cp /tmp/kafka-testcase2.log $GOPATH
-    popd
 }

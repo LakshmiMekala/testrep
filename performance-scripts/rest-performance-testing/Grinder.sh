@@ -6,14 +6,15 @@ function get_test_cases {
 }
 
 function testcase1 {
-	cd $GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/performance-scripts/rest-performance-testing
-	go run server.go &	
-	cd $GOPATH/rest-conditional-gateway/bin
+	cd $PERFPATH/rest-performance-testing
+	go run server.go &
+
 	export FLOGO_LOG_LEVEL=ERROR
 	export FLOGO_RUNNER_TYPE=POOLED
 	export FLOGO_RUNNER_WORKERS=5
 	export FLOGO_RUNNER_QUEUE=60
-	./rest-conditional-gateway > /tmp/rest-testcase1.log 2>&1 &
+	cd $GOPATH/src/github.com/TIBCOSoftware/mashling
+	./bin/mashling-gateway -c $PERFPATH/rest-conditional-gateway.json > /tmp/rest-testcase1.log 2>&1 &
 	pId=$!
 	sleep 10
 	echo GATEWAY
@@ -73,20 +74,20 @@ function testcase1 {
 	kill -9 $pId2
 	kill $(lsof -t -i:9090)
 	kill $(lsof -t -i:6373)
-	pushd $GOPATH/rest-conditional-gateway/bin
+	pushd $GOPATH/src/github.com/TIBCOSoftware/mashling
 	cp /tmp/rest-testcase1.log $GOPATH
 	popd
 }
 
 function testcase2 {
-	cd $GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/performance-scripts/rest-performance-testing
+	cd $PERFPATH/rest-performance-testing
 	go run server.go &
-	cd $GOPATH/rest-conditional-gateway/bin
 	export FLOGO_LOG_LEVEL=ERROR
 	export FLOGO_RUNNER_TYPE=POOLED
 	export FLOGO_RUNNER_WORKERS=5
 	export FLOGO_RUNNER_QUEUE=60
-	./rest-conditional-gateway > /tmp/rest-testcase2.log 2>&1 &
+	cd $GOPATH/src/github.com/TIBCOSoftware/mashling
+	./bin/mashling-gateway -c $PERFPATH/rest-conditional-gateway.json > /tmp/rest-testcase2.log 2>&1 &
 	pId=$!
 	sleep 10
 	echo GATEWAY
@@ -147,7 +148,7 @@ function testcase2 {
 	kill -9 $pId2
 	kill $(lsof -t -i:9090)
 	kill $(lsof -t -i:6373)
-	pushd $GOPATH/rest-conditional-gateway/bin
+	pushd $GOPATH/src/github.com/TIBCOSoftware/mashling
 	cp /tmp/rest-testcase2.log $GOPATH
 	popd
 }
