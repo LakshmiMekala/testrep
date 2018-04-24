@@ -50,19 +50,19 @@ function create_dest_directory ()
 }
 
 GIT_BRANCH_LOCAL=$(echo $GIT_BRANCH | sed -e "s|origin/||g")
-pushd $GOPATH/src/github.com/TIBCOSoftware/mashling ;
+pushd $GOPATH/src/github.com/TIBCOSoftware/mashling-cicd ;
 mkdir perf-reports/$GIT_BRANCH_LOCAL;
 create_dest_directory ;
-cp $GOPATH/rest-testcase1.log "$GOPATH/src/github.com/TIBCOSoftware/mashling/perf-reports/$GIT_BRANCH_LOCAL/$DESTFOLDER"
-cp $GOPATH/rest-testcase2.log "$GOPATH/src/github.com/TIBCOSoftware/mashling/perf-reports/$GIT_BRANCH_LOCAL/$DESTFOLDER"
-cp $GOPATH/kafka-testcase1.log "$GOPATH/src/github.com/TIBCOSoftware/mashling/perf-reports/$GIT_BRANCH_LOCAL/$DESTFOLDER"
-cp $GOPATH/kafka-testcase2.log "$GOPATH/src/github.com/TIBCOSoftware/mashling/perf-reports/$GIT_BRANCH_LOCAL/$DESTFOLDER"
-cp "$GOPATH/$FILENAME" "$GOPATH/src/github.com/TIBCOSoftware/mashling/perf-reports/$GIT_BRANCH_LOCAL/$DESTFOLDER"
-cp "$GOPATH/$FILENAME" "$GOPATH/src/github.com/TIBCOSoftware/mashling/perf-reports/$GIT_BRANCH_LOCAL/latest"
-# aws s3 cp "$GOPATH/src/github.com/TIBCOSoftware/mashling/perf-reports" "s3://$AWS_BUCKET/TIBCOSoftware/mashling" --recursive
+cp $GOPATH/rest-testcase1.log "$GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/perf-reports/$GIT_BRANCH_LOCAL/$DESTFOLDER"
+cp $GOPATH/rest-testcase2.log "$GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/perf-reports/$GIT_BRANCH_LOCAL/$DESTFOLDER"
+cp $GOPATH/kafka-testcase1.log "$GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/perf-reports/$GIT_BRANCH_LOCAL/$DESTFOLDER"
+cp $GOPATH/kafka-testcase2.log "$GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/perf-reports/$GIT_BRANCH_LOCAL/$DESTFOLDER"
+cp "$GOPATH/$FILENAME" "$GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/perf-reports/$GIT_BRANCH_LOCAL/$DESTFOLDER"
+cp "$GOPATH/$FILENAME" "$GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/perf-reports/$GIT_BRANCH_LOCAL/latest"
+aws s3 cp "$GOPATH/src/github.com/TIBCOSoftware/mashling/perf-reports" "s3://$AWS_BUCKET/TIBCOSoftware/mashling" --recursive
 popd ;
 
-pushd $GOPATH/src/github.com/TIBCOSoftware/mashling/perf-reports/$GIT_BRANCH_LOCAL/$DESTFOLDER
+pushd $GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/perf-reports/$GIT_BRANCH_LOCAL/$DESTFOLDER
 echo 11111111111111111
 ls -ll
 echo 22222222222222222
