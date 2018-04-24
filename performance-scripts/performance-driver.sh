@@ -49,6 +49,7 @@ function create_dest_directory ()
     cd "$DESTFOLDER";
 }
 
+GIT_BRANCH_LOCAL=$(echo $GIT_BRANCH | sed -e "s|origin/||g")
 pushd $GOPATH/src/github.com/TIBCOSoftware/mashling ;
 mkdir perf-reports/$GIT_BRANCH_LOCAL;
 create_dest_directory ;
