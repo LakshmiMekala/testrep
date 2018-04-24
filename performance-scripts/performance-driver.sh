@@ -51,7 +51,7 @@ function create_dest_directory ()
 
 GIT_BRANCH_LOCAL=$(echo $GIT_BRANCH | sed -e "s|origin/||g")
 pushd $GOPATH/src/github.com/TIBCOSoftware/mashling-cicd ;
-mkdir perf-reports/$GIT_BRANCH_LOCAL;
+mkdir -p perf-reports/$GIT_BRANCH_LOCAL;
 create_dest_directory ;
 cp $GOPATH/rest-testcase1.log "$GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/perf-reports/$GIT_BRANCH_LOCAL/$DESTFOLDER"
 cp $GOPATH/rest-testcase2.log "$GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/perf-reports/$GIT_BRANCH_LOCAL/$DESTFOLDER"
