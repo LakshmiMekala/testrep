@@ -40,7 +40,8 @@ EOL
 function create_dest_directory ()
 {
     cd perf-reports/$GIT_BRANCH_LOCAL ;
-    DESTFOLDER="$REPOFOLDER-$GIT_BRANCH_LOCAL-$BUILD_NUMBER"
+    echo +++++++++++++$REPOFOLDER-${GIT_BRANCH_LOCAL}-$BUILD_NUMBER++++++++++++++
+    DESTFOLDER="$REPOFOLDER-${GIT_BRANCH_LOCAL}-$BUILD_NUMBER"
     if [ ! -d "$DESTFOLDER" ]; then
         mkdir "$DESTFOLDER" "latest";
     fi
