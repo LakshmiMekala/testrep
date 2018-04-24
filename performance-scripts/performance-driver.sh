@@ -59,7 +59,7 @@ cp $GOPATH/kafka-testcase1.log "$GOPATH/src/github.com/TIBCOSoftware/mashling-ci
 cp $GOPATH/kafka-testcase2.log "$GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/perf-reports/$GIT_BRANCH_LOCAL/$DESTFOLDER"
 cp "$GOPATH/$FILENAME" "$GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/perf-reports/$GIT_BRANCH_LOCAL/$DESTFOLDER"
 cp "$GOPATH/$FILENAME" "$GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/perf-reports/$GIT_BRANCH_LOCAL/latest"
-aws s3 cp "$GOPATH/src/github.com/TIBCOSoftware/mashling/perf-reports" "s3://$AWS_BUCKET/TIBCOSoftware/mashling" --recursive
+aws s3 cp "$GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/perf-reports" "s3://$AWS_BUCKET/TIBCOSoftware/mashling" --recursive
 popd ;
 
 pushd $GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/perf-reports/$GIT_BRANCH_LOCAL/$DESTFOLDER
