@@ -6,6 +6,7 @@ function get_test_cases {
 }
 # function testcase1 {
 
+	echo "-==============="
     pushd $GOPATH/kafka
     # starting zookeeper in background
     bin/zookeeper-server-start.sh config/zookeeper.properties > /tmp/kafka.log &
