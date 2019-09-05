@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "========================"
+echo "123"
+echo "========================"
 cd ../.. ;
 git clone https://github.com/TIBCOSoftware/mashling-cicd.git ;
 pwd ;
